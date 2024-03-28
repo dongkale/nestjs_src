@@ -60,9 +60,9 @@ export class AppController {
   @Get('/hello/:message')
   getHello(@Param('message') message: string): any {
     const data = {
-      name: message,
-      number: `id-${Date.now()}`,
       event: 'app_event1',
+      number: `id-${Date.now()}`,
+      message: message,
     };
 
     this.eventSubscribeHandler.publishEvent('app_event1', data);
