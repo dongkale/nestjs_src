@@ -1,0 +1,40 @@
+{{!-- <div class="sidebar">
+    <ul class="sidebar-menu">
+        {{#each items}}
+            <li class="sidebar-menu-item">
+                <a href="{{url}}" class="sidebar-menu-link">{{label}}</a>
+            </li>
+        {{/each}}
+    </ul>
+</div> --}}
+
+<nav class="col-md-2 d-none d-sm-block bg-light sidebar py-4 sticky-top"> 
+    <div class="sidebar-sticky list-group ">
+        <h2><a href="#ref" style="text-decoration: none">BIBLE UNIVERSITY</a></h2>
+        <ul class="nav flex-column nav-stacked list-group mt-3">            
+            <li class="nav-item">
+                <div class="d-flex align-items-center">
+                    <span class="fa fa-bars mr-1 ml-2"></span>
+                    <a class="nav-link" href="#ref" data-menu="dashboard">홈</a>                                
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="d-flex align-items-center">
+                    <span class="fa fa-bars mr-1 ml-2"></span>
+                    <a class="nav-link" href="#ref" data-menu="memberManagement">사용자</a>                    
+                </div>
+            </li>            
+            <li class="nav-item">
+                <div class="d-flex align-items-center">
+                    <span class="fa fa-bars mr-1 ml-2"></span>
+                    <a class="nav-link" href="#ref" data-menu="setting">설정</a>                    
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<script>
+$(document).ready( function() {        
+} );
+</script>
