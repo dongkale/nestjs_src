@@ -7,7 +7,8 @@ import { HttpModule } from '@nestjs/axios';
 import { RxjsTestService } from './rxjs-test/rxjs-test.service';
 import { RxjsTestController } from './rxjs-test/rxjs-test.controller';
 
-import { EventSubscribeHandler } from './event-subscribe/event-subscribe';
+import { EventSubscribeHandler } from './event-subscribe/event-subscribe-handler';
+import { EventSubscriber } from './event-subscribe/event-subscriber';
 
 @Module({
   imports: [HttpModule],
@@ -17,6 +18,7 @@ import { EventSubscribeHandler } from './event-subscribe/event-subscribe';
     ExampleService,
     RxjsTestService,
     EventSubscribeHandler,
+    EventSubscriber,
   ],
 })
 export class AppModule {}

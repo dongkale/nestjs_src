@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { AppService } from './app.service';
 
-import { EventSubscribeHandler } from './event-subscribe/event-subscribe';
+import { EventSubscribeHandler } from './event-subscribe/event-subscribe-handler';
 
 @Controller()
 export class AppController {

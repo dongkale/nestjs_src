@@ -25,6 +25,8 @@ export class EventSubscribeHandler {
       return false;
     }
 
+    this.eventSubjects[event].unsubscribe();
+
     delete this.eventSubjects[event];
 
     return true;

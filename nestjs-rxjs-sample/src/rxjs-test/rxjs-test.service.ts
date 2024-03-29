@@ -110,7 +110,11 @@ export class RxjsTestService {
   }
 
   getWorld(): string {
-    return 'World!(Service)';
+    return 'World!(Service) ';
+  }
+
+  getFuntion(inData: string): string {
+    return `Input: ${inData} - (Service)`;
   }
 
   //   subscribeToMessages(): Observable<string> {
