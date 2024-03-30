@@ -68,6 +68,7 @@ export class EventSubscriber {
     //   });
   }
 
+  @AttachdedException()
   subscribeEvent(
     name: string,
     data: any,
@@ -207,4 +208,22 @@ export class EventSubscriber {
   private __cb_complete__(name: string) {
     console.log(`[EventSubscriber] complete event: ${name}`);
   }
+}
+
+function AttachdedException(object) {
+  return function (
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor,
+  ) {
+    const method = descriptor.value;
+
+    descriptor.value = function () {
+      try {
+        method();
+      } catch (e) {
+        console.log(e);
+      }
+    };
+  };
 }
