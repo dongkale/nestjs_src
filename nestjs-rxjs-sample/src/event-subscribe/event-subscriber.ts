@@ -68,7 +68,7 @@ export class EventSubscriber {
     //   });
   }
 
-  @AttachdedException()
+  //@AttachdedException()
   subscribeEvent(
     name: string,
     data: any,
