@@ -13,8 +13,20 @@ export class EventsGateway {
   @WebSocketServer()
   server: Server;
 
+  afterInit(server: Server) {
+    this.server = server;
+    console.log('Init');
+  }
+
   @SubscribeMessage('events')
-  onEvent(client: any, data: any): Observable<WsResponse<number>> {
-    return from([1, 2, 3]).pipe(map(item => ({ event: 'events', data: item })));
+  onEvent(client: any, data: any): void /*Observable<WsResponse<number>>*/ {
+    console.log(data);
+    //return from([1, 2, 3]).pipe(map(item => ({ event: 'events', data: item })));
+
+    const ret = this.server.clients.forEach(client => {
+      client.send(data);
+    });
+
+    return ret;
   }
 }

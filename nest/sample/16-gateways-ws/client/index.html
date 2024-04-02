@@ -1,21 +1,34 @@
 <html>
-  <head>
-    <script>
-      const socket = new WebSocket('ws://localhost:8080');
-      socket.onopen = function() {
-        console.log('Connected');
-        socket.send(
-          JSON.stringify({
-            event: 'events',
-            data: 'test',
-          }),
-        );
-        socket.onmessage = function(data) {
-          console.log(data);
-        };
-      };
-    </script>
-  </head>
+  <head> </head>
 
-  <body></body>
+  <body>
+    <h1>Client</h1>
+    <input type="text" id="message" />
+    <button
+      onclick="socket.send(JSON.stringify({ event: 'events', data: document.getElementById('message').value }))"
+    >
+      Send
+    </button>
+    <ul id="messages"></ul>
+  </body>
+
+  <script>
+    const socket = new WebSocket('ws://localhost:8080');
+    socket.onopen = function () {
+      console.log('Connected');
+      /* socket.send(
+        JSON.stringify({
+          event: 'events',
+          data: 'test',
+        }),
+      ); */
+      socket.onmessage = function (data) {
+        console.log(data);
+        const messages = document.getElementById('messages');
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(data.data));
+        messages.appendChild(li);
+      };
+    };
+  </script>
 </html>

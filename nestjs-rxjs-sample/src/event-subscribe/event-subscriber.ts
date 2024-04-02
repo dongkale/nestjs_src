@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { /* BehaviorSubject, Observable, */ Subject } from 'rxjs';
+import { /* BehaviorSubject, Observable, */ Subject, Subscription } from 'rxjs';
 
 type CallbackEventSubscribe = (
   num: number,
@@ -7,6 +7,11 @@ type CallbackEventSubscribe = (
   data: any,
   argument: any,
 ) => boolean;
+
+interface EventSubscription {
+  subscription: Subscription;
+  maxNum: number;
+}
 
 @Injectable()
 export class EventSubscriber {
@@ -53,20 +58,15 @@ export class EventSubscriber {
   }
   */
 
-  private eventSubjects = {};
+  // private eventSubjects = {};
   // private eventSubjectsByDelete = {};
+  private eventSubjects: Record<
+    string,
+    Subject<{ name: string; argument: any }>
+  > = {};
+  private eventSubscriptions: Record<string, EventSubscription[]> = {};
 
-  constructor() {
-    // this.eventSubjects['delete'] = new Subject<{
-    //   name: string;
-    //   argument: any;
-    // }>()
-    //   .asObservable()
-    //   .subscribe({
-    //     next: (event) => this.__cb_delete__(event.name, null, event.argument),
-    //     error: (err) => this.__cb_error__(err),
-    //   });
-  }
+  constructor() {}
 
   //@AttachdedException()
   subscribeEvent(
@@ -83,56 +83,50 @@ export class EventSubscriber {
     // this.eventSubjects[name] = new Subject<{ name: string; argument: any }>()
     //   .asObservable()
     //   .subscribe({
-    //     next: (event) => {
-    //       const result = func(event.name, data, event.argument);
-    //       console.log(`[EventSubscriber] ${name} result: ${result}`);
-    //     },
-    //     error: (err) => this.__error__(err),
-    //   });
-
-    // this.eventSubjects[name] = new Subject<{ name: string; argument: any }>()
-    //   .asObservable()
-    //   .subscribe({
     //     next: (event) =>
     //       this.__cb_function__(func, event.name, data, event.argument),
     //     error: (err) => this.__cb_error__(name, err),
     //     complete: () => this.__cb_complete__(name),
     //   });
 
-    this.eventSubjects[name] = new Subject<{
-      name: string;
-      argument: any;
-    }>();
+    // this.eventSubjects[name] = new Subject<{
+    //   name: string;
+    //   argument: any;
+    // }>();
 
-    // if (maxNum <= 0) {
-    // } else {
-    //   maxNum = 1;
+    // const makeCount = maxNum > 0 ? maxNum : 1;
+    // for (let i = 0; i < makeCount; i++) {
+    //   const num = i + 1;
+    //   this.eventSubjects[name].asObservable().subscribe({
+    //     next: (event) =>
+    //       this.__cb_function__(
+    //         num,
+    //         maxNum,
+    //         event.name,
+    //         data,
+    //         func,
+    //         event.argument,
+    //       ),
+    //     error: (err) => this.__cb_error__(name, err),
+    //     complete: () => this.__cb_complete__(name),
+    //   });
     // }
+
+    const eventSubject = new Subject<{ name: string; argument: any }>();
+    this.eventSubjects[name] = eventSubject;
+    this.eventSubscriptions[name] = [];
 
     const makeCount = maxNum > 0 ? maxNum : 1;
     for (let i = 0; i < makeCount; i++) {
       const num = i + 1;
-      this.eventSubjects[name].asObservable().subscribe({
+      const subscription = eventSubject.asObservable().subscribe({
         next: (event) =>
-          this.__cb_function__(
-            num,
-            maxNum,
-            event.name,
-            data,
-            func,
-            event.argument,
-          ),
-        error: (err) => this.__cb_error__(name, err),
-        complete: () => this.__cb_complete__(name),
+          this.handleEvent(num, maxNum, event.name, data, func, event.argument),
+        error: (err) => this.handleEventError(name, err),
+        complete: () => this.handleEventComplete(name),
       });
+      this.eventSubscriptions[name].push({ subscription, maxNum });
     }
-
-    // this.eventSubjects[name].asObservable().subscribe({
-    //   next: (event) =>
-    //     this.__cb_function__(func, event.name, data, event.argument),
-    //   error: (err) => this.__cb_error__(name, err),
-    //   complete: () => this.__cb_complete__(name),
-    // });
 
     return true;
   }
@@ -143,10 +137,7 @@ export class EventSubscriber {
       return false;
     }
 
-    this.eventSubjects[name].next({ name: name, argument: argument });
-
-    // this.eventSubjects[name].error('error');
-    // this.eventSubjects[name].complete('cpomplete');
+    this.eventSubjects[name].next({ name, argument });
 
     return true;
   }
@@ -156,14 +147,21 @@ export class EventSubscriber {
       return false;
     }
 
-    this.eventSubjects[name].unsubscribe();
+    // this.eventSubjects[name].unsubscribe();
+    // delete this.eventSubjects[name];
+
+    const subscriptions = this.eventSubscriptions[name];
+    subscriptions.forEach(({ subscription }) => {
+      subscription.unsubscribe();
+    });
 
     delete this.eventSubjects[name];
+    delete this.eventSubscriptions[name];
 
     return true;
   }
 
-  private __cb_function__(
+  private handleEvent(
     num: number,
     maxNum: number,
     name: string,
@@ -176,17 +174,17 @@ export class EventSubscriber {
       return false;
     }
 
-    if (!userFn(num, name, data, argument)) {
-      this.deleteEvent(name);
-      console.log(`[EventSubscriber] delete event: ${name}`);
-    }
-
-    // complete
-    // if (num == maxNum) {
-    // userFn(-1, name, data, argument);
+    // if (!userFn(num, name, data, argument)) {
+    //   this.deleteEvent(name);
+    //   console.log(`[EventSubscriber] delete event: ${name}`);
     // }
 
-    if (maxNum > 0 && num >= maxNum) {
+    // if (maxNum > 0 && num >= maxNum) {
+    //   this.deleteEvent(name);
+    //   console.log(`[EventSubscriber] delete event: ${name}`);
+    // }
+
+    if (!userFn(num, name, data, argument) || (maxNum > 0 && num >= maxNum)) {
       this.deleteEvent(name);
       console.log(`[EventSubscriber] delete event: ${name}`);
     }
@@ -194,18 +192,11 @@ export class EventSubscriber {
     return true;
   }
 
-  // // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // private __cb_delete__(event: string, _data: any, argument: any): any {
-  //   this.deleteEvent(argument);
-
-  //   console.log(`[EventSubscriber] delete event: ${argument}`);
-  // }
-
-  private __cb_error__(name: string, err: Error) {
+  private handleEventError(name: string, err: Error): void {
     console.log(`[EventSubscriber][Error] event: ${name} -> ${err.message}`);
   }
 
-  private __cb_complete__(name: string) {
+  private handleEventComplete(name: string): void {
     console.log(`[EventSubscriber] complete event: ${name}`);
   }
 }

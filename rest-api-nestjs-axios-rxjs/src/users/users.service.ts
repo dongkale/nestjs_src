@@ -9,29 +9,43 @@ export class UsersService {
 
   // GET all users
   getAllUsers(): Observable<AxiosResponse<User[]>> {
-    return this.httpService
-      .get(`https://dummyjson.com/users`)
-      .pipe(map((resp) => resp.data.users));
+    const r = this.httpService.get(`http://dummyjson.com/users`);
+
+    r.pipe(
+      map((resp) => {
+        console.log(resp);
+        return resp.data;
+      }),
+    );
+
+    return r;
+
+    // return this.httpService.get(`http://dummyjson.com/users`).pipe(
+    //   map((resp) => {
+    //     console.log(resp);
+    //     return resp.data;
+    //   }),
+    // );
   }
 
   // GET one user by id
   getUser(id: string): Observable<AxiosResponse<User>> {
     return this.httpService
-      .get(`https://dummyjson.com/users/${id}`)
+      .get(`http://dummyjson.com/users/${id}`)
       .pipe(map((resp) => resp.data));
   }
 
   // ADD a new user
   addUser(body: User): Observable<AxiosResponse<User>> {
     return this.httpService
-      .post(`https://dummyjson.com/users/add`, { body })
+      .post(`http://dummyjson.com/users/add`, { body })
       .pipe(map((resp) => resp.data));
   }
 
   // UPDATE a user
   updateUser(body: User, id: string): Observable<AxiosResponse<User>> {
     return this.httpService
-      .put(`https://dummyjson.com/users/${id}`, {
+      .put(`http://dummyjson.com/users/${id}`, {
         body,
       })
       .pipe(map((resp) => resp.data));
@@ -40,7 +54,7 @@ export class UsersService {
   // DELETE a user by id
   deleteUser(id: string): Observable<AxiosResponse> {
     return this.httpService
-      .delete(`https://dummyjson.com/users/${id}`)
+      .delete(`http://dummyjson.com/users/${id}`)
       .pipe(map((resp) => resp.data));
   }
 }

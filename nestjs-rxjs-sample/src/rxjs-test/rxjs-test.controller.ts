@@ -5,6 +5,9 @@ import { EventSubscribeHandler } from '../event-subscribe/event-subscribe-handle
 import { EventSubscriber } from '../event-subscribe/event-subscriber';
 import { interval } from 'rxjs';
 
+var path = require('path');
+var PROJECT_ROOT = path.join(__dirname, '..');
+
 @Controller('rxjs-test')
 export class RxjsTestController {
   constructor(
@@ -241,6 +244,252 @@ export class RxjsTestController {
 
     this.eventSubscriber.publishEvent('ex-event3', data);
 
+    // console.log(this.getStackInfo(0));
+    // console.log(this.getStackInfo(1));
+    // console.log(this.getStackInfo(2));
+
+    // console.log(this.getStackTrace_01());
+    console.log(this.getStackTrace_02(0));
+    console.log(this.getStackTrace_02(1));
+    console.log(this.getStackTrace_02(2));
+
+    // console.log(this.__debug_info());
+
+    this.__test_info();
+
     return data; // this.appService.getHello();
   }
+
+  getStackInfo(stackIndex) {
+    // get call stack, and analyze it
+    // get all file, method, and line numbers
+    const stacklist = new Error().stack.split('\n').slice(3);
+
+    // let stacklist;
+
+    // try {
+    //   throw new Error('');
+    // } catch (error) {
+    //   stacklist = error.stack.split('\n').slice(3);
+    // }
+
+    // stack trace format:
+    // http://code.google.com/p/v8/wiki/JavaScriptStackTraceApi
+    // do not remove the regex expresses to outside of this method (due to a BUG in node.js)
+    const stackReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/gi;
+    const stackReg2 = /at\s+()(.*):(\d*):(\d*)/gi;
+
+    const s = stacklist[stackIndex] || stacklist[0];
+    const sp = stackReg.exec(s) || stackReg2.exec(s);
+
+    if (sp && sp.length === 5) {
+      return {
+        method: sp[1],
+        relativePath: path.relative(PROJECT_ROOT, sp[2]),
+        line: sp[3],
+        pos: sp[4],
+        file: path.basename(sp[2]),
+        stack: stacklist.join('\n'),
+      };
+    }
+  }
+
+  getStackTrace_01() {
+    // let stack: any;
+
+    // try {
+    //   throw new Error('');
+    // } catch (error) {
+    //   stack = error.stack || '';
+    // }
+
+    const stack = new Error().stack || '';
+
+    const stackList = stack.split('\n').map(function (line) {
+      return line.trim();
+    });
+
+    return stackList.splice(stackList[0] == 'Error' ? 2 : 1);
+  }
+
+  getStackTrace_02(stackIndex) {
+    //let stack;
+
+    // try {
+    //   throw new Error('');
+    // } catch (error) {
+    //   stack = error.stack || '';
+    // }
+
+    // const stacklist = new Error().stack.split('\n').slice(3);
+
+    const stack = new Error().stack || '';
+
+    const stackReg1 = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/gi;
+    const stackReg2 = /at\s+()(.*):(\d*):(\d*)/gi;
+
+    const stackList = stack.split('\n').map(function (line) {
+      // return line.trim().exec(line) || line.trim().exec(line);
+      return line.trim();
+    });
+
+    // stack = stack.split('\n').map(function (line) {
+    //   return line.trim();
+    // });
+
+    // return stack.splice(stack[0] == 'Error' ? 2 : 1);
+    // const stack__ = stack.splice(stack[0] == 'Error' ? 2 : 1);
+
+    const stackObj = stackList.map(function (line) {
+      const regStack = stackReg1.exec(line) || stackReg2.exec(line);
+      if (regStack && regStack.length === 5) {
+        const ret = {
+          method: regStack[1],
+          relativePath: path.relative(PROJECT_ROOT, regStack[2]),
+          line: regStack[3],
+          pos: regStack[4],
+          file: path.basename(regStack[2]),
+          stack: stackList.join('\n'),
+        };
+
+        return ret;
+      }
+    });
+
+    return stackObj[stackIndex];
+
+    // const s = stackList[stackIndex] || stackList[0];
+    // const sp = stackReg.exec(s) || stackReg2.exec(s);
+
+    // if (sp && sp.length === 5) {
+    //   return {
+    //     method: sp[1],
+    //     relativePath: path.relative(PROJECT_ROOT, sp[2]),
+    //     line: sp[3],
+    //     pos: sp[4],
+    //     file: path.basename(sp[2]),
+    //     stack: stackList.join('\n'),
+    //   };
+    // }
+  }
+
+  __test_info() {
+    console.log(this.getStackTrace());
+  }
+
+  getStackTrace(num = 2) {
+    // const e = new Error();
+    // const regex = /\((.*):(\d+):(\d+)\)$/
+    // const match = regex.exec(e.stack.split("\n")[num]);
+    // const filepath = match[1];
+    // const fileName = path.basename(filepath);
+    // const line = match[2];
+    // const column = match[3];
+
+    // return `(${fileName}:${line}:${column})`;
+    // return {
+    //     filepath,
+    //     fileName,
+    //     line,
+    //     column,
+    //     str: `${getTime()} - ${fileName}:${line}:${column}`
+    // };
+
+    try {
+      const frame = new Error().stack.split('\n')[num];
+      const match = /\((.*):(\d+):(\d+)\)$/.exec(frame);
+
+      const functionName = frame.split(' ')[5];
+      const filename = match[1].replace(/^.*[\\\/]/, '').split('?')[0];
+
+      const lineNumber = match[2];
+      const columnNumber = match[3];
+
+      return {
+        message: 'success',
+        function_name: functionName,
+        file_name: filename,
+        line_number: lineNumber,
+        column_number: columnNumber,
+      };
+    } catch (err) {
+      return {
+        message: err,
+        function_name: '',
+        file_name: '',
+        line_number: 0,
+        column_number: 0,
+      };
+    }
+  }
+
+  // // stackFN()  = the immediate caller to stackFN
+  // // stackFN(0) = the immediate caller to stackFN
+  // // stackFN(1) = the caller to stackFN's caller
+  // // stackFN(2) = and so on
+  // // eg console.log(stackFN(),JSON.stringify(arguments),"called by",stackFN(1),"returns",retval);
+  // stackFN(n) {
+  //   let r = n ? n : 0,
+  //     f = arguments.callee,
+  //     avail = typeof f === 'function',
+  //     s2,
+  //     s = avail ? false : new Error().stack;
+  //   if (s) {
+  //     var tl = function (x) {
+  //         s = s.substr(s.indexOf(x) + x.length);
+  //       },
+  //       tr = function (x) {
+  //         s = s.substr(0, s.indexOf(x) - x.length);
+  //       };
+  //     while (r-- >= 0) {
+  //       tl(')');
+  //     }
+  //     tl(' at ');
+  //     tr('(');
+  //     return s;
+  //   } else {
+  //     if (!avail) return null;
+  //     s = 'f = arguments.callee';
+  //     while (r >= 0) {
+  //       s += '.caller';
+  //       r--;
+  //     }
+  //     eval(s);
+  //     return f.toString().split('(')[0].trim().split(' ')[1];
+  //   }
+  // }
+  // // same as stackFN() but returns an array so you can work iterate or whatever.
+  // stackArray() {
+  //   var res = [],
+  //     f = arguments.callee,
+  //     avail = typeof f === 'function',
+  //     s2,
+  //     s = avail ? false : new Error().stack;
+  //   if (s) {
+  //     var tl = function (x) {
+  //         s = s.substr(s.indexOf(x) + x.length);
+  //       },
+  //       tr = function (x) {
+  //         s = s.substr(0, s.indexOf(x) - x.length);
+  //       };
+  //     while (s.indexOf(')') >= 0) {
+  //       tl(')');
+  //       s2 = '' + s;
+  //       tl(' at ');
+  //       tr('(');
+  //       res.push(s);
+  //       s = '' + s2;
+  //     }
+  //   } else {
+  //     if (!avail) return null;
+  //     s = 'f = arguments.callee.caller';
+  //     eval(s);
+  //     while (f) {
+  //       res.push(f.toString().split('(')[0].trim().split(' ')[1]);
+  //       s += '.caller';
+  //       eval(s);
+  //     }
+  //   }
+  //   return res;
+  // }
 }
