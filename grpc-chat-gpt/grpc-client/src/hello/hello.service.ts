@@ -3,13 +3,9 @@ import { Client, ClientGrpc, Transport } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { HelloRequest, HelloResponse } from './interfaces/hello.interface';
 
-// interface HelloRequest {
-//   name: string;
-// }
-
-// interface HelloResponse {
-//   message: string;
-// }
+interface HelloProtoService {
+  sayHello(data: HelloRequest): Observable<HelloResponse>;
+}
 
 @Injectable()
 export class HelloService {
@@ -26,7 +22,8 @@ export class HelloService {
   private helloService;
 
   onModuleInit() {
-    this.helloService = this.client.getService<HelloService>('HelloService'); // proto 에 있는 ByeService
+    this.helloService =
+      this.client.getService<HelloProtoService>('HelloProtoService'); // proto 에 있는 ByeService
   }
 
   sayHello(name: string): Observable<HelloResponse> {

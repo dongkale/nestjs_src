@@ -3,6 +3,10 @@ import { Client, ClientGrpc, Transport } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { ByeRequest, ByeResponse } from './interfaces/bye.interface';
 
+interface ByeProtoService {
+  sayBye(data: ByeRequest): Observable<ByeResponse>;
+}
+
 @Injectable()
 export class ByeService {
   @Client({
@@ -15,10 +19,11 @@ export class ByeService {
   })
   private readonly client: ClientGrpc;
 
-  private byeService;
+  private byeService: ByeProtoService;
 
   onModuleInit() {
-    this.byeService = this.client.getService<ByeService>('ByeService'); // proto 에 있는 ByeService
+    this.byeService =
+      this.client.getService<ByeProtoService>('ByeProtoService'); // proto 에 있는 ByeService
   }
 
   sayBye(name: string): Observable<ByeResponse> {
