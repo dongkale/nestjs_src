@@ -12,7 +12,7 @@ export class ByeService {
   @Client({
     transport: Transport.GRPC,
     options: {
-      // url: 'localhost:5000',
+      url: 'localhost:5000',
       package: 'bye',
       protoPath: '../proto/bye.proto',
     },

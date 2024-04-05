@@ -19,7 +19,7 @@ export class HelloService {
   })
   private readonly client: ClientGrpc;
 
-  private helloService;
+  private helloService: HelloProtoService;
 
   onModuleInit() {
     this.helloService =
