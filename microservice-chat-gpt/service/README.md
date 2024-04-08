@@ -71,3 +71,11 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## Document
+
+https://medium.com/@briankworld/creating-a-microservice-in-nestjs-using-clientproxy-and-messagepattern-c73e938ab18e
+https://npm.io/package/ts-nats
+https://nats.io/blog/ts-nats/
+https://velog.io/@cxzaqq/NESTJS%EB%A5%BC-%EB%B0%B0%EC%9B%8C%EB%B3%B4%EC%9E%9013-Asynchronous-providers
+https://docs.nats.io/using-nats/developer/connecting/reconnect/max
