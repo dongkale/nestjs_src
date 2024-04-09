@@ -22,7 +22,7 @@ import { NatsController } from './nats.controller';
 
         nats.on('connect', (s) => {
           console.log('Connected to NATS server ');
-          console.log(s);
+          console.log(s.protocolHandler.currentServer);
         });
 
         // 연결이 끊어졌을 때 재시도

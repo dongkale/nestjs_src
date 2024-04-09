@@ -7,7 +7,9 @@ export class NatsController {
 
   constructor(private readonly natsService: NatsService) {
     this.natsService.subscribe('rev-message', (err, msg) => {
-      this.logger.log(`[Reserved] Recved a message: ${msg.data}`);
+      this.logger.log(
+        `[Reserved] Recved a message: ${msg.data}, sid:${msg.sid}, subject: ${msg.subject}`,
+      );
     });
 
     this.logger.log(`[Reserved] Subscribed message to rev-message`);
