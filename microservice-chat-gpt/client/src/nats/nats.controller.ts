@@ -8,7 +8,7 @@ export class NatsController {
   constructor(private readonly natsService: NatsService) {
     this.natsService.subscribe('rev-message', (err, msg) => {
       this.logger.log(
-        `[Reserved] Recved a message: ${msg.data}, sid:${msg.sid}, subject: ${msg.subject}`,
+        `[${msg.subject}][${msg.sid}] Recved a message: ${msg.data}`,
       );
     });
 
@@ -18,7 +18,7 @@ export class NatsController {
   @Get('rev-publish/:message')
   async natsRevPublish(@Param('message') message: string): Promise<string> {
     this.natsService.publish('rev-message', message);
-    this.logger.log(`[Reserved] Published message to ${message}`);
+    this.logger.log(`[${'rev-publish'}] Published message to ${message}`);
 
     return 'Published to ' + message;
   }
