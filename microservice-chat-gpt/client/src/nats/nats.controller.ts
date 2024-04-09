@@ -32,6 +32,9 @@ export class NatsController {
   @Get('subscribe')
   async natsSubscribe(): Promise<string> {
     this.natsService.subscribe('nats-publish', (err, msg) => {
+      if (err) {
+        this.logger.error(`Error: ${err}`);
+      }
       this.logger.log(`Recved a message: ${msg.data}`);
     });
 

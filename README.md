@@ -7,7 +7,7 @@ grpc-chat-gpt
 -- nats 이용 예제
 microservice-chat-gpt
 
--- rxjs 이용 예제
+-- rxjs 이용 예제(feat getStackInfo())
 nestjs-rxjs-sample
 
 -- nestjs 백엔드 개발자 서적 예제
