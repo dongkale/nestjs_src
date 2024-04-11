@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { MessagePattern } from '@nestjs/microservices';
+import { MessagePattern, Transport } from '@nestjs/microservices';
 
 @Injectable()
 export class AppService {
@@ -7,9 +7,19 @@ export class AppService {
     return 'Hello World!';
   }
 
-  @MessagePattern({ cmd: 'hello' })
-  hello(data: any) {
-    console.log('Service: Hello');
-    return { message: `Hello, ${data.name}!` };
+  // service 에서는 MessagePattern() 안됨
+  // @MessagePattern({ cmd: 'hello_TCP' })
+  helloTCP(data: any) {
+    console.log('Service: Hello(TCP)');
+    // return { message: `Hello, ${data}!` };
+    return data;
+  }
+
+  // service 에서는 MessagePattern() 안됨
+  // @MessagePattern({ cmd: 'hello' })
+  helloNATS(data: any) {
+    console.log('Service: Hello(NATS)');
+    // return { message: `Hello, ${data}!` };
+    return data;
   }
 }

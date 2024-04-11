@@ -79,3 +79,4 @@ https://npm.io/package/ts-nats
 https://nats.io/blog/ts-nats/
 https://velog.io/@cxzaqq/NESTJS%EB%A5%BC-%EB%B0%B0%EC%9B%8C%EB%B3%B4%EC%9E%9013-Asynchronous-providers
 https://docs.nats.io/using-nats/developer/connecting/reconnect/max
+https://velog.io/@anjinwoong/Nest.js-Microservices-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0

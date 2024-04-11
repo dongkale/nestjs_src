@@ -13,8 +13,7 @@ import { NatsController } from './nats.controller';
       provide: 'NATS_SERVICE',
       useFactory: async (configService: ConfigService) => {
         const nats = await connect({
-          servers: [configService.get<string>('NATS_SERVER_HOST')], // NATS 서버의 주소 및 포트
-          // port: configService.get<number>('NATS_SERVER_PORT'),
+          servers: [configService.get<string>('NATS_SERVER_HOSTS')], // NATS 서버의 주소 및 포트
           reconnect: true, // 자동 재접속 활성화
           maxReconnectAttempts: -1, // 무제한 재접속 시도
           pingInterval: 5000, // 10초마다 핑을 보냄
