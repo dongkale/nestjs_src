@@ -1,6 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { EventPattern, MessagePattern, Transport } from '@nestjs/microservices';
+import {
+  EventPattern,
+  MessagePattern,
+  Payload,
+  Transport,
+} from '@nestjs/microservices';
 
 @Controller()
 export class AppController {
@@ -12,7 +17,7 @@ export class AppController {
   }
 
   @MessagePattern({ cmd: 'hello_TCP' }, Transport.TCP)
-  helloTCP(data: any) {
+  helloTCP(@Payload() data: any) {
     console.log(`Service: Hello => data: ${JSON.stringify(data)}`);
 
     // return { message: `Hello, ${JSON.stringify(data)}!` };
@@ -20,7 +25,7 @@ export class AppController {
   }
 
   @MessagePattern({ cmd: 'hello_NATS' }, Transport.NATS)
-  helloNATS(data: any) {
+  helloNATS(@Payload() data: any) {
     console.log(`Service: Hello => data: ${JSON.stringify(data)}`);
 
     // return { message: `Hello, ${JSON.stringify(data)}!` };
@@ -29,8 +34,6 @@ export class AppController {
 
   @EventPattern({ cmd: 'Event_hello_NATS' }, Transport.NATS)
   async handleUserCreated(data: Record<string, unknown>) {
-    // business logic
-
     console.log(`[AppController][Event_hello_NATS] ${JSON.stringify(data)}`);
   }
 
