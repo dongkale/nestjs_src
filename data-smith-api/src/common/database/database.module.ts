@@ -17,7 +17,8 @@ import { addTransactionalDataSource } from 'typeorm-transactional';
           password: configService.get<string>('DB_PASSWORD'),
           database: configService.get<string>('DB_NAME'),
           // entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-          entities: [Item],
+          // entities: [Item],
+          autoLoadEntities: true,
           synchronize:
             configService.get<string>('NODE_ENV') == 'development'
               ? true
