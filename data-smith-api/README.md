@@ -87,9 +87,13 @@ npm i winston-daily-rotate-file
 
 # https://www.daleseo.com/nestjs-configuration/
 
+
 npm i @nestjs/config
 
 - typeorm
+
+# https://jojoldu.tistory.com/568 이름 snake camel
+# https://jiwondev.tistory.com/226
 
 npm i @nestjs/typeorm typeorm mysql2
 npm i class-validator class-transformer
