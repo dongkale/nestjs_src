@@ -1,11 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
 import {
+  Ctx,
   EventPattern,
   MessagePattern,
   Payload,
   Transport,
+  NatsContext,
 } from '@nestjs/microservices';
+import { AppInterceptor } from './app.interceptor';
 
 @Controller()
 export class AppController {
@@ -16,9 +19,11 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @UseInterceptors(new AppInterceptor())
   @MessagePattern({ cmd: 'hello_TCP' }, Transport.TCP)
-  helloTCP(@Payload() data: any) {
+  helloTCP(@Payload() data: any, @Ctx() context: NatsContext) {
     console.log(`Service: Hello => data: ${JSON.stringify(data)}`);
+    // console.log(context);
 
     // return { message: `Hello, ${JSON.stringify(data)}!` };
     return this.appService.helloTCP(data);
@@ -33,7 +38,7 @@ export class AppController {
   }
 
   @EventPattern({ cmd: 'Event_hello_NATS' }, Transport.NATS)
-  async handleUserCreated(data: Record<string, unknown>) {
+  async helloEventNATS(data: Record<string, unknown>) {
     console.log(`[AppController][Event_hello_NATS] ${JSON.stringify(data)}`);
   }
 

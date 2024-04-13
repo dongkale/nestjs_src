@@ -1,11 +1,17 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, RequestTimeoutException } from '@nestjs/common';
 // import {
 //   Client,
 //   ClientProxy,
 //   ClientProxyFactory,
 //   Transport,
 // } from '@nestjs/microservices';
-import { firstValueFrom, timeout } from 'rxjs';
+import {
+  TimeoutError,
+  catchError,
+  firstValueFrom,
+  throwError,
+  timeout,
+} from 'rxjs';
 
 @Injectable()
 export class AdapterService {
@@ -51,9 +57,23 @@ export class AdapterService {
     const pattern = { cmd: 'hello_TCP' };
     const data = { numbers: [1, 2, 3], message: message };
 
+    // firstValueFrom: Observable을 구독하고 Observable에서 첫 번째 값이 도착하자마자 promise를 반환하여 Observable을 promise로 변환합니다.
     const response: string = await firstValueFrom(
-      this.client_tcp.send(pattern, data).pipe(timeout(5000)),
+      this.client_tcp.send(pattern, data).pipe(
+        timeout(15000),
+        // catchError((err) => {
+        //   if (err instanceof TimeoutError) {
+        //     return throwError(() => new RequestTimeoutException());
+        //   }
+        //   return throwError(() => err);
+        // }),
+      ),
+      { defaultValue: '' },
     );
+
+    // const response: string = await this.client_tcp
+    //   .send(pattern, data)
+    //   .pipe(timeout(10000));
 
     console.log(response);
 
