@@ -94,6 +94,7 @@ npm i @nestjs/config
 
 # https://jojoldu.tistory.com/568 이름 snake camel
 # https://jiwondev.tistory.com/226
+# https://blog.naver.com/gi_balja/223054972094
 
 npm i @nestjs/typeorm typeorm mysql2
 npm i class-validator class-transformer
