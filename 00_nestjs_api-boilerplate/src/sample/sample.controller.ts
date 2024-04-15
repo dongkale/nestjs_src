@@ -21,7 +21,7 @@ import {
 // import { ResponseDto } from 'src/common/response/response.dto';
 // import { ApiCommonResponse } from 'src/common/response/common-response';
 // import { Sample } from './sample.entity';
-import { makeSuccessApiCommonResponse } from 'src/common/response/common-response.dto';
+import { makeSuccessApiCustomResponse } from 'src/common/response/custom-response.dto';
 import { ApiOkCustomResponse } from 'src/common/response/custom-response';
 
 @Controller('sample')
@@ -72,7 +72,7 @@ export class SampleController {
     //   result_data: findAll,
     // };
 
-    return makeSuccessApiCommonResponse(findAll);
+    return makeSuccessApiCustomResponse(findAll);
   }
 
   @ApiOperation({
@@ -94,7 +94,7 @@ export class SampleController {
     //   result_data: find,
     // };
 
-    return makeSuccessApiCommonResponse(find);
+    return makeSuccessApiCustomResponse([find]);
   }
 
   @ApiOperation({
@@ -124,7 +124,7 @@ export class SampleController {
     //   result_data: create,
     // };
 
-    return makeSuccessApiCommonResponse(create);
+    return makeSuccessApiCustomResponse(create);
   }
 
   @ApiOperation({
@@ -143,7 +143,7 @@ export class SampleController {
     //   result_data: remove,
     // };
 
-    return makeSuccessApiCommonResponse(remove);
+    return makeSuccessApiCustomResponse(remove);
   }
 
   @ApiOperation({
@@ -161,6 +161,6 @@ export class SampleController {
     //   result_data: update,
     // };
 
-    return makeSuccessApiCommonResponse(update);
+    return makeSuccessApiCustomResponse(update);
   }
 }
