@@ -22,7 +22,7 @@ export const ApiOkCustomResponse = <DataDto extends Type<unknown>>(
                 type: 'string',
                 example: 'Success',
                 description:
-                  '성공/실패 메세지: 성공: Seccess, 실패: 실패 메세지',
+                  '성공/실패 메세지: 성공: Success, 실패: 실패 메세지',
               },
               result_data: {
                 type: 'array',
