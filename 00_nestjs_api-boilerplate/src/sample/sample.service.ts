@@ -1,4 +1,4 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException, UseFilters } from '@nestjs/common';
 import { EntityNotFoundError, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Sample } from './sample.entity';
@@ -70,7 +70,9 @@ export class SampleService {
     try {
       const sample = await this.sampleRepository.findOneBy({ id: id });
       if (!sample) {
-        throw new NotFoundException('Not Found Sample');
+        // throw new NotFoundException('Not Found Sample');
+
+        throw new EntityNotFoundError(Sample, id);
       }
       this.logger.debug(sample);
 
@@ -87,11 +89,14 @@ export class SampleService {
     }
   }
 
+  // @UseFilters(EntityNotFoundError)
   async update(id: number, updateSample: UpdateSampleDto) {
     try {
       const sample = await this.sampleRepository.findOneBy({ id: id });
       if (!sample) {
         throw new NotFoundException('Not Found Sample');
+
+        // throw new EntityNotFoundError(Sample, id);
       }
       this.logger.debug(sample);
 

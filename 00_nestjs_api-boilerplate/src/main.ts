@@ -10,6 +10,9 @@ import {
 import 'winston-daily-rotate-file';
 import { ValidationPipe } from '@nestjs/common';
 import { setupSwagger } from './common/swagger/setup-swagger';
+import { EntityNotFoundExceptionFilter } from './common/filters/entity-not-found-exception.filter';
+import { AllExceptionFilter } from './common/filters/all-exception.filter';
+import { CustomExceptionFilter } from './common/filters/custom-exception.filter';
 
 async function bootstrap() {
   initializeTransactionalContext({ storageDriver: StorageDriver.AUTO });
@@ -36,7 +39,10 @@ async function bootstrap() {
   setupSwagger(app, prefix);
   app.setGlobalPrefix(prefix);
 
-  await app.useGlobalFilters(new HttpExceptionFilter());
+  // await app.useGlobalFilters(new HttpExceptionFilter(), new EntityNotFoundExceptionFilter());
+  // await app.useGlobalFilters(new EntityNotFoundExceptionFilter());
+  // await app.useGlobalFilters(new AllExceptionFilter());
+  await app.useGlobalFilters(new CustomExceptionFilter());
 
   await app.listen(port);
 
