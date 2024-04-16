@@ -1,4 +1,9 @@
-import { Injectable, Logger, NotFoundException, UseFilters } from '@nestjs/common';
+import {
+  Injectable,
+  Logger,
+  NotFoundException,
+  UseFilters,
+} from '@nestjs/common';
 import { EntityNotFoundError, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Sample } from './sample.entity';
@@ -15,27 +20,17 @@ export class SampleService {
 
   async findAll(): Promise<Sample[]> {
     try {
-      // throw new NotFoundException('Not Found Sample');
-
       const samples = await this.sampleRepository.find();
 
-      for (const sample of samples) {
-        const parseData = JSON.parse(sample.dataJson);
-        this.logger.debug(parseData);
-        this.logger.debug(
-          `List: id: ${sample.id}, name: ${sample.name}, description: ${sample.description}, data_json: ${JSON.stringify(sample.dataJson)}, created_at: ${sample.createdAt}, updated_at: ${sample.updatedAt}`,
-        );
+      if (Array.isArray(samples)) {
+        for (const sample of samples) {
+          const parseData = JSON.parse(sample.dataJson);
+          this.logger.debug(parseData);
+          this.logger.debug(
+            `List: id: ${sample.id}, name: ${sample.name}, description: ${sample.description}, data_json: ${JSON.stringify(sample.dataJson)}, created_at: ${sample.createdAt}, updated_at: ${sample.updatedAt}`,
+          );
+        }
       }
-
-      /*
-      items.forEach((item) => {
-        const parseData = JSON.parse(item.dataJson);
-        this.logger.debug(parseData);
-        this.logger.debug(
-          `Item: id: ${item.id}, name: ${item.name}, description: ${item.description}, data_json: ${JSON.stringify(item.dataJson)}, created_at: ${item.createdAt}, updated_at: ${item.updatedAt}`,
-        );
-      });
-      */
 
       return samples;
     } catch (error) {
@@ -46,9 +41,12 @@ export class SampleService {
 
   async findOne(id: number): Promise<Sample> {
     try {
-      const find = await this.sampleRepository.findOneBy({ id: id });
-      this.logger.debug(find);
-      return find;
+      const sample = await this.sampleRepository.findOne({ where: { id } });
+      // if (!sample) {
+      //   throw new NotFoundException(`id: ${id} Not Found.`);
+      // }
+      this.logger.debug(sample);
+      return sample;
     } catch (error) {
       this.logger.error(error);
       throw error;
@@ -68,11 +66,9 @@ export class SampleService {
 
   async remove(id: number) {
     try {
-      const sample = await this.sampleRepository.findOneBy({ id: id });
+      const sample = await this.sampleRepository.findOne({ where: { id } });
       if (!sample) {
-        // throw new NotFoundException('Not Found Sample');
-
-        throw new EntityNotFoundError(Sample, id);
+        throw new NotFoundException(`id: ${id} Not Found.`);
       }
       this.logger.debug(sample);
 
@@ -89,14 +85,11 @@ export class SampleService {
     }
   }
 
-  // @UseFilters(EntityNotFoundError)
   async update(id: number, updateSample: UpdateSampleDto) {
     try {
-      const sample = await this.sampleRepository.findOneBy({ id: id });
+      const sample = await this.sampleRepository.findOne({ where: { id } });
       if (!sample) {
-        throw new NotFoundException('Not Found Sample');
-
-        // throw new EntityNotFoundError(Sample, id);
+        throw new NotFoundException(`id: ${id} Not Found.`);
       }
       this.logger.debug(sample);
 

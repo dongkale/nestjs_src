@@ -26,9 +26,9 @@ export class Sample {
 
   @CreateDateColumn({ name: 'created_at' })
   @ApiProperty({ description: '생성일' })
-  createdAt: Date = new Date();
+  createdAt?: Date = new Date();
 
   @CreateDateColumn({ name: 'updated_at' })
   @ApiProperty({ description: '갱신일' })
-  updatedAt: Date;
+  updatedAt?: Date;
 }

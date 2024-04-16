@@ -21,8 +21,8 @@ import {
 // import { ResponseDto } from 'src/common/response/response.dto';
 // import { ApiCommonResponse } from 'src/common/response/common-response';
 // import { Sample } from './sample.entity';
-import { makeSuccessApiCustomResponse } from 'src/common/response/custom-response.dto';
-import { ApiOkCustomResponse } from 'src/common/response/custom-response';
+import { CustomResponseDto } from '../common/response/custom-response.dto';
+import { ApiOkCustomResponse } from '../common/response/custom-response';
 
 @Controller('sample')
 @ApiTags('샘플 API')
@@ -51,12 +51,6 @@ export class SampleController {
     summary: '데이터 리스트 요청 API',
     description: '데이터 리스트 요청한다.',
   })
-  // @ApiResponse({
-  //   description: '데이터 리스트',
-  //   isArray: true,
-  //   type: ResponseDto<SampleResponse>,
-  //   status: 200,
-  // })
   // @ApiExtraModels(ResponseSampleDto)
   // @ApiCommonResponse({
   //   $ref: getSchemaPath(ResponseSampleDto),
@@ -66,13 +60,13 @@ export class SampleController {
   async findAll() {
     const findAll = await this.sampleService.findAll();
 
-    // return {
-    //   result_code: ApiCommonResponseDto.SUCCESS_CODE,
-    //   result_message: ApiCommonResponseDto.SUCCESS_STRING,
-    //   result_data: findAll,
-    // };
+    return {
+      result_code: CustomResponseDto.SUCCESS_CODE,
+      result_message: CustomResponseDto.SUCCESS_STRING,
+      result_data: findAll,
+    };
 
-    return makeSuccessApiCustomResponse(findAll);
+    // return makeSuccessApiCustomResponse(findAll);
   }
 
   @ApiOperation({
@@ -88,43 +82,31 @@ export class SampleController {
   async findOne(@Param('id') id: number) {
     const find = await this.sampleService.findOne(id);
 
-    // return {
-    //   result_code: ApiCommonResponseDto.SUCCESS_CODE,
-    //   result_message: ApiCommonResponseDto.SUCCESS_STRING,
-    //   result_data: find,
-    // };
+    return {
+      result_code: CustomResponseDto.SUCCESS_CODE,
+      result_message: CustomResponseDto.SUCCESS_STRING,
+      result_data: find ? [find] : [],
+    };
 
-    return makeSuccessApiCustomResponse([find]);
+    // return makeSuccessApiCustomResponse(find ? [find] : []);
   }
 
   @ApiOperation({
     summary: '지정 데이터 생성 API',
     description: '지정 데이터를 생성한다.',
   })
-  // @ApiResponse({
-  //   description: '데이터 생성',
-  //   type: Sample,
-  // })
-  // @ApiCommonResponse({
-  //   properties: {
-  //     userId: {
-  //       type: 'string',
-  //       description: '생성된 user Id',
-  //     },
-  //   },
-  // })
   @ApiOkCustomResponse(ResponseSampleDto)
   @Post()
   async create(@Body() createSample: CreateSampleDto) {
     const create = await this.sampleService.create(createSample);
 
-    // return {
-    //   result_code: ApiCommonResponseDto.SUCCESS_CODE,
-    //   result_message: ApiCommonResponseDto.SUCCESS_STRING,
-    //   result_data: create,
-    // };
+    return {
+      result_code: CustomResponseDto.SUCCESS_CODE,
+      result_message: CustomResponseDto.SUCCESS_STRING,
+      result_data: create,
+    };
 
-    return makeSuccessApiCustomResponse(create);
+    // return makeSuccessApiCustomResponse(create);
   }
 
   @ApiOperation({
@@ -136,14 +118,13 @@ export class SampleController {
   async remove(@Param('id') id: number) {
     const remove = await this.sampleService.remove(id);
 
-    // return new ApiCommonResponseDto<Sample>(0, 'Success', remove);
-    // return {
-    //   result_code: ApiCommonResponseDto.SUCCESS_CODE,
-    //   result_message: ApiCommonResponseDto.SUCCESS_STRING,
-    //   result_data: remove,
-    // };
+    return {
+      result_code: CustomResponseDto.SUCCESS_CODE,
+      result_message: CustomResponseDto.SUCCESS_STRING,
+      result_data: remove,
+    };
 
-    return makeSuccessApiCustomResponse(remove);
+    // return makeSuccessApiCustomResponse(remove);
   }
 
   @ApiOperation({
@@ -155,12 +136,12 @@ export class SampleController {
   async update(@Param('id') id: number, @Body() updateSample: UpdateSampleDto) {
     const update = await this.sampleService.update(id, updateSample);
 
-    // return {
-    //   result_code: ApiCommonResponseDto.SUCCESS_CODE,
-    //   result_message: ApiCommonResponseDto.SUCCESS_STRING,
-    //   result_data: update,
-    // };
+    return {
+      result_code: CustomResponseDto.SUCCESS_CODE,
+      result_message: CustomResponseDto.SUCCESS_STRING,
+      result_data: update,
+    };
 
-    return makeSuccessApiCustomResponse(update);
+    // return makeSuccessApiCustomResponse(update);
   }
 }

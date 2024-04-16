@@ -1,0 +1,147 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/complex-sample/src",
+  "monorepo": true,
+  "root": "apps/complex-sample",
+  "compilerOptions": {
+    "webpack": false,
+    "tsConfigPath": "apps/complex-sample/tsconfig.app.json"
+  },
+  "projects": {
+    "complex-sample": {
+      "type": "application",
+      "root": "apps/complex-sample",
+      "entryFile": "main",
+      "sourceRoot": "apps/complex-sample/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/complex-sample/tsconfig.app.json"
+      }
+    },
+    "mongo-sample": {
+      "type": "application",
+      "root": "apps/mongo-sample",
+      "entryFile": "main",
+      "sourceRoot": "apps/mongo-sample/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/mongo-sample/tsconfig.app.json"
+      }
+    },
+    "simple-sample": {
+      "type": "application",
+      "root": "apps/simple-sample",
+      "entryFile": "main",
+      "sourceRoot": "apps/simple-sample/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/simple-sample/tsconfig.app.json"
+      }
+    },
+    "typeorm-graphql-sample": {
+      "type": "application",
+      "root": "apps/typeorm-graphql-sample",
+      "entryFile": "main",
+      "sourceRoot": "apps/typeorm-graphql-sample/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/typeorm-graphql-sample/tsconfig.app.json"
+      }
+    },
+    "typeorm-sample": {
+      "type": "application",
+      "root": "apps/typeorm-sample",
+      "entryFile": "main",
+      "sourceRoot": "apps/typeorm-sample/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/typeorm-sample/tsconfig.app.json"
+      }
+    },
+    "websocket-sample": {
+      "type": "application",
+      "root": "apps/websocket-sample",
+      "entryFile": "main",
+      "sourceRoot": "apps/websocket-sample/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/websocket-sample/tsconfig.app.json"
+      }
+    },
+    "rxjs-sample": {
+      "type": "application",
+      "root": "apps/rxjs-sample",
+      "entryFile": "main",
+      "sourceRoot": "apps/rxjs-sample/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/rxjs-sample/tsconfig.app.json"
+      }
+    },
+    "render-sample": {
+      "type": "application",
+      "root": "apps/render-sample",
+      "entryFile": "main",
+      "sourceRoot": "apps/render-sample/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/render-sample/tsconfig.app.json"
+      }
+    },
+    "graphql-sample": {
+      "type": "application",
+      "root": "apps/graphql-sample",
+      "entryFile": "main",
+      "sourceRoot": "apps/graphql-sample/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/graphql-sample/tsconfig.app.json"
+      }
+    },
+    "microservice-sample": {
+      "type": "application",
+      "root": "apps/microservice-sample",
+      "entryFile": "main",
+      "sourceRoot": "apps/microservice-sample/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/microservice-sample/tsconfig.app.json"
+      }
+    },
+    "e2e-redis-publisher-sample": {
+      "type": "application",
+      "root": "apps/e2e-redis-publisher-sample",
+      "entryFile": "main",
+      "sourceRoot": "apps/e2e-redis-publisher-sample/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/e2e-redis-publisher-sample/tsconfig.app.json"
+      }
+    },
+    "e2e-redis-subscriber-sample": {
+      "type": "application",
+      "root": "apps/e2e-redis-subscriber-sample",
+      "entryFile": "main",
+      "sourceRoot": "apps/e2e-redis-subscriber-sample/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/e2e-redis-subscriber-sample/tsconfig.app.json"
+      }
+    },
+    "cqrs-sample": {
+      "type": "application",
+      "root": "apps/cqrs-sample",
+      "entryFile": "main",
+      "sourceRoot": "apps/cqrs-sample/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/cqrs-sample/tsconfig.app.json"
+      }
+    },
+    "sequelize-sample": {
+      "type": "application",
+      "root": "apps/sequelize-sample",
+      "entryFile": "main",
+      "sourceRoot": "apps/sequelize-sample/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/sequelize-sample/tsconfig.app.json"
+      }
+    },
+    "prisma-sample": {
+      "type": "application",
+      "root": "apps/prisma-sample",
+      "entryFile": "main",
+      "sourceRoot": "apps/prisma-sample/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/prisma-sample/tsconfig.app.json"
+      }
+    }
+  }
+}

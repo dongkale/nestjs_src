@@ -5,6 +5,7 @@ import {
   HttpException,
   HttpStatus,
   Injectable,
+  Logger,
 } from '@nestjs/common';
 import { makeFailApiCustomResponse } from '../response/custom-response.dto';
 // import { Request, Response } from 'express';
@@ -12,29 +13,31 @@ import { makeFailApiCustomResponse } from '../response/custom-response.dto';
 
 @Injectable()
 export class CustomExceptionFilter implements ExceptionFilter {
+  private readonly logger = new Logger(CustomExceptionFilter.name);
+
   catch(exception: any, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const message = exception.message;
+    const stack = exception.stack;
 
     const status =
       exception instanceof HttpException
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    console.log('exception: ', message);
+    this.logger.error(`[Exception] message: ${message}`, stack);
 
-    response
-      .status(status)
-      .json(
-        makeFailApiCustomResponse(
-          status,
-          status !== HttpStatus.INTERNAL_SERVER_ERROR
-            ? exception['message']['error'] || exception['message'] || null
-            : 'Internal server error',
-          [],
-        ),
-      );
+    response.status(status).json(
+      makeFailApiCustomResponse(
+        status,
+        message,
+        // status !== HttpStatus.INTERNAL_SERVER_ERROR
+        //   ? exception['message']['error'] || exception['message'] || null
+        //   : 'Internal server error',
+        [],
+      ),
+    );
 
     // if (exception instanceof HttpException) {
     //   response
