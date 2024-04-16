@@ -6,7 +6,6 @@ import { CreateSampleDto, UpdateSampleDto } from './dto/sample.dto';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { NotFoundException } from '@nestjs/common';
-import { throwError } from 'rxjs';
 
 const mockSampleRepository = () => ({
   create: jest.fn(),
@@ -23,7 +22,6 @@ describe('SampleController', () => {
   let service: SampleService;
   let repository: MockRepository<Sample>;
   // let service: MockRepository<SampleService>;
-  // let sampleRepository: Sample;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -260,6 +258,20 @@ describe('SampleController', () => {
     //     result_data: [],
     //   });
     // });
+
+    it('should throw NotFoundException if sample is not found', async () => {
+      const nonExistId = 999;
+      const exceptionMessage = `id: ${nonExistId} Not Found.`;
+
+      jest.spyOn(service, 'findOne').mockResolvedValue(null);
+
+      try {
+        await controller.remove(nonExistId);
+      } catch (error) {
+        expect(error).toBeInstanceOf(NotFoundException);
+        expect(error.message).toEqual(exceptionMessage);
+      }
+    });
   });
 
   describe('update', () => {
