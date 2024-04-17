@@ -80,6 +80,9 @@ npm i @nestjs/typeorm typeorm mysql2
 npm i class-validator class-transformer
 
 # https://www.npmjs.com/package/typeorm-transactional
+# https://velog.io/@wndbsgkr/NestJS%EC%97%90%EC%84%9C-Transaction-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0feat.-TypeORM
+# https://github.com/odavid/typeorm-transactional-cls-hooked
+# https://github.com/Aliheym/typeorm-transactional/tree/master
 npm i typeorm-transactional
 
 npm install typeorm reflect-metadata
