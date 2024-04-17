@@ -8,7 +8,6 @@ import {
   Delete,
   Put,
   UseGuards,
-  Version,
 } from '@nestjs/common';
 import { PartService } from './part.service';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

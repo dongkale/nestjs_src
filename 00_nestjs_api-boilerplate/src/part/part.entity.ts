@@ -21,6 +21,18 @@ export class Part {
   @ApiProperty({ description: '설명' })
   description: string;
 
+  // @Column({
+  //   type: 'json',
+  //   nullable: true,
+  //   transformer: {
+  //     from(value: object): string {
+  //       return JSON.stringify(value);
+  //     },
+  //     to(value: string): object {
+  //       return JSON.parse(value);
+  //     },
+  //   },
+  // })
   @Column()
   @ApiProperty({ description: '데이터' })
   dataJson: string;

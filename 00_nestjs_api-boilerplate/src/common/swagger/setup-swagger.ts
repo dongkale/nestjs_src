@@ -24,9 +24,9 @@ export function setupSwagger(app: INestApplication, basePrefix: string): void {
       // docExpansion: 'none',
       // filter: true,
       // showRequestDuration: true,
-      apisSorter: 'method',
-      tagsSorter: 'alpha',
-      // operationsSorter: 'alpha',
+      apisSorter: 'order',
+      tagsSorter: 'order',
+      // operationsSorter: 'order',
       operationsSorter: (a, b) => {
         const methodsOrder = [
           'get',
