@@ -1,13 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SampleController } from './sample.controller';
-import { SampleService } from './sample.service';
-import { Sample } from './sample.entity';
-import { CreateSampleDto, UpdateSampleDto } from './dto/sample.dto';
+import { PartController } from './part.controller';
+import { PartService } from './part.service';
+import { Part } from './part.entity';
+import { CreatePartDto, UpdatePartDto } from './dto/part.dto';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { NotFoundException } from '@nestjs/common';
 
-const mockSampleRepository = () => ({
+const mockPartRepository = () => ({
   create: jest.fn(),
   save: jest.fn(),
   find: jest.fn(),
@@ -17,29 +17,29 @@ const mockSampleRepository = () => ({
 
 type MockRepository<T = any> = Partial<Record<keyof Repository<T>, jest.Mock>>;
 
-describe('SampleController', () => {
-  let controller: SampleController;
-  let service: SampleService;
-  let repository: MockRepository<Sample>;
-  // let service: MockRepository<SampleService>;
+describe('PartController', () => {
+  let controller: PartController;
+  let service: PartService;
+  let repository: MockRepository<Part>;
+  // let service: MockRepository<PartService>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [SampleController],
+      controllers: [PartController],
       providers: [
-        SampleService,
+        PartService,
         {
-          provide: getRepositoryToken(Sample),
-          useValue: mockSampleRepository(),
+          provide: getRepositoryToken(Part),
+          useValue: mockPartRepository(),
         },
       ],
     }).compile();
 
-    controller = module.get<SampleController>(SampleController);
-    service = module.get<SampleService>(SampleService);
-    repository = module.get<MockRepository<Sample>>(getRepositoryToken(Sample));
-    // service = module.get<MockRepository<SampleService>>(
-    //   getRepositoryToken(SampleService),
+    controller = module.get<PartController>(PartController);
+    service = module.get<PartService>(PartService);
+    repository = module.get<MockRepository<Part>>(getRepositoryToken(Part));
+    // service = module.get<MockRepository<PartService>>(
+    //   getRepositoryToken(PartService),
     // );
   });
 
@@ -52,62 +52,62 @@ describe('SampleController', () => {
   });
 
   /*
-  it('create => should create a new sample by a given data', async () => {
-    const createSampleDto = {
+  it('create => should create a new part by a given data', async () => {
+    const createPartDto = {
       name: 'name_00',
       description: 'description_00',
       dataJson: '{ "numver": 0, "string": "string_00" }',
-    } as CreateSampleDto;
+    } as CreatePartDto;
 
-    const createSample = {
+    const createPart = {
       id: Date.now(),
       name: 'name_00',
       description: 'description_00',
       dataJson: '{ "numver": 0, "string": "string_00" }',
-    } as Sample;
+    } as Part;
 
-    // service.create.mockResolvedValue(sample);
+    // service.create.mockResolvedValue(part);
     //jest.
-    // .spyOn(mockSampleService as unknown as Repository<SampleService>, 'create')
-    // .mockResolvedValue(sample);
+    // .spyOn(mockPartService as unknown as Repository<PartService>, 'create')
+    // .mockResolvedValue(part);
 
-    jest.spyOn(service, 'create').mockResolvedValue(createSample);
+    jest.spyOn(service, 'create').mockResolvedValue(createPart);
 
-    const result = await controller.create(createSampleDto);
+    const result = await controller.create(createPartDto);
     console.log('result:', result);
 
-    //   // jest.spyOn(mockSampleService, 'create').mockResolvedValue(sample);
-    //   service.save.mockReturnValue(sample);
-    //   const result = await controller.create(createSampleDto);
-    //   //expect(mockSampleService as MockRepository<SampleService>.create).toHaveBeenCalledWith(createUserDto);
+    //   // jest.spyOn(mockPartService, 'create').mockResolvedValue(part);
+    //   service.save.mockReturnValue(part);
+    //   const result = await controller.create(createPartDto);
+    //   //expect(mockPartService as MockRepository<PartService>.create).toHaveBeenCalledWith(createUserDto);
     //   //expect(result).toEqual(user);
     expect(service.create).toHaveBeenCalledTimes(1);
-    expect(service.create).toHaveBeenCalledWith(createSampleDto);
+    expect(service.create).toHaveBeenCalledWith(createPartDto);
 
-    // expect(result).toEqual(sample);
+    // expect(result).toEqual(part);
     expect(result).toEqual({
       result_code: 0,
       result_message: 'Success',
-      result_data: createSample,
+      result_data: createPart,
     });
   });
   */
 
   describe('create', () => {
-    it('should create a new sample', async () => {
-      const createSampleDto: CreateSampleDto = {
-        name: 'Test Sample',
+    it('should create a new part', async () => {
+      const createPartDto: CreatePartDto = {
+        name: 'Test Part',
         description: 'Test Description',
         dataJson: '{}',
       };
 
-      const mockData = { id: 1, ...createSampleDto };
+      const mockData = { id: 1, ...createPartDto };
       jest.spyOn(service, 'create').mockResolvedValue(mockData);
 
-      const result = await controller.create(createSampleDto);
+      const result = await controller.create(createPartDto);
 
       expect(service.create).toHaveBeenCalledTimes(1);
-      expect(service.create).toHaveBeenCalledWith(createSampleDto);
+      expect(service.create).toHaveBeenCalledWith(createPartDto);
 
       expect(result).toEqual({
         result_code: 0,
@@ -118,17 +118,17 @@ describe('SampleController', () => {
   });
 
   describe('findAll', () => {
-    it('should return an array of samples', async () => {
-      const mockData: Sample[] = [
+    it('should return an array of parts', async () => {
+      const mockData: Part[] = [
         {
           id: 1,
-          name: 'Sample 1',
+          name: 'Part 1',
           description: 'Test Description 1',
           dataJson: '{}',
         },
         {
           id: 2,
-          name: 'Sample 2',
+          name: 'Part 2',
           description: 'Test Description 2',
           dataJson: '{}',
         },
@@ -149,12 +149,12 @@ describe('SampleController', () => {
   });
 
   describe('findOne', () => {
-    it('should return a sample', async () => {
+    it('should return a part', async () => {
       const testId = 1;
 
-      const mockData: Sample = {
+      const mockData: Part = {
         id: 1,
-        name: 'Sample 1',
+        name: 'Part 1',
         description: 'Test Description 1',
         dataJson: '{}',
       };
@@ -172,7 +172,7 @@ describe('SampleController', () => {
       });
     });
 
-    it('should return an empty array if sample not found', async () => {
+    it('should return an empty array if part not found', async () => {
       const nonExistId = 999;
 
       jest.spyOn(service, 'findOne').mockResolvedValue(null);
@@ -211,12 +211,12 @@ describe('SampleController', () => {
   });
 
   describe('remove', () => {
-    it('should remove a sample', async () => {
+    it('should remove a part', async () => {
       const testId = 1;
 
       const mockData = {
         id: 1,
-        name: 'Sample 1',
+        name: 'Part 1',
         description: 'Test Description 1',
         dataJson: '{}',
       };
@@ -234,9 +234,9 @@ describe('SampleController', () => {
       });
     });
 
-    // it('should throw NotFoundException if sample is not found', async () => {
+    // it('should throw NotFoundException if part is not found', async () => {
     //   const nonExistId = 999;
-    //   const exceptionMessage = `id: ${nonExistId} Not Found.`;
+    //   const exceptionMessage = `${nonExistId} Not Found.`;
 
     //   jest
     //     .spyOn(service, 'remove')
@@ -259,9 +259,9 @@ describe('SampleController', () => {
     //   });
     // });
 
-    it('should throw NotFoundException if sample is not found', async () => {
+    it('should throw NotFoundException if part is not found', async () => {
       const nonExistId = 999;
-      const exceptionMessage = `id: ${nonExistId} Not Found.`;
+      const exceptionMessage = `${nonExistId} Not Found.`;
 
       jest.spyOn(service, 'findOne').mockResolvedValue(null);
 
@@ -275,16 +275,16 @@ describe('SampleController', () => {
   });
 
   describe('update', () => {
-    it('should update a sample', async () => {
-      const updateSampleDto: UpdateSampleDto = {
-        name: 'Updated Sample',
+    it('should update a part', async () => {
+      const updatePartDto: UpdatePartDto = {
+        name: 'Updated Part',
         description: 'Updated Description',
         dataJson: '{}',
       };
-      const mockData = { id: 1, ...updateSampleDto };
+      const mockData = { id: 1, ...updatePartDto };
       jest.spyOn(service, 'update').mockResolvedValue(mockData);
 
-      const result = await controller.update(1, updateSampleDto);
+      const result = await controller.update(1, updatePartDto);
 
       expect(result).toEqual({
         result_code: 0,

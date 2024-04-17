@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { addTransactionalDataSource } from 'typeorm-transactional';
 
 @Module({
@@ -15,13 +16,14 @@ import { addTransactionalDataSource } from 'typeorm-transactional';
           username: configService.get<string>('DB_USERNAME'),
           password: configService.get<string>('DB_PASSWORD'),
           database: configService.get<string>('DB_NAME'),
+          namingStrategy: new SnakeNamingStrategy(),
           // entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-          // entities: [Sample],
+          // entities: [Part],
           autoLoadEntities: true,
-          synchronize:
-            configService.get<string>('NODE_ENV') == 'development'
-              ? true
-              : false, // synchronize: true는 운영에서는 사용하지 마세요
+          synchronize: false,
+          // configService.get<string>('NODE_ENV') == 'development'
+          //   ? true
+          //   : false, // synchronize: true는 운영에서는 사용하지 마세요
           // logging:
           //   configService.get<string>('NODE_ENV') == 'development'
           //     ? true

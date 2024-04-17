@@ -15,7 +15,7 @@ export const ApiOkCustomResponse = <DataDto extends Type<unknown>>(
             properties: {
               result_code: {
                 type: 'number',
-                example: true,
+                example: 0,
                 description: '성공/실패: 성공:0, 실패:에러코드(>0)',
               },
               result_message: {

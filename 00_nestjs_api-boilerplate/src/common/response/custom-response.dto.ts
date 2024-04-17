@@ -10,10 +10,11 @@ export class CustomResponseDto<T> {
   @ApiProperty()
   result_message: string;
 
+  @ApiProperty()
   result_data: T[];
 }
 
-export function makeSuccessApiCustomResponse(result_data: any) {
+export function makeSuccessCustomResponseDto(result_data: any) {
   return {
     result_code: CustomResponseDto.SUCCESS_CODE,
     result_message: CustomResponseDto.SUCCESS_STRING,
@@ -21,7 +22,7 @@ export function makeSuccessApiCustomResponse(result_data: any) {
   };
 }
 
-export function makeFailApiCustomResponse(
+export function makeFailCustomResponseDto(
   result_code: number = CustomResponseDto.SUCCESS_CODE,
   result_message: string = CustomResponseDto.SUCCESS_STRING,
   result_data: any,

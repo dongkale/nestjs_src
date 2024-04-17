@@ -1,7 +1,7 @@
 import { Catch, ExceptionFilter, ArgumentsHost } from '@nestjs/common';
 import { EntityNotFoundError } from 'typeorm/error/EntityNotFoundError';
 import { Response } from 'express';
-import { makeFailApiCustomResponse } from '../response/custom-response.dto';
+import { makeFailCustomResponseDto } from '../../response/custom-response.dto';
 
 @Catch(EntityNotFoundError, Error)
 export class EntityNotFoundExceptionFilter implements ExceptionFilter {
@@ -21,6 +21,6 @@ export class EntityNotFoundExceptionFilter implements ExceptionFilter {
 
     return response
       .status(status)
-      .json(makeFailApiCustomResponse(status, 'Not Found', []));
+      .json(makeFailCustomResponseDto(status, 'Not Found', []));
   }
 }

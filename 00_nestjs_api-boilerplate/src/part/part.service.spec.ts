@@ -3,9 +3,9 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { SampleService } from './sample.service';
+import { PartService } from './part.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Sample } from './sample.entity';
+import { Part } from './part.entity';
 import {
   EntityNotFoundError,
   FindOneOptions,
@@ -13,9 +13,9 @@ import {
   Repository,
   ServerDescription,
 } from 'typeorm';
-import { UpdateSampleDto } from './dto/sample.dto';
+import { UpdatePartDto } from './dto/part.dto';
 
-const mockSampleRepository = () => ({
+const mockPartRepository = () => ({
   create: jest.fn(),
   save: jest.fn(),
   find: jest.fn(),
@@ -25,27 +25,27 @@ const mockSampleRepository = () => ({
 
 type MockRepository<T = any> = Partial<Record<keyof Repository<T>, jest.Mock>>;
 
-describe('SampleService', () => {
-  let service: SampleService;
-  // let repository: Repository<Sample>;
-  let repository: MockRepository<Sample>;
+describe('PartService', () => {
+  let service: PartService;
+  // let repository: Repository<Part>;
+  let repository: MockRepository<Part>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        SampleService,
+        PartService,
         {
-          provide: getRepositoryToken(Sample),
-          useValue: mockSampleRepository(),
+          provide: getRepositoryToken(Part),
+          useValue: mockPartRepository(),
         },
       ],
     }).compile();
 
-    service = module.get<SampleService>(SampleService);
-    repository = module.get<MockRepository<Sample>>(getRepositoryToken(Sample));
+    service = module.get<PartService>(PartService);
+    repository = module.get<MockRepository<Part>>(getRepositoryToken(Part));
 
-    // service = module.get<SampleService>(SampleService);
-    // repository = module.get<Repository<Sample>>(getRepositoryToken(Sample));
+    // service = module.get<PartService>(PartService);
+    // repository = module.get<Repository<Part>>(getRepositoryToken(Part));
   });
 
   it('should be defined', () => {
@@ -72,7 +72,7 @@ describe('SampleService', () => {
       expect(result).toEqual(ErrorString);
     });
 
-    it('should create Sample', async () => {
+    it('should create Part', async () => {
       repository.save.mockReturnValue(createArgs);
       const result = await service.create(createArgs);
 
@@ -110,20 +110,20 @@ describe('SampleService', () => {
     const findOneArgs = { id: 1 };
 
     it('should be findOne', async () => {
-      const mockedSample = {
+      const mockedPart = {
         id: 1,
         name: 'name_00',
         description: 'description_00',
         dataJson: "{ number: 1, string: 'string_01' }",
       };
-      repository.findOne.mockResolvedValue(mockedSample);
+      repository.findOne.mockResolvedValue(mockedPart);
 
       const result = await service.findOne(findOneArgs.id);
 
       expect(repository.findOne).toHaveBeenCalledTimes(1);
       // expect(repository.findOne).toHaveBeenCalledWith(findOneArgs);
 
-      expect(result).toEqual(mockedSample);
+      expect(result).toEqual(mockedPart);
     });
 
     it('should fail if no post is found', async () => {
@@ -155,35 +155,35 @@ describe('SampleService', () => {
   });
 
   describe('update()', () => {
-    const sampleId = 1;
-    const updateSampleDto: UpdateSampleDto = {
+    const partId = 1;
+    const updatePartDto: UpdatePartDto = {
       name: 'Updated Name',
       description: 'Updated Description',
       dataJson: '{"updated_key": "updated_value"}',
     };
 
     it('should be update post', async () => {
-      const existingSample = new Sample();
+      const existingPart = new Part();
 
-      jest.spyOn(repository, 'findOne').mockResolvedValue(existingSample);
-      jest.spyOn(repository, 'save').mockResolvedValue(existingSample);
+      jest.spyOn(repository, 'findOne').mockResolvedValue(existingPart);
+      jest.spyOn(repository, 'save').mockResolvedValue(existingPart);
 
-      const result = await service.update(sampleId, updateSampleDto);
+      const result = await service.update(partId, updatePartDto);
 
       expect(repository.findOne).toHaveBeenCalledTimes(1);
       expect(repository.findOne).toHaveBeenCalledWith({
-        where: { id: sampleId },
+        where: { id: partId },
       });
 
-      expect(result).toEqual(existingSample);
+      expect(result).toEqual(existingPart);
     });
 
-    it('should throw NotFoundException if sample is not found', async () => {
+    it('should throw NotFoundException if part is not found', async () => {
       const nonExistId = 999;
 
       jest.spyOn(repository, 'findOne').mockResolvedValue(null);
 
-      const result = service.update(nonExistId, updateSampleDto);
+      const result = service.update(nonExistId, updatePartDto);
 
       expect(repository.findOne).toHaveBeenCalledTimes(1);
       expect(repository.findOne).toHaveBeenCalledWith({
@@ -195,41 +195,41 @@ describe('SampleService', () => {
   });
 
   describe('remove()', () => {
-    const sampleId = 1;
-    const expectedSample = new Sample();
+    const partId = 1;
+    const expectedPart = new Part();
 
     it('should be remove post', async () => {
       // repository.findOne.mockResolvedValue(findOneArgs);
       // repository.softDelete.mockResolvedValue(softDeleteArgs);
 
-      repository.findOne.mockResolvedValue(expectedSample);
+      repository.findOne.mockResolvedValue(expectedPart);
 
-      const removedSample = await service.remove(sampleId);
+      const removedPart = await service.remove(partId);
 
       expect(repository.findOne).toHaveBeenCalledTimes(1);
       expect(repository.findOne).toHaveBeenCalledWith({
-        where: { id: sampleId },
+        where: { id: partId },
       });
 
       expect(repository.delete).toHaveBeenCalledTimes(1);
-      expect(removedSample).toEqual(expectedSample);
+      expect(removedPart).toEqual(expectedPart);
     });
 
-    it('should remove an existing sample', async () => {
-      jest.spyOn(repository, 'findOne').mockResolvedValue(expectedSample);
+    it('should remove an existing part', async () => {
+      jest.spyOn(repository, 'findOne').mockResolvedValue(expectedPart);
       jest.spyOn(repository, 'delete').mockResolvedValue({});
 
-      const result = await service.remove(sampleId);
+      const result = await service.remove(partId);
 
       expect(repository.findOne).toHaveBeenCalledTimes(1);
       expect(repository.findOne).toHaveBeenCalledWith({
-        where: { id: sampleId },
+        where: { id: partId },
       });
 
-      expect(result).toEqual(expectedSample);
+      expect(result).toEqual(expectedPart);
     });
 
-    it('should nonExistId NotFoundException if sample is not found', async () => {
+    it('should nonExistId NotFoundException if part is not found', async () => {
       const nonExistId = 999; // Non-existent ID
       jest.spyOn(repository, 'findOne').mockResolvedValue(null);
 

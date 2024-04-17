@@ -1,27 +1,3 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
@@ -60,20 +36,24 @@ $ npm run test:cov
 
 ## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- CRUD(Get, Post, Put, Delete)(Part)
+- Typeorm(mysql), typeorm-transactional
+- Winston Log(file rotate)
+- Swagger
+- Custom Exception Filter
+- Custom Reponse Format
+- Entity Custom Validate Pipe
+- interceptor(request log)
+- Health Check
+- Api-key Check(nestjs/passport)
+- Controller, Service Test
 
 ## License
 
 Nest is [MIT licensed](LICENSE).
 `
 
-# install
+# Ref
 
 ```bash
 
@@ -104,10 +84,18 @@ npm i typeorm-transactional
 
 npm install typeorm reflect-metadata
 
+- typeorm naming strategies
+
+npm install typeorm-naming-strategies --save
+
 - swagger
 
 # https://jhyeok.com/nestjs-swagger/
 npm install --save @nestjs/swagger
+
+- swagger api-key
+
+https://stackoverflow.com/questions/73061034/how-to-authorize-multi-api-keys-using-nestjs-swagger-and-useguards
 
 - swagger + 공통 reponse
 
@@ -115,6 +103,46 @@ npm install --save @nestjs/swagger
 # https://devnm.tistory.com/23?category=1258201
 # https://aalonso.dev/blog/2021/how-to-generate-generics-dtos-with-nestjsswagger-422g
 
+- swagger api sort
 
+# https://stackoverflow.com/questions/68529137/sorting-tags-and-operation-in-swagger-ui
+
+- auth : header api-key
+
+# https://stackoverflow.com/questions/72238595/how-to-secure-a-rest-api-with-an-api-key
+# https://www.stewright.me/2021/03/add-header-api-key-to-nestjs-rest-api/amp/
+
+npm i passport passport-headerapikey @nestjs/passport --save
+npm i @types/passport @types/passport-http --save-dev
+
+added .env
+API_KEY=1ab2c3d4e5f61ab2c3d4e5f6
+
+# https://medium.com/@Dee_Mayoor/apikey-authentication-for-nestjs-using-passport-js-6db467fc31f7
+
+- health module
+
+npm install @nestjs/terminus
+npm install @nestjs/axios
+
+- class-validator TypeScript Examples
+
+#https://assu10.github.io/dev/2023/03/11/nest-pipe/#3-%EC%9C%A0%ED%9A%A8%EC%84%B1-%EA%B2%80%EC%82%AC-pipe-%EB%A7%8C%EB%93%A4%EA%B8%B0
+
+# https://www.programcreek.com/typescript/?api=class-validator.registerDecorator
+
+- mysql json column
+
+# https://givemethesocks.tistory.com/75
+
+- health
+
+# https://velog.io/@hong-brother/NestJS-health-api-%EC%B6%94%EA%B0%80
+
+npm install --save @nestjs/termius
+
+- vesioning
+
+# https://www.daleseo.com/nestjs-versioning/
 
 ```

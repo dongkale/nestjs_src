@@ -6,7 +6,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { makeFailApiCustomResponse } from '../response/custom-response.dto';
+import { makeFailCustomResponseDto } from '../../response/custom-response.dto';
 
 @Catch()
 export class AllExceptionFilter implements ExceptionFilter {
@@ -23,7 +23,7 @@ export class AllExceptionFilter implements ExceptionFilter {
     response
       .status(status)
       .json(
-        makeFailApiCustomResponse(
+        makeFailCustomResponseDto(
           status,
           status !== HttpStatus.INTERNAL_SERVER_ERROR
             ? exception['message']['error'] || exception['message'] || null
