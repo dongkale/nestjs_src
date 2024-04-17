@@ -134,6 +134,7 @@ npm install @nestjs/axios
 - mysql json column
 
 # https://givemethesocks.tistory.com/75
+# https://stackoverflow.com/questions/64285189/how-to-save-array-of-json-object-in-postgres-using-typeorm
 
 - health
 
