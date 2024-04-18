@@ -2,52 +2,52 @@ export class ApiCommonResponseDto<T> {
   public static readonly SUCCESS_CODE = 0;
   public static readonly SUCCESS_STRING = 'Success';
 
-  result_code: number;
+  resultCode: number;
 
-  result_message: string;
+  resultMessage: string;
 
-  result_data: T;
+  resultData: T;
 
   constructor(
-    result_code: number = ApiCommonResponseDto.SUCCESS_CODE,
-    result_message: string = ApiCommonResponseDto.SUCCESS_STRING,
-    result_data: T,
+    resultCode: number = ApiCommonResponseDto.SUCCESS_CODE,
+    resultMessage: string = ApiCommonResponseDto.SUCCESS_STRING,
+    resultData: T,
   ) {
-    this.result_code = result_code;
-    this.result_message = result_message;
-    this.result_data = result_data;
+    this.resultCode = resultCode;
+    this.resultMessage = resultMessage;
+    this.resultData = resultData;
   }
 }
 
 // Move the static method outside of the class and remove the type parameter T
 // export function makeApiCommonResponse(
-//   result_code: number = ApiCommonResponseDto.SUCCESS_CODE,
-//   result_message: string = ApiCommonResponseDto.SUCCESS_STRING,
-//   result_data: any,
+//   resultCode: number = ApiCommonResponseDto.SUCCESS_CODE,
+//   resultMessage: string = ApiCommonResponseDto.SUCCESS_STRING,
+//   resultData: any,
 // ) {
 //   return {
-//     result_code: result_code,
-//     result_message: result_message,
-//     result_data: result_data,
+//     resultCode: resultCode,
+//     resultMessage: resultMessage,
+//     resultData: resultData,
 //   };
 // }
 
-export function makeSuccessApiCommonResponse(result_data: any) {
+export function makeSuccessApiCommonResponse(resultData: any) {
   return {
-    result_code: ApiCommonResponseDto.SUCCESS_CODE,
-    result_message: ApiCommonResponseDto.SUCCESS_STRING,
-    result_data: result_data,
+    resultCode: ApiCommonResponseDto.SUCCESS_CODE,
+    resultMessage: ApiCommonResponseDto.SUCCESS_STRING,
+    resultData: resultData,
   };
 }
 
 export function makeFailApiCommonResponse(
-  result_code: number = ApiCommonResponseDto.SUCCESS_CODE,
-  result_message: string = ApiCommonResponseDto.SUCCESS_STRING,
-  result_data: any,
+  resultCode: number = ApiCommonResponseDto.SUCCESS_CODE,
+  resultMessage: string = ApiCommonResponseDto.SUCCESS_STRING,
+  resultData: any,
 ) {
   return {
-    result_code: result_code,
-    result_message: result_message,
-    result_data: result_data,
+    resultCode: resultCode,
+    resultMessage: resultMessage,
+    resultData: resultData,
   };
 }

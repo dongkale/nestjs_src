@@ -32,8 +32,8 @@ export class PartController {
   //   const findAll = await this.partService.findAll();
 
   //   return {
-  //     result_code: 0,
-  //     result_message: '',
+  //     resultCode: 0,
+  //     resultMessage: '',
   //     data: findAll,
   //   };
   // }
@@ -53,9 +53,9 @@ export class PartController {
     const findAll = await this.partService.findAll();
 
     return {
-      result_code: CustomResponseDto.SUCCESS_CODE,
-      result_message: CustomResponseDto.SUCCESS_STRING,
-      result_data: findAll,
+      resultCode: CustomResponseDto.SUCCESS_CODE,
+      resultMessage: CustomResponseDto.SUCCESS_STRING,
+      resultData: findAll,
     };
 
     // return makeSuccessCustomResponseDto(findAll);
@@ -76,9 +76,9 @@ export class PartController {
     const find = await this.partService.findOne(id);
 
     return {
-      result_code: CustomResponseDto.SUCCESS_CODE,
-      result_message: CustomResponseDto.SUCCESS_STRING,
-      result_data: find ? [find] : [],
+      resultCode: CustomResponseDto.SUCCESS_CODE,
+      resultMessage: CustomResponseDto.SUCCESS_STRING,
+      resultData: find ? [find] : [],
     };
 
     // return makeSuccessCustomResponseDto(find ? [find] : []);
@@ -95,9 +95,9 @@ export class PartController {
     const create = await this.partService.create(createPart);
 
     return {
-      result_code: CustomResponseDto.SUCCESS_CODE,
-      result_message: CustomResponseDto.SUCCESS_STRING,
-      result_data: create,
+      resultCode: CustomResponseDto.SUCCESS_CODE,
+      resultMessage: CustomResponseDto.SUCCESS_STRING,
+      resultData: create,
     };
 
     // return makeSuccessCustomResponseDto(create);
@@ -114,9 +114,9 @@ export class PartController {
     const remove = await this.partService.remove(id);
 
     return {
-      result_code: CustomResponseDto.SUCCESS_CODE,
-      result_message: CustomResponseDto.SUCCESS_STRING,
-      result_data: remove,
+      resultCode: CustomResponseDto.SUCCESS_CODE,
+      resultMessage: CustomResponseDto.SUCCESS_STRING,
+      resultData: remove,
     };
 
     // return makeSuccessCustomResponseDto(remove);
@@ -133,9 +133,9 @@ export class PartController {
     const update = await this.partService.update(id, updatePart);
 
     return {
-      result_code: CustomResponseDto.SUCCESS_CODE,
-      result_message: CustomResponseDto.SUCCESS_STRING,
-      result_data: update,
+      resultCode: CustomResponseDto.SUCCESS_CODE,
+      resultMessage: CustomResponseDto.SUCCESS_STRING,
+      resultData: update,
     };
 
     // return makeSuccessCustomResponseDto(update);

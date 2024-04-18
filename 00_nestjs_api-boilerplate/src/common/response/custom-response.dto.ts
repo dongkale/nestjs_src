@@ -5,31 +5,31 @@ export class CustomResponseDto<T> {
   public static readonly SUCCESS_STRING = 'Success';
 
   @ApiProperty()
-  result_code: number;
+  resultCode: number;
 
   @ApiProperty()
-  result_message: string;
+  resultMessage: string;
 
   @ApiProperty()
-  result_data: T[];
+  resultData: T[];
 }
 
-export function makeSuccessCustomResponseDto(result_data: any) {
+export function makeSuccessCustomResponseDto(resultData: any) {
   return {
-    result_code: CustomResponseDto.SUCCESS_CODE,
-    result_message: CustomResponseDto.SUCCESS_STRING,
-    result_data: result_data,
+    resultCode: CustomResponseDto.SUCCESS_CODE,
+    resultMessage: CustomResponseDto.SUCCESS_STRING,
+    resultData: resultData,
   };
 }
 
 export function makeFailCustomResponseDto(
-  result_code: number = CustomResponseDto.SUCCESS_CODE,
-  result_message: string = CustomResponseDto.SUCCESS_STRING,
-  result_data: any,
+  resultCode: number = CustomResponseDto.SUCCESS_CODE,
+  resultMessage: string = CustomResponseDto.SUCCESS_STRING,
+  resultData: any,
 ) {
   return {
-    result_code: result_code,
-    result_message: result_message,
-    result_data: result_data,
+    resultCode: resultCode,
+    resultMessage: resultMessage,
+    resultData: resultData,
   };
 }

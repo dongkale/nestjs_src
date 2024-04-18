@@ -43,12 +43,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
     //   exception.message || 'Internal Server Error',
     // );
     // response.status(status).json({
-    //   result_code: status,
-    //   result_message:
+    //   resultCode: status,
+    //   resultMessage:
     //     status !== HttpStatus.INTERNAL_SERVER_ERROR
     //       ? exception['message']['error'] || exception['message'] || null
     //       : 'Internal server error',
-    //   result_data: [],
+    //   resultData: [],
     // });
 
     response

@@ -86,9 +86,9 @@ describe('PartController', () => {
 
     // expect(result).toEqual(part);
     expect(result).toEqual({
-      result_code: 0,
-      result_message: 'Success',
-      result_data: createPart,
+      resultCode: 0,
+      resultMessage: 'Success',
+      resultData: createPart,
     });
   });
   */
@@ -110,9 +110,9 @@ describe('PartController', () => {
       expect(service.create).toHaveBeenCalledWith(createPartDto);
 
       expect(result).toEqual({
-        result_code: 0,
-        result_message: 'Success',
-        result_data: mockData,
+        resultCode: 0,
+        resultMessage: 'Success',
+        resultData: mockData,
       });
     });
   });
@@ -141,9 +141,9 @@ describe('PartController', () => {
       // expect(service.findAll).toHaveBeenCalledWith(mockData);
 
       expect(result).toEqual({
-        result_code: 0,
-        result_message: 'Success',
-        result_data: mockData,
+        resultCode: 0,
+        resultMessage: 'Success',
+        resultData: mockData,
       });
     });
   });
@@ -166,9 +166,9 @@ describe('PartController', () => {
       expect(service.findOne).toHaveBeenCalledWith(testId);
 
       expect(result).toEqual({
-        result_code: 0,
-        result_message: 'Success',
-        result_data: [mockData],
+        resultCode: 0,
+        resultMessage: 'Success',
+        resultData: [mockData],
       });
     });
 
@@ -183,9 +183,9 @@ describe('PartController', () => {
       expect(service.findOne).toHaveBeenCalledWith(nonExistId);
 
       expect(result).toEqual({
-        result_code: 0,
-        result_message: 'Success',
-        result_data: [],
+        resultCode: 0,
+        resultMessage: 'Success',
+        resultData: [],
       });
     });
 
@@ -203,9 +203,9 @@ describe('PartController', () => {
     //   });
 
     //   expect(result).toEqual({
-    //     result_code: 0,
-    //     result_message: ErrorString,
-    //     result_data: [],
+    //     resultCode: 0,
+    //     resultMessage: ErrorString,
+    //     resultData: [],
     //   });
     // });
   });
@@ -228,9 +228,9 @@ describe('PartController', () => {
       expect(service.remove).toHaveBeenCalledWith(testId);
 
       expect(result).toEqual({
-        result_code: 0,
-        result_message: 'Success',
-        result_data: mockData,
+        resultCode: 0,
+        resultMessage: 'Success',
+        resultData: mockData,
       });
     });
 
@@ -253,9 +253,9 @@ describe('PartController', () => {
     //   expect(service.remove).toHaveBeenCalledWith(nonExistId);
 
     //   expect(result).toEqual({
-    //     result_code: 404,
-    //     result_message: exceptionMessage,
-    //     result_data: [],
+    //     resultCode: 404,
+    //     resultMessage: exceptionMessage,
+    //     resultData: [],
     //   });
     // });
 
@@ -287,9 +287,9 @@ describe('PartController', () => {
       const result = await controller.update(1, updatePartDto);
 
       expect(result).toEqual({
-        result_code: 0,
-        result_message: 'Success',
-        result_data: mockData,
+        resultCode: 0,
+        resultMessage: 'Success',
+        resultData: mockData,
       });
     });
   });

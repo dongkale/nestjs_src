@@ -13,18 +13,18 @@ export const ApiOkCustomResponse = <DataDto extends Type<unknown>>(
           { $ref: getSchemaPath(CustomResponseDto) },
           {
             properties: {
-              result_code: {
+              resultCode: {
                 type: 'number',
                 example: 0,
                 description: '성공/실패: 성공:0, 실패:에러코드(>0)',
               },
-              result_message: {
+              resultMessage: {
                 type: 'string',
                 example: 'Success',
                 description:
                   '성공/실패 메세지: 성공: Success, 실패: 실패 메세지',
               },
-              result_data: {
+              resultData: {
                 type: 'array',
                 items: { $ref: getSchemaPath(dataDto) },
               },
