@@ -53,7 +53,7 @@ async function bootstrap() {
   //   defaultVersion: '1',
   // });
 
-  app.useGlobalFilters(new CustomExceptionFilter());
+  await app.useGlobalFilters(new CustomExceptionFilter());
 
   await app.listen(port);
 

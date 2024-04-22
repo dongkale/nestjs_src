@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  api-app:
+    container_name: Api-Server
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - '5000:5000'
+    volumes:
+      - .:/app
+    command: ['sh', '-c', 'sleep 20 && npm run start:dev']

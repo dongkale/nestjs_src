@@ -78,24 +78,24 @@ export class ResponsePartDto {
     });
   }
 
-  // static convertFromPartEx(items: Part[]): ResponsePartDto[] {
-  //   const response: ResponsePartDto[] = [];
+  static convertFromPartEx(items: Part[]): ResponsePartDto[] {
+    const response: ResponsePartDto[] = [];
 
-  //   if (!Array.isArray(items)) {
-  //     return [];
-  //   }
+    if (!Array.isArray(items)) {
+      return [];
+    }
 
-  //   for (const part of items) {
-  //     response.push({
-  //       id: part.id,
-  //       name: part.name,
-  //       description: part.description,
-  //       dataJson: JSON.stringify(part.dataJson),
-  //     });
-  //   }
+    for (const part of items) {
+      response.push({
+        id: part.id,
+        name: part.name,
+        description: part.description,
+        dataJson: part.dataJson,
+      });
+    }
 
-  //   return response;
-  // }
+    return response;
+  }
 
   @ApiProperty({ description: 'ID', example: 1 })
   @Expose()

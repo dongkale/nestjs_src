@@ -89,9 +89,9 @@ export class PartController {
   })
   @ApiOkCustomResponse(ResponsePartDto)
   @UseGuards(AuthGuard('api-key'))
-  @Delete(':name')
-  async remove(@Param('name') name: string) {
-    const remove = await this.partService.remove(name);
+  @Delete(':id')
+  async remove(@Param('id') id: number) {
+    const remove = await this.partService.remove(id);
 
     return Object.assign({
       resultCode: CustomResponseDto.SUCCESS_CODE,
@@ -106,9 +106,9 @@ export class PartController {
   })
   @ApiOkCustomResponse(ResponsePartDto)
   @UseGuards(AuthGuard('api-key'))
-  @Put(':name')
-  async update(@Param('name') name: string, @Body() updatePart: UpdatePartDto) {
-    const update = await this.partService.update(name, updatePart);
+  @Put(':id')
+  async update(@Param('id') id: number, @Body() updatePart: UpdatePartDto) {
+    const update = await this.partService.update(id, updatePart);
 
     return Object.assign({
       resultCode: CustomResponseDto.SUCCESS_CODE,

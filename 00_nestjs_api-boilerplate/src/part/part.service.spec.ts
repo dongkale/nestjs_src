@@ -13,7 +13,7 @@ import {
   Repository,
   ServerDescription,
 } from 'typeorm';
-import { UpdatePartDto } from './dto/part.dto';
+import { CreatePartDto, ResponsePartDto, UpdatePartDto } from './dto/part.dto';
 
 const mockPartRepository = () => ({
   create: jest.fn(),
@@ -43,9 +43,6 @@ describe('PartService', () => {
 
     service = module.get<PartService>(PartService);
     repository = module.get<MockRepository<Part>>(getRepositoryToken(Part));
-
-    // service = module.get<PartService>(PartService);
-    // repository = module.get<Repository<Part>>(getRepositoryToken(Part));
   });
 
   it('should be defined', () => {
@@ -60,26 +57,62 @@ describe('PartService', () => {
       dataJson: "{ number: 1, string: 'string_01' }",
     };
 
-    it('should fail on error', async () => {
-      const ErrorString = 'save error';
-      repository.save.mockReturnValue(ErrorString);
+    it('should fail on save error', async () => {
+      const exceptionString = 'Create Part Failed';
+      repository.save.mockResolvedValue(null); // save() 에 정상처리 되었을 때(물론 에러 리턴하지만)
 
-      const result = await service.create(createArgs);
+      await expect(service.create(createArgs)).rejects.toThrow(
+        new Error(exceptionString),
+      );
 
-      expect(repository.save).toHaveBeenCalledTimes(1);
-      expect(repository.save).toHaveBeenCalledWith(createArgs);
+      // const result = await service.create(createArgs);
+      // expect(await service.create(createArgs)).rejects.toThrow(exceptionString);
 
-      expect(result).toEqual(ErrorString);
+      // await expect(service.create({})).rejects.toThrow(exceptionString);
+
+      // expect(repository.save).toHaveBeenCalledTimes(1);
+      // expect(repository.save).toHaveBeenCalledWith(createArgs);
+
+      // expect(result).toEqual(ErrorString);
     });
 
-    it('should create Part', async () => {
-      repository.save.mockReturnValue(createArgs);
-      const result = await service.create(createArgs);
+    it('should fail on save exception', async () => {
+      repository.save.mockRejectedValue(new Error()); // save() 에 에러가 발생했을 때
 
-      expect(repository.save).toHaveBeenCalledTimes(1);
-      expect(repository.save).toHaveBeenCalledWith(createArgs); // 매개변수로 createArgs가 주어졌니?
+      await expect(service.create(createArgs)).rejects.toThrow(new Error());
+    });
 
-      expect(result).toEqual(createArgs);
+    it('should create a part', async () => {
+      // Mocking the repository methods and data
+      const createPartDto: CreatePartDto = {
+        name: 'mame_00',
+        description: 'description_00',
+        dataJson: JSON.stringify({ number: 0, string: 'string_00' }),
+      };
+
+      const createdPart: Part = {
+        id: 1,
+        ...createPartDto,
+      };
+
+      repository.save.mockResolvedValue(createdPart);
+      repository.findOne.mockResolvedValue(createdPart);
+
+      const result = await service.create(createPartDto);
+
+      // Check if the repository methods were called with the correct arguments
+      expect(repository.save).toHaveBeenCalledWith(createPartDto, {
+        reload: true,
+      });
+      expect(repository.findOne).toHaveBeenCalledWith({
+        where: { id: createdPart.id },
+      });
+
+      // Json String 파싱이 잘 되나?
+      expect(JSON.parse(result.dataJson)).toBeTruthy();
+
+      // Check if the result matches the expected value
+      expect(result).toEqual(createdPart);
     });
   });
 
@@ -94,172 +127,333 @@ describe('PartService', () => {
       expect(result).toEqual([]);
     });
 
-    it('should fail on exception', async () => {
-      const ErrorString = 'find error';
-      repository.find.mockReturnValue(ErrorString);
+    it('should return an array of ResponsePartDto', async () => {
+      const findData = [
+        {
+          id: 1,
+          name: 'name_01',
+          description: 'description_01',
+          dataJson: JSON.stringify({ number: 0, string: 'string_00' }),
+        },
+        {
+          id: 2,
+          name: 'name_02',
+          description: 'description_02',
+          dataJson: JSON.stringify({ number: 0, string: 'string_00' }),
+        },
+      ];
+      const expectedData: ResponsePartDto[] = [
+        {
+          id: findData[0].id,
+          name: findData[0].name,
+          description: findData[0].description,
+          dataJson: findData[0].dataJson,
+        },
+        {
+          id: findData[1].id,
+          name: findData[1].name,
+          description: findData[1].description,
+          dataJson: findData[1].dataJson,
+        },
+      ];
+      repository.find.mockResolvedValue(findData);
 
       const result = await service.findAll();
 
-      expect(repository.find).toHaveBeenCalledTimes(1);
+      expect(repository.find).toHaveBeenCalled();
+      expect(result).toEqual(expectedData);
+    });
 
-      expect(result).toEqual(ErrorString);
+    it('should fail on exception', async () => {
+      repository.find.mockRejectedValue(new Error()); // save() 에 에러가 발생했을 때
+
+      await expect(service.findAll()).rejects.toThrow(new Error());
     });
   });
 
   describe('findOne()', () => {
-    const findOneArgs = { id: 1 };
+    const findName = 'name_00';
+    const nonExistName = 'name_999';
 
     it('should be findOne', async () => {
-      const mockedPart = {
+      const findOneData = {
         id: 1,
-        name: 'name_00',
+        name: findName,
         description: 'description_00',
-        dataJson: "{ number: 1, string: 'string_01' }",
+        dataJson: JSON.stringify({ number: 0, string: 'string_00' }),
       };
-      repository.findOne.mockResolvedValue(mockedPart);
 
-      const result = await service.findOne(findOneArgs.id);
+      const expectedData = {
+        id: findOneData.id,
+        name: findOneData.name,
+        description: findOneData.description,
+        dataJson: findOneData.dataJson,
+      };
 
-      expect(repository.findOne).toHaveBeenCalledTimes(1);
-      // expect(repository.findOne).toHaveBeenCalledWith(findOneArgs);
+      repository.findOne.mockResolvedValue(findOneData);
 
-      expect(result).toEqual(mockedPart);
+      const result = await service.findOne(findName);
+
+      expect(repository.findOne).toHaveBeenCalledWith({
+        where: { name: findName },
+      });
+
+      expect(result).toEqual(expectedData);
     });
 
+    it('should throw a NotFoundException if part is not found', async () => {
+      const exceptionString = `"${nonExistName}" Not Found.`;
+
+      repository.findOne.mockResolvedValue(null);
+
+      await expect(service.findOne(nonExistName)).rejects.toThrow(
+        new NotFoundException(exceptionString),
+      );
+    });
+
+    it('should fail on exception', async () => {
+      repository.findOne.mockRejectedValue(new Error()); // save() 에 에러가 발생했을 때
+
+      await expect(service.findOne(nonExistName)).rejects.toThrow(new Error());
+    });
+
+    /*
     it('should fail if no post is found', async () => {
       repository.findOne.mockResolvedValue(null);
 
-      const result = await service.findOne(findOneArgs.id);
+      const result = await service.findOne(findName);
 
       expect(repository.findOne).toHaveBeenCalledTimes(1);
       expect(repository.findOne).toHaveBeenCalledWith({
-        where: { id: findOneArgs.id },
+        where: { name: findName },
       });
 
       expect(result).toEqual(null);
     });
-
+    
     it('should fail on findOne exception', async () => {
       const ErrorString = 'find error';
       repository.findOne.mockReturnValue(ErrorString);
 
-      const result = await service.findOne(findOneArgs.id);
+      const result = await service.findOne(findOneArgs.name);
 
       expect(repository.findOne).toHaveBeenCalledTimes(1);
       expect(repository.findOne).toHaveBeenCalledWith({
-        where: { id: findOneArgs.id },
+        where: { name: findOneArgs.name },
       });
 
       expect(result).toEqual(ErrorString);
     });
+    */
   });
 
   describe('update()', () => {
-    const partId = 1;
-    const updatePartDto: UpdatePartDto = {
-      name: 'Updated Name',
-      description: 'Updated Description',
-      dataJson: '{"updated_key": "updated_value"}',
-    };
+    const partName = 'name_00';
+    const nonExistName = 'name_999';
 
+    it('should update a part and return the updated part', async () => {
+      const updatedData: UpdatePartDto = {
+        description: 'description_99',
+        dataJson: '{ "number": 9, "string": "string_99" }',
+      };
+
+      const findOne1Data = {
+        id: 1,
+        name: partName,
+        description: 'description_00',
+        dataJson: JSON.stringify({ number: 0, string: 'string_00' }),
+      };
+
+      const findOne2Data = {
+        id: 1,
+        name: partName,
+        description: updatedData.description,
+        dataJson: updatedData.dataJson,
+      };
+
+      const updatedResponse: ResponsePartDto = {
+        id: 1,
+        name: partName,
+        description: updatedData.description,
+        dataJson: updatedData.dataJson,
+      };
+      repository.findOne.mockResolvedValueOnce(findOne1Data); // findOne() 함수가 1번째 호출
+      repository.findOne.mockResolvedValueOnce(findOne2Data); // findOne() 함수가 2번째 호출
+      repository.save.mockResolvedValue(null);
+
+      const result = await service.update(partName, updatedData);
+
+      expect(repository.findOne).toHaveBeenCalledWith({
+        where: { name: partName },
+      });
+
+      expect(repository.save).toHaveBeenCalledWith({
+        ...findOne1Data,
+        ...updatedData,
+      });
+
+      console.log(result);
+
+      // findOne() 함수가 2번 호출 되어서
+      expect(result.id).toEqual(updatedResponse.id);
+      expect(result.name).toEqual(updatedResponse.name);
+      expect(result.description).toEqual(updatedResponse.description);
+      expect(JSON.parse(result.dataJson)).toEqual(
+        JSON.parse(updatedResponse.dataJson),
+      );
+    });
+
+    it('should throw a NotFoundException if part is not found', async () => {
+      const updatePartDto: UpdatePartDto = {
+        description: 'description_00',
+        dataJson: '{ "number": 0, "string": "string_00" }',
+      };
+
+      const exceptionString = `"${nonExistName}" Not Found.`;
+
+      repository.findOne.mockResolvedValue(null);
+
+      await expect(service.update(nonExistName, updatePartDto)).rejects.toThrow(
+        new NotFoundException(exceptionString),
+      );
+    });
+
+    it('should fail on exception', async () => {
+      const updatePartDto: UpdatePartDto = {
+        description: 'description_00',
+        dataJson: '{ "number": 0, "string": "string_00" }',
+      };
+
+      repository.findOne.mockRejectedValue(new Error()); // save() 에 에러가 발생했을 때
+
+      await expect(service.update(nonExistName, updatePartDto)).rejects.toThrow(
+        new Error(),
+      );
+    });
+
+    /*
     it('should be update post', async () => {
       const existingPart = new Part();
 
       jest.spyOn(repository, 'findOne').mockResolvedValue(existingPart);
       jest.spyOn(repository, 'save').mockResolvedValue(existingPart);
 
-      const result = await service.update(partId, updatePartDto);
+      const result = await service.update(partName, updatePartDto);
 
       expect(repository.findOne).toHaveBeenCalledTimes(1);
       expect(repository.findOne).toHaveBeenCalledWith({
-        where: { id: partId },
+        where: { name: partName },
       });
 
       expect(result).toEqual(existingPart);
     });
 
     it('should throw NotFoundException if part is not found', async () => {
-      const nonExistId = 999;
+      const nonExistName = 'name_999';
 
       jest.spyOn(repository, 'findOne').mockResolvedValue(null);
 
-      const result = service.update(nonExistId, updatePartDto);
+      const result = service.update(nonExistName, updatePartDto);
 
       expect(repository.findOne).toHaveBeenCalledTimes(1);
       expect(repository.findOne).toHaveBeenCalledWith({
-        where: { id: nonExistId },
+        where: { name: nonExistName },
       });
 
       expect(result).rejects.toThrow(NotFoundException);
     });
+    */
   });
 
   describe('remove()', () => {
-    const partId = 1;
-    const expectedPart = new Part();
+    const partName = 'name_00';
 
-    it('should be remove post', async () => {
-      // repository.findOne.mockResolvedValue(findOneArgs);
-      // repository.softDelete.mockResolvedValue(softDeleteArgs);
+    it('should remove a part and return the removed part', async () => {
+      const findOneData = {
+        id: 1,
+        name: partName,
+        description: 'description_00',
+        dataJson: JSON.stringify({ number: 0, string: 'string_00' }),
+      };
+      const expectedData = {
+        id: 1,
+        name: findOneData.name,
+        description: findOneData.description,
+        dataJson: findOneData.dataJson,
+      };
+      repository.findOne.mockResolvedValue(findOneData);
+      repository.delete.mockResolvedValue({});
 
-      repository.findOne.mockResolvedValue(expectedPart);
+      const result = await service.remove(partName);
 
-      const removedPart = await service.remove(partId);
-
-      expect(repository.findOne).toHaveBeenCalledTimes(1);
       expect(repository.findOne).toHaveBeenCalledWith({
-        where: { id: partId },
+        where: { name: partName },
       });
-
-      expect(repository.delete).toHaveBeenCalledTimes(1);
-      expect(removedPart).toEqual(expectedPart);
+      expect(repository.delete).toHaveBeenCalledWith({ name: partName });
+      expect(result).toEqual(expectedData);
     });
 
-    it('should remove an existing part', async () => {
-      jest.spyOn(repository, 'findOne').mockResolvedValue(expectedPart);
-      jest.spyOn(repository, 'delete').mockResolvedValue({});
+    it('should throw a NotFoundException if part is not found', async () => {
+      const exceptionString = `"${partName}" Not Found.`;
 
-      const result = await service.remove(partId);
+      repository.findOne.mockResolvedValue(null);
 
-      expect(repository.findOne).toHaveBeenCalledTimes(1);
-      expect(repository.findOne).toHaveBeenCalledWith({
-        where: { id: partId },
-      });
-
-      expect(result).toEqual(expectedPart);
+      await expect(service.remove(partName)).rejects.toThrow(
+        new NotFoundException(exceptionString),
+      );
     });
 
-    it('should nonExistId NotFoundException if part is not found', async () => {
-      const nonExistId = 999; // Non-existent ID
-      jest.spyOn(repository, 'findOne').mockResolvedValue(null);
+    it('should fail on exception', async () => {
+      repository.findOne.mockRejectedValue(new Error()); // save() 에 에러가 발생했을 때
 
-      const result = service.remove(nonExistId);
-
-      expect(repository.findOne).toHaveBeenCalledTimes(1);
-      expect(repository.findOne).toHaveBeenCalledWith({
-        where: { id: nonExistId },
-      });
-
-      expect(result).rejects.toThrow(NotFoundException);
+      await expect(service.remove(partName)).rejects.toThrow(new Error());
     });
+
+    // it('should be remove post', async () => {
+    //   // repository.findOne.mockResolvedValue(findOneArgs);
+    //   // repository.softDelete.mockResolvedValue(softDeleteArgs);
+
+    //   const expectedPart = new Part();
+
+    //   repository.findOne.mockResolvedValue(expectedPart);
+
+    //   const removedPart = await service.remove(partName);
+
+    //   expect(repository.findOne).toHaveBeenCalledTimes(1);
+    //   expect(repository.findOne).toHaveBeenCalledWith({
+    //     where: { name: partName },
+    //   });
+
+    //   expect(repository.delete).toHaveBeenCalledTimes(1);
+    //   expect(removedPart).toEqual(expectedPart);
+    // });
+
+    // it('should remove an existing part', async () => {
+    //   jest.spyOn(repository, 'findOne').mockResolvedValue(expectedPart);
+    //   jest.spyOn(repository, 'delete').mockResolvedValue({});
+
+    //   const result = await service.remove(partName);
+
+    //   expect(repository.findOne).toHaveBeenCalledTimes(1);
+    //   expect(repository.findOne).toHaveBeenCalledWith({
+    //     where: { name: partName },
+    //   });
+
+    //   expect(result).toEqual(expectedPart);
+    // });
+
+    // it('should nonExistId NotFoundException if part is not found', async () => {
+    //   const nonExistname = 'name_999'; // Non-existent ID
+    //   jest.spyOn(repository, 'findOne').mockResolvedValue(null);
+
+    //   const result = service.remove(nonExistname);
+
+    //   expect(repository.findOne).toHaveBeenCalledTimes(1);
+    //   expect(repository.findOne).toHaveBeenCalledWith({
+    //     where: { name: nonExistname },
+    //   });
+
+    //   expect(result).rejects.toThrow(NotFoundException);
+    // });
   });
-
-  // // 함수 정의 하여 테스트
-  // describe('findOne() extend', () => {
-  //   it('should return one user who has id in input param', async () => {
-  //     const userId = 42;
-
-  //     const result = await service.findOneById(userId);
-
-  //     expect(result.id).toBe(userId);
-  //   });
-
-  //   it('should return InternelServerException when input userId is 1', async () => {
-  //     const userId = 1;
-
-  //     await expect(service.findOneById(userId)).rejects.toThrow(
-  //       InternalServerErrorException,
-  //     );
-  //   });
-  // });
 });
