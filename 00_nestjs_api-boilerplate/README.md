@@ -72,6 +72,8 @@ npm i @nestjs/config
 
 - typeorm
 
+# https://github.com/typeorm/typeorm/tree/master
+
 # https://jojoldu.tistory.com/568 이름 snake camel
 # https://jiwondev.tistory.com/226
 # https://blog.naver.com/gi_balja/223054972094

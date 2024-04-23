@@ -83,18 +83,14 @@ export class PartService {
     }
   }
 
-  async remove(id: number) {
+  async remove(name: string) {
     try {
-      const part = await this.partRepository.findOne({ where: { id } });
+      const part = await this.partRepository.findOne({ where: { name } });
       if (!part) {
-        throw new NotFoundException(`${id} Not Found.`);
+        throw new NotFoundException(`"${name}" Not Found.`);
       }
 
-      // const result = await this.partRepository.softDelete({
-      //   id,
-      // });
-
-      await this.partRepository.delete({ id: id });
+      await this.partRepository.delete({ name: name });
 
       return ResponsePartDto.convertFromPart([part])?.[0] || null;
     } catch (error) {
@@ -103,7 +99,41 @@ export class PartService {
     }
   }
 
-  async update(id: number, updatePart: UpdatePartDto) {
+  async update(name: string, updatePart: UpdatePartDto) {
+    try {
+      const part = await this.partRepository.findOne({ where: { name } });
+      if (!part) {
+        throw new NotFoundException(`"${name}" Not Found.`);
+      }
+
+      await this.partRepository.save({
+        ...part,
+        ...updatePart,
+      });
+
+      const updated = await this.partRepository.findOne({ where: { name } });
+
+      return ResponsePartDto.convertFromPart([updated])?.[0] || null;
+    } catch (error) {
+      this.logger.debug(error);
+      throw error;
+    }
+  }
+
+  async findOneById(id: number): Promise<Part> {
+    try {
+      const part = await this.partRepository.findOne({ where: { id } });
+      if (!part) {
+        throw new NotFoundException(`"${id}" Not Found.`);
+      }
+      return ResponsePartDto.convertFromPart([part])?.[0] || null;
+    } catch (error) {
+      this.logger.error(error);
+      throw error;
+    }
+  }
+
+  async updateById(id: number, updatePart: UpdatePartDto) {
     try {
       const part = await this.partRepository.findOne({ where: { id } });
       if (!part) {

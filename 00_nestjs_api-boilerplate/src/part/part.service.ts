@@ -106,10 +106,13 @@ export class PartService {
         throw new NotFoundException(`"${name}" Not Found.`);
       }
 
-      await this.partRepository.save({
-        ...part,
-        ...updatePart,
-      });
+      // Subscriber Update 가 발생하지 않음, update 보다 많은 리소스를 사용함
+      // await this.partRepository.save({
+      //   ...part,
+      //   ...updatePart,
+      // });
+
+      await this.partRepository.update(part.id, updatePart);
 
       const updated = await this.partRepository.findOne({ where: { name } });
 
