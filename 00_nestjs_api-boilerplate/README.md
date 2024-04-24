@@ -151,4 +151,8 @@ npm install --save @nestjs/termius
 
 # https://www.daleseo.com/nestjs-versioning/
 
+- file upload
+
+# https://velog.io/@dev_leewoooo/NestJs-%ED%8C%8C%EC%9D%BC%EC%97%85%EB%A1%9C%EB%93%9C-%EC%9D%B4-%EA%B8%80%EB%A1%9C-%EB%81%9D
+# https://zenn.dev/kisihara_c/books/nest-officialdoc-jp/viewer/techniques-fileupload
 ```
