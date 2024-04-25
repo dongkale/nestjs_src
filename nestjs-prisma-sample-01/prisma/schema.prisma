@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://lennon:lennon0108!@52.79.52.203:3306/test"
+  url      = ""
 }
 
 model User {
