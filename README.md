@@ -16,3 +16,6 @@ book-nestjs-backend
 
 -- 
 nestjs-nats
+
+-- graphql + typeorm sample
+nestjs-graphql-example-01
