@@ -4,7 +4,6 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ValueTransformer,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -28,6 +27,7 @@ export class Part {
     transformer: {
       to(obj: any): string {
         return JSON.parse(obj);
+        // return obj;
       },
       from(value: any): string {
         return JSON.stringify(value);

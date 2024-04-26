@@ -13,146 +13,105 @@ import {
 
 @EventSubscriber()
 export class TypeOrmCommonSubscriber implements EntitySubscriberInterface {
-  /**
-   * Called after entity is loaded.
-   */
+  private readonly logger = new Logger(TypeOrmCommonSubscriber.name);
+
   afterLoad(entity: any) {
-    console.log(`AFTER ENTITY LOADED: `, entity);
+    this.logger.log(`After Entity Load: ${JSON.stringify(entity, null, 2)}`);
   }
 
-  /**
-   * Called before post insertion.
-   */
-  beforeInsert(event: InsertEvent<any>) {
-    console.log(`BEFORE POST INSERTED: `, event.entity);
+  beforeInsert(event: InsertEvent<any>): Promise<any> | void {
+    this.logger.log(
+      `Before Entity Inserted: ${JSON.stringify(event.entity, null, 2)}`,
+    );
   }
 
-  /**
-   * Called after entity insertion.
-   */
-  afterInsert(event: InsertEvent<any>) {
-    console.log(`AFTER ENTITY INSERTED: `, event.entity);
+  afterInsert(event: InsertEvent<any>): Promise<any> | void {
+    this.logger.log(
+      `After Entity Inserted: ${JSON.stringify(event.entity, null, 2)}`,
+    );
   }
 
-  /**
-   * Called before entity update.
-   */
-  beforeUpdate(event: UpdateEvent<any>) {
-    console.log(`BEFORE ENTITY UPDATED: `, event.entity);
+  beforeUpdate(event: UpdateEvent<any>): Promise<any> | void {
+    this.logger.log(
+      `Before Entity Updated: ${JSON.stringify(event.entity, null, 2)}`,
+    );
   }
 
-  /**
-   * Called after entity update.
-   */
-  afterUpdate(event: UpdateEvent<any>) {
-    console.log(`AFTER ENTITY UPDATED: `, event.entity);
+  afterUpdate(event: UpdateEvent<any>): Promise<any> | void {
+    this.logger.log(
+      `After Entity Updated: ${JSON.stringify(event.entity, null, 2)}`,
+    );
   }
 
-  /**
-   * Called before entity removal.
-   */
   beforeRemove(event: RemoveEvent<any>) {
-    console.log(
-      `BEFORE ENTITY WITH ID ${event.entityId} REMOVED: `,
-      event.entity,
+    this.logger.log(
+      `Before Entity with ID ${event.entityId} Removed: ${JSON.stringify(event.entity, null, 2)}`,
     );
   }
 
-  /**
-   * Called after entity removal.
-   */
   afterRemove(event: RemoveEvent<any>) {
-    console.log(
-      `AFTER ENTITY WITH ID ${event.entityId} REMOVED: `,
-      event.entity,
+    this.logger.log(
+      `After Entity with ID ${event.entityId} Removed: ${JSON.stringify(event.entity, null, 2)}`,
     );
   }
 
-  /**
-   * Called before entity removal.
-   */
   beforeSoftRemove(event: SoftRemoveEvent<any>) {
-    console.log(
-      `BEFORE ENTITY WITH ID ${event.entityId} SOFT REMOVED: `,
-      event.entity,
+    this.logger.log(
+      `Before Entity with ID ${event.entityId}: ${JSON.stringify(event.entity, null, 2)}`,
     );
   }
 
-  /**
-   * Called after entity removal.
-   */
   afterSoftRemove(event: SoftRemoveEvent<any>) {
-    console.log(
-      `AFTER ENTITY WITH ID ${event.entityId} SOFT REMOVED: `,
-      event.entity,
+    this.logger.log(
+      `After Entity with ID ${event.entityId} Soft Removed: ${JSON.stringify(event.entity, null, 2)}`,
     );
   }
 
-  /**
-   * Called before entity removal.
-   */
   beforeRecover(event: RecoverEvent<any>) {
-    console.log(
-      `BEFORE ENTITY WITH ID ${event.entityId} RECOVERED: `,
-      event.entity,
+    this.logger.log(
+      `Before Entity with ID ${event.entityId} Recovered: ${JSON.stringify(event.entity, null, 2)}`,
     );
   }
 
-  /**
-   * Called after entity removal.
-   */
   afterRecover(event: RecoverEvent<any>) {
-    console.log(
-      `AFTER ENTITY WITH ID ${event.entityId} RECOVERED: `,
-      event.entity,
+    this.logger.log(
+      `After Entity with ID ${event.entityId} Recovered: ${JSON.stringify(event.entity, null, 2)}`,
     );
   }
 
-  /**
-   * Called before transaction start.
-   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   beforeTransactionStart(event: TransactionStartEvent) {
     // console.log(`BEFORE TRANSACTION STARTED: `, event);
-    console.log(`BEFORE TRANSACTION STARTED: `);
+    this.logger.log(`Before Transaction Started: `);
   }
 
-  /**
-   * Called after transaction start.
-   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   afterTransactionStart(event: TransactionStartEvent) {
     // console.log(`AFTER TRANSACTION STARTED: `, event);
-    console.log(`AFTER TRANSACTION STARTED: `);
+    this.logger.log(`After Transaction Started: `);
   }
 
-  /**
-   * Called before transaction commit.
-   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   beforeTransactionCommit(event: TransactionCommitEvent) {
     // console.log(`BEFORE TRANSACTION COMMITTED: `, event);
-    console.log(`BEFORE TRANSACTION COMMITTED: `);
+    this.logger.log(`Before Transaction Committed: `);
   }
 
-  /**
-   * Called after transaction commit.
-   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   afterTransactionCommit(event: TransactionCommitEvent) {
     // console.log(`AFTER TRANSACTION COMMITTED: `, event);
-    console.log(`AFTER TRANSACTION COMMITTED: `);
+    this.logger.log(`After Transaction Committed: `);
   }
 
-  /**
-   * Called before transaction rollback.
-   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   beforeTransactionRollback(event: TransactionRollbackEvent) {
     // console.log(`BEFORE TRANSACTION ROLLBACK: `, event);
-    console.log(`BEFORE TRANSACTION ROLLBACK: `);
+    this.logger.log(`Before Transaction Rollback: `);
   }
 
-  /**
-   * Called after transaction rollback.
-   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   afterTransactionRollback(event: TransactionRollbackEvent) {
     // console.log(`AFTER TRANSACTION ROLLBACK: `, event);
-    console.log(`AFTER TRANSACTION ROLLBACK: `);
+    this.logger.log(`After Transaction Rollback: `);
   }
 }

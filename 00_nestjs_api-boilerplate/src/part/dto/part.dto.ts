@@ -49,7 +49,7 @@ export class CreatePartDto {
   // })
   @JsonStringCheck()
   @ApiProperty({
-    name: 'data_json',
+    name: 'dataJson',
     description: 'JSON 데이터',
     example: "{ number: 1, string: 'string_01' }",
   })
@@ -63,7 +63,7 @@ export class UpdatePartDto {
 
   @IsString()
   @ApiProperty({
-    name: 'data_json',
+    name: 'dataJson',
     description: 'JSON 데이터',
     example: "{ number: 1, string: 'string_01' }",
   })

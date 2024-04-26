@@ -12,12 +12,4 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
       await app.close();
     });
   }
-
-  async findUserById(userIdx: number) {
-    return await this.user.findUnique({
-      where: {
-        id: userIdx,
-      },
-    });
-  }
 }
