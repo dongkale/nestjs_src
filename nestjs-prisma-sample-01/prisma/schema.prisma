@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://lennon:lennon0108!@52.79.52.203:3306/test"
+  url      = "mysql://lennon:lennon0108!@52.79.52.203:3306/test"  
 }
 
 generator client {
@@ -11,7 +11,7 @@ generator client {
 }
 
 model User {
-  id    String  @id @default(cuid())
+  id    Int  @id @default(autoincrement())
   email String  @unique
   name  String?
 }
