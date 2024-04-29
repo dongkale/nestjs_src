@@ -12,7 +12,7 @@
   // "forwardPorts": [],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "sudo apt update && sudo apt install nodejs -y && sudo apt install npm -y && npm -g config set strict-ssl false && npm -g install @nestjs/cli && npm -g install --no-bin-links --save"
+  "postCreateCommand": "sudo apt-get clean && sudo apt update && apt-get upgrade && sudo apt install nodejs -y && sudo apt install npm -y && npm -g config set strict-ssl false && npm -g install @nestjs/cli && npm -g install --no-bin-links --save"
 
   // Configure tool-specific properties.
   // "customizations": {},
