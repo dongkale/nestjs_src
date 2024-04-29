@@ -19,3 +19,6 @@ nestjs-nats
 
 -- graphql + typeorm sample
 nestjs-graphql-example-01
+
+-- nestjs + prisma 
+nestjs-prisma-sample-01
