@@ -71,11 +71,3 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
-
-## Document
-
-https://iwantbaobab.tistory.com/157
-https://lobehub.com/ko/docs/self-hosting/faq/proxy-with-unable-to-verify-leaf-signature
-
-docker ps
-docker exec -it Api-Server /bin/sh

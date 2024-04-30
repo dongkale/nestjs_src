@@ -72,10 +72,94 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](LICENSE).
 
+## Install
+
+- .devcontainer\devcontainer.json
+- docker-compose.yaml
+- Dockerfile
+- .vscode\launch.sjon
+   ->  { 
+            "name": "Docker: Attach to Node",
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "port": 9229,
+            "address": "localhost",
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/home/node/app",            
+        }
+- tsconfig.json 
+   -> "watchOptions": {
+        "watchFile": "fixedPollingInterval"
+      } 
+	  
+- .eslintrc.js
+	'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],	  
+
 ## Document
 
 https://iwantbaobab.tistory.com/157
 https://lobehub.com/ko/docs/self-hosting/faq/proxy-with-unable-to-verify-leaf-signature
+https://stackoverflow.com/questions/69531072/npm-err-exit-handler-never-called
 
 docker ps
 docker exec -it Api-Server /bin/sh
+
+-- 핵심 문서
+https://tech-lab.sios.jp/archives/38639
+
+-- debug watch
+
+https://stackoverflow.com/questions/71872127/nestjs-doesnt-work-in-watch-mode-inside-docker
+
+-- debugging launch.json
+
+{
+    "version": "0.2.0",
+    "configurations": [        
+        {
+            "name": "Docker: Attach to Node",
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "port": 9229,
+            "address": "localhost",
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/home/node/app",            
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "프로그램 시작",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/src/main.ts",
+            "preLaunchTask": "tsc: build - tsconfig.json",
+            "outFiles": [
+                "${workspaceFolder}/dist/**/*.js"
+            ]
+        }
+    ]
+}
+
+-- typeorm install
+
+npm i @nestjs/typeorm typeorm mysql2
+npm i class-validator class-transformer
+
+## issue
+
+https://stackoverflow.com/questions/69531072/npm-err-exit-handler-never-called
+
+npm install --no-bin-links --saveg.git
+npm install --no-package-lock 
+npm cache clean --force
+
+
+

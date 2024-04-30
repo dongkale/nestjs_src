@@ -8,6 +8,5 @@ services:
     ports:
       - '5000:5000'
     volumes:
-      - .:/nest
-    # command: ['sh', '-c', 'sleep 20 && npm run start:dev']
-    # command: ['sh', '-c', 'sleep 20']
+      - .:/app
+    command: ['sh', '-c', 'sleep 20 && npm run start:dev']
