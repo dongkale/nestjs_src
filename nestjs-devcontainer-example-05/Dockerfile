@@ -2,6 +2,8 @@
 # 베이스 이미지로 Ubuntu 20.04 사용
 FROM ubuntu:20.04
 
+RUN useradd node
+
 # install nodejs
 RUN apt-get -qq update
 RUN apt-get -qq upgrade --yes 
