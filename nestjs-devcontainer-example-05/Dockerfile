@@ -1,25 +1,20 @@
+ARG NODE_VER
+FROM node:${NODE_VER}
 
-# 베이스 이미지로 Ubuntu 20.04 사용
-FROM ubuntu:20.04
-
-RUN useradd node
-
-# install nodejs
-RUN apt-get -qq update
-RUN apt-get -qq upgrade --yes 
-RUN apt-get -qq install curl --yes
-RUN curl -sL -k https://deb.nodesource.com/setup_20.x | bash -
-RUN apt-get -qq install nodejs --yes
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 
 RUN npm config set strict-ssl false
 RUN npm update -g npm
 RUN npm i -g @nestjs/cli
 
-USER node
-WORKDIR /home/node/app
+USER root
+WORKDIR /app
 
-COPY --chown=node:node . .
+# COPY --chown=node:node . .
+COPY . .
 
-RUN npm install
+RUN npm config set strict-ssl false && npm install
 
 EXPOSE 3000
+
+# CMD [ "npm", "run", "start:dev" ]

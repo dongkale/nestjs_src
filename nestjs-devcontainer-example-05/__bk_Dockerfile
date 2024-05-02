@@ -1,5 +1,5 @@
 ARG NODE_VER
-FROM node:${NODE_VER}
+FROM node:${NODE_VER}-alpine
 
 RUN npm config set strict-ssl false
 RUN npm update -g npm

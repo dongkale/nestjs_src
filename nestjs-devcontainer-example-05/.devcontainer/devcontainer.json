@@ -1,27 +1,27 @@
 {
-    "name": "procject-dev",
-    "dockerComposeFile": [
-        "../docker-compose.yaml"
-    ],
-    "service": "nest",
-    "workspaceFolder": "/home/node/app",
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "esbenp.prettier-vscode",
-                "dbaeumer.vscode-eslint",
-                "VisualStudioExptTeam.vscodeintellicode",
-                "christian-kohler.path-intellisense",
-                "mhutchie.git-graph",
-                "donjayamanne.githistory",
-                "oderwat.indent-rainbow",
-                "formulahendry.auto-rename-tag",
-                "vscode-icons-team.vscode-icons",
-                "MariusAlchimavicius.json-to-ts",
-                "wix.vscode-import-cost"
-            ]
-        }
-    },
-    "forwardPorts": [3000],
-    "remoteUser": "node"
+  "name": "procject-dev",
+  "dockerComposeFile": ["../docker-compose.yaml"],
+  "service": "nest",
+  "workspaceFolder": "/app",
+  // "customizations": {
+  //   "vscode": {
+  //     "extensions": [
+  //       "esbenp.prettier-vscode",
+  //       "dbaeumer.vscode-eslint",
+  //       "VisualStudioExptTeam.vscodeintellicode",
+  //       "christian-kohler.path-intellisense",
+  //       "mhutchie.git-graph",
+  //       "donjayamanne.githistory",
+  //       "oderwat.indent-rainbow",
+  //       "formulahendry.auto-rename-tag",
+  //       "vscode-icons-team.vscode-icons",
+  //       "MariusAlchimavicius.json-to-ts",
+  //       "wix.vscode-import-cost",
+  //       "github.copilot",
+  //       "github.copilot-chat"
+  //     ]
+  //   }
+  // },
+  "forwardPorts": [3000],
+  "remoteUser": "root"
 }
