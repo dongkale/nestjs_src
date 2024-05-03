@@ -7,7 +7,7 @@ import {
   WinstonModule,
 } from 'nest-winston';
 import { AppModule } from './app.module';
-import { HttpExceptionFilter } from 'src/exception/http-exception.filter';
+// import { HttpExceptionFilter } from 'src/exception/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -17,15 +17,19 @@ async function bootstrap() {
           level: process.env.NODE_ENV === 'production' ? 'info' : 'silly',
           format: winston.format.combine(
             winston.format.timestamp(),
-            nestWinstonModuleUtilities.format.nestLike('MyApp', { prettyPrint: true }),
+            nestWinstonModuleUtilities.format.nestLike('MyApp', {
+              prettyPrint: true,
+            }),
           ),
         }),
       ],
-    })
+    }),
   });
-  app.useGlobalPipes(new ValidationPipe({
-    transform: true,
-  }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+    }),
+  );
   // app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
   // app.useGlobalFilters(new HttpExceptionFilter()); // 전역 필터 적용
   await app.listen(3000);

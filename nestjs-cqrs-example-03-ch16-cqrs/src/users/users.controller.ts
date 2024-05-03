@@ -1,4 +1,16 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards, Inject, LoggerService, InternalServerErrorException, Logger } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+  Inject,
+  LoggerService,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { AuthGuard } from 'src/auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserLoginDto } from './dto/user-login.dto';
@@ -16,7 +28,7 @@ export class UsersController {
     private commandBus: CommandBus,
     private queryBus: QueryBus,
     @Inject(Logger) private readonly logger: LoggerService,
-  ) { }
+  ) {}
 
   @Post()
   async createUser(@Body() dto: CreateUserDto): Promise<void> {

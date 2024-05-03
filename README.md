@@ -27,3 +27,14 @@ nestjs-devcontainer-example-05 >> complete
 
 -- nestjs + docker
 nestjs-docker
+
+-- nestjs stat print + figlet(서버 구동시 타이틀 표시)
+nestjs-monitor-example-02
+
+-- nestjs + cqrs 공식 홈피 예제
+nestjs-cqrs-example-01
+
+-- nestjs + cqrs + typeorm + figlet(서버 구동시 타이틀 표시)
+nestjs-cqrs-todo-app
+
+

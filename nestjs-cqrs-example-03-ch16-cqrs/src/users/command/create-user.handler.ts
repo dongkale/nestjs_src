@@ -16,20 +16,28 @@ export class CreateUserHandler implements ICommandHandler<CreateUserCommand> {
     private dataSource: DataSource,
     private eventBus: EventBus,
 
-    @InjectRepository(UserEntity) private usersRepository: Repository<UserEntity>,
-  ) { }
+    @InjectRepository(UserEntity)
+    private usersRepository: Repository<UserEntity>,
+  ) {}
 
   async execute(command: CreateUserCommand) {
     const { name, email, password } = command;
 
     const userExist = await this.checkUserExists(email);
     if (userExist) {
-      throw new UnprocessableEntityException('해당 이메일로는 가입할 수 없습니다.');
+      throw new UnprocessableEntityException(
+        '해당 이메일로는 가입할 수 없습니다.',
+      );
     }
 
     const signupVerifyToken = uuid.v1();
 
-    await this.saveUserUsingTransaction(name, email, password, signupVerifyToken);
+    await this.saveUserUsingTransaction(
+      name,
+      email,
+      password,
+      signupVerifyToken,
+    );
 
     this.eventBus.publish(new UserCreatedEvent(email, signupVerifyToken));
     this.eventBus.publish(new TestEvent());
@@ -37,14 +45,19 @@ export class CreateUserHandler implements ICommandHandler<CreateUserCommand> {
 
   private async checkUserExists(emailAddress: string): Promise<boolean> {
     const user = await this.usersRepository.findOne({
-      where: { email: emailAddress }
+      where: { email: emailAddress },
     });
 
     return user !== null;
   }
 
-  private async saveUserUsingTransaction(name: string, email: string, password: string, signupVerifyToken: string) {
-    await this.dataSource.transaction(async manager => {
+  private async saveUserUsingTransaction(
+    name: string,
+    email: string,
+    password: string,
+    signupVerifyToken: string,
+  ) {
+    await this.dataSource.transaction(async (manager) => {
       const user = new UserEntity();
       user.id = ulid();
       user.name = name;
@@ -53,6 +66,6 @@ export class CreateUserHandler implements ICommandHandler<CreateUserCommand> {
       user.signupVerifyToken = signupVerifyToken;
 
       await manager.save(user);
-    })
+    });
   }
 }

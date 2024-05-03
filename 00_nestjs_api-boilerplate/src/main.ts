@@ -13,8 +13,18 @@ import { setupSwagger } from './common/swagger/setup-swagger';
 // import { EntityNotFoundExceptionFilter } from './common/filters/entity-not-found-exception.filter';
 // import { AllExceptionFilter } from './common/filters/all-exception.filter';
 import { CustomExceptionFilter } from './common/filters/custom-exception.filter';
+import * as figlet from 'figlet';
 
 async function bootstrap() {
+  console.log(
+    figlet.textSync('NestJS-API-Boilerplate', {
+      font: 'Standard', //Ghost , Standard , Graffiti , Dancing Font , Slant , Pagga
+      horizontalLayout: 'fitted',
+      verticalLayout: 'default',
+      width: 200,
+      whitespaceBreak: true,
+    }),
+	
   initializeTransactionalContext({ storageDriver: StorageDriver.AUTO });
 
   const app = await NestFactory.create(AppModule, {

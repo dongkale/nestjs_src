@@ -20,13 +20,9 @@ const commandHandlers = [
   VerifyAccessTokenHandler,
 ];
 
-const queryHandlers = [
-  GetUserInfoQueryHandler,
-];
+const queryHandlers = [GetUserInfoQueryHandler];
 
-const eventHandlers = [
-  UserEventsHandler,
-]
+const eventHandlers = [UserEventsHandler];
 
 @Module({
   imports: [
@@ -36,11 +32,6 @@ const eventHandlers = [
     CqrsModule,
   ],
   controllers: [UsersController],
-  providers: [
-    ...commandHandlers,
-    ...queryHandlers,
-    ...eventHandlers,
-    Logger,
-  ],
+  providers: [...commandHandlers, ...queryHandlers, ...eventHandlers, Logger],
 })
-export class UsersModule { }
+export class UsersModule {}

@@ -59,4 +59,4 @@ import { DogHealthIndicator } from './health-check/dog.health';
   controllers: [HealthCheckController],
   providers: [DogHealthIndicator],
 })
-export class AppModule { }
+export class AppModule {}
