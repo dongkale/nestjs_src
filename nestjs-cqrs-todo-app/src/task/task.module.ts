@@ -3,10 +3,10 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TaskController } from './task.controller';
 import { Task } from './entities/task.entity';
-import { CreateTaskHandler } from './cqrs/handlers/create-task.handdler';
-import { ListTaskHandler } from './cqrs/handlers/list-task.handdler';
-import { ListByIdTaskHandler } from './cqrs/handlers/list-by-id-task.handdler';
-import { DeleteTaskHandler } from './cqrs/handlers/delete-task.handdler';
+import { CreateTaskHandler } from './cqrs/handlers/create-task.handler';
+import { ListTaskHandler } from './cqrs/handlers/list-task.handler';
+import { ListByIdTaskHandler } from './cqrs/handlers/list-by-id-task.handler';
+import { DeleteTaskHandler } from './cqrs/handlers/delete-task.handler';
 import { UpdateByCompletedHandler } from './cqrs/handlers/update-by-completed.handler';
 
 @Module({
