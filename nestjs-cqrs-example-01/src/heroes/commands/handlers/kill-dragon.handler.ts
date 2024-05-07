@@ -11,13 +11,17 @@ export class KillDragonHandler implements ICommandHandler<KillDragonCommand> {
   ) {}
 
   async execute(command: KillDragonCommand) {
-    console.log(clc.greenBright('KillDragonCommand...'));
+    console.log(clc.greenBright('[KillDragonHandler] KillDragonCommand...'));
 
     const { heroId, dragonId } = command;
     const hero = this.publisher.mergeObjectContext(
       await this.repository.findOneById(+heroId),
     );
+
     hero.killEnemy(dragonId);
+    hero.addHp(dragonId);
     hero.commit();
+
+    return { result: 'success' };
   }
 }

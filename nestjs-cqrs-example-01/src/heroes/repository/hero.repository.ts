@@ -5,6 +5,7 @@ import { userHero } from './fixtures/user';
 @Injectable()
 export class HeroRepository {
   async findOneById(id: number): Promise<Hero> {
+    console.log('[HeroRepository] findOneById()');
     return userHero;
   }
 

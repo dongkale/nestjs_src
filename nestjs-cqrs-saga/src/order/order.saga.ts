@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { ICommand, ofType, Saga } from "@nestjs/cqrs";
 import { Observable } from "rxjs";
-import { flatMap, map } from "rxjs/operators";
+import { map, mergeMap } from "rxjs/operators";
 
 import { OrderEvent, OrderEventSuccess, OrderEventFail } from "./order.events";
 import { OrderCommand } from "./order.command";
@@ -27,9 +27,9 @@ export class OrderSaga {
   createOrderSuccess = (events$: Observable<any>): Observable<ICommand> => {
     return events$.pipe(
       ofType(OrderEventSuccess),
-      flatMap((event: OrderEventSuccess) => {
+      mergeMap((event: OrderEventSuccess) => {
         // tslint:disable-next-line:no-console
-        console.log("Order Placed");
+        console.log("Order Placed Successfully " + JSON.stringify(event));
         return [];
       })
     );
@@ -39,9 +39,9 @@ export class OrderSaga {
   createOrderFail = (events$: Observable<any>): Observable<ICommand> => {
     return events$.pipe(
       ofType(OrderEventFail),
-      flatMap((event: OrderEventFail) => {
+      mergeMap((event: OrderEventFail) => {
         // tslint:disable-next-line:no-console
-        console.log("Order Placing Failed");
+        console.log("Order Placing Failed" + +JSON.stringify(event));
         return [];
       })
     );

@@ -8,6 +8,7 @@ import { ListTaskHandler } from './cqrs/handlers/list-task.handler';
 import { ListByIdTaskHandler } from './cqrs/handlers/list-by-id-task.handler';
 import { DeleteTaskHandler } from './cqrs/handlers/delete-task.handler';
 import { UpdateByCompletedHandler } from './cqrs/handlers/update-by-completed.handler';
+import { UpdateTaskHandler } from './cqrs/handlers/update-task.handler';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Task]), CqrsModule],
@@ -18,6 +19,7 @@ import { UpdateByCompletedHandler } from './cqrs/handlers/update-by-completed.ha
     ListByIdTaskHandler,
     DeleteTaskHandler,
     UpdateByCompletedHandler,
+    UpdateTaskHandler,
   ],
 })
 export class TaskModule {}

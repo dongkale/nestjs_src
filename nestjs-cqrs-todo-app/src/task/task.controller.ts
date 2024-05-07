@@ -13,6 +13,7 @@ import { ListByIdTaskQuery } from './cqrs/queries/list-by-id-task.query';
 import { ListTaskQuery } from './cqrs/queries/list-task.query';
 import { UpdateByCompletedCommand } from './cqrs/commands/update-by-completed.command';
 import { DeleteTaskCommand } from './cqrs/commands/delete-task.command';
+import { UpdateTaskCommand } from './cqrs/commands/update-task.command';
 
 @Controller('task')
 export class TaskController {
@@ -23,17 +24,28 @@ export class TaskController {
 
   @Post()
   async create(@Body('description') description: string) {
-    return this.commandBus.execute(new CreateTaskCommand(description));
+    const result = await this.commandBus.execute(
+      new CreateTaskCommand(description),
+    );
+
+    console.log(result);
+    return result;
   }
 
   @Get()
   async find() {
-    return this.queryBus.execute(new ListTaskQuery());
+    const result = await this.queryBus.execute(new ListTaskQuery());
+
+    console.log(result);
+    return result;
   }
 
   @Get(':id')
   async findById(@Param('id') id: number) {
-    return this.queryBus.execute(new ListByIdTaskQuery(id));
+    const result = await this.queryBus.execute(new ListByIdTaskQuery(id));
+
+    console.log(result);
+    return result;
   }
 
   @Patch(':id/completed/:completed')
@@ -41,11 +53,32 @@ export class TaskController {
     @Param('id') id: number,
     @Param('completed') completed: boolean,
   ) {
-    return this.commandBus.execute(new UpdateByCompletedCommand(id, completed));
+    const result = await this.commandBus.execute(
+      new UpdateByCompletedCommand(id, completed),
+    );
+
+    console.log(result);
+    return result;
+  }
+
+  @Patch(':id')
+  async update(
+    @Param('id') id: number,
+    @Body('description') description: string,
+  ) {
+    const result = await this.commandBus.execute(
+      new UpdateTaskCommand(id, description),
+    );
+
+    console.log(result);
+    return result;
   }
 
   @Delete(':id')
   async delete(@Param('id') id: number) {
-    return this.commandBus.execute(new DeleteTaskCommand(id));
+    const result = await this.commandBus.execute(new DeleteTaskCommand(id));
+
+    console.log(result);
+    return result;
   }
 }
