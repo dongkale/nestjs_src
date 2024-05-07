@@ -4,13 +4,13 @@ import {
   EntityIdTransformer,
   ENTITY_ID_TRANSFORMER,
   readConnection,
-} from 'libs/DatabaseModule';
+} from '../../../libs/DatabaseModule';
 
-import { NotificationEntity } from 'src/notification/infrastructure/entities/NotificationEntity';
+import { NotificationEntity } from '../../../notification/infrastructure/entities/NotificationEntity';
 
-import { FindNotificationQuery } from 'src/notification/application/query/FindNotificationQuery';
-import { FindNotificationResult } from 'src/notification/application/query/FindNotificationResult';
-import { NotificationQuery } from 'src/notification/application/query/NotificationQuery';
+import { FindNotificationQuery } from '../../../notification/application/query/FindNotificationQuery';
+import { FindNotificationResult } from '../../../notification/application/query/FindNotificationResult';
+import { NotificationQuery } from '../../../notification/application/query/NotificationQuery';
 
 export class NotificationQueryImplement implements NotificationQuery {
   @Inject(ENTITY_ID_TRANSFORMER)

@@ -8,9 +8,9 @@ import {
 import { APP_GUARD } from '@nestjs/core';
 import { ScheduleModule } from '@nestjs/schedule';
 
-import { DatabaseModule } from 'libs/DatabaseModule';
-import { MessageModule } from 'libs/MessageModule';
-import { RequestStorageMiddleware } from 'libs/RequestStorageMiddleware';
+import { DatabaseModule } from './libs/DatabaseModule';
+import { MessageModule } from './libs/MessageModule';
+import { RequestStorageMiddleware } from './libs/RequestStorageMiddleware';
 
 import { AppController } from 'src/AppController';
 import { AppService } from 'src/AppService';

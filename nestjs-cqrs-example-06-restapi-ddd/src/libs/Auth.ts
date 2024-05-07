@@ -15,7 +15,7 @@ import {
 } from '../libs/DatabaseModule';
 import { PasswordGenerator, PASSWORD_GENERATOR } from '../libs/PasswordModule';
 
-import { AccountEntity } from './account/infrastructure/entity/AccountEntity';
+import { AccountEntity } from 'src/account/infrastructure/entity/AccountEntity';
 
 class AuthGuard implements CanActivate {
   @Inject(PASSWORD_GENERATOR)

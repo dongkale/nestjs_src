@@ -10,12 +10,12 @@ import {
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
-import { FindNotificationQuery } from 'src/notification/application/query/FindNotificationQuery';
-import { FindNotificationResult } from 'src/notification/application/query/FindNotificationResult';
+import { FindNotificationQuery } from '../../notification/application/query/FindNotificationQuery';
+import { FindNotificationResult } from '../../notification/application/query/FindNotificationResult';
 
-import { FindAccountNotificationRequestParam } from 'src/notification/interface/dto/FindAccountNotificationRequestParam';
-import { FindNotificationRequestQueryString } from 'src/notification/interface/dto/FindNotificationRequestQueryString';
-import { FindNotificationResponseDto } from 'src/notification/interface/dto/FindNotificationResponseDto';
+import { FindAccountNotificationRequestParam } from '../../notification/interface/dto/FindAccountNotificationRequestParam';
+import { FindNotificationRequestQueryString } from '../../notification/interface/dto/FindNotificationRequestQueryString';
+import { FindNotificationResponseDto } from '../../notification/interface/dto/FindNotificationResponseDto';
 
 @ApiTags('Notifications')
 @Controller()

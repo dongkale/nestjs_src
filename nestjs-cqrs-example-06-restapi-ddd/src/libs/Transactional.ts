@@ -1,7 +1,7 @@
 import { ICommandHandler, IEventHandler } from '@nestjs/cqrs';
 
-import { writeConnection } from 'libs/DatabaseModule';
-import { RequestStorage } from 'libs/RequestStorage';
+import { writeConnection } from '../libs/DatabaseModule';
+import { RequestStorage } from '../libs/RequestStorage';
 
 export function Transactional() {
   return (
