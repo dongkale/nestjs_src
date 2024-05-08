@@ -13,8 +13,7 @@ export const getTypeOrmModuleOptions = (config: EnvironmentConfigService): TypeO
     database: config.getDatabaseName(),
     namingStrategy: new SnakeNamingStrategy(),
     // entities: [__dirname + './../../**/*.entity{.ts,.js}'],
-    // synchronize: false,
-    // schema: process.env.DATABASE_SCHEMA,
+    synchronize: config.getDatabaseSync(),
     // migrationsRun: true,
     // migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
     // cli: {

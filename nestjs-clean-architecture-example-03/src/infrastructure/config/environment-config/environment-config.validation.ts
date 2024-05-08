@@ -21,7 +21,6 @@ class EnvironmentVariables {
   @IsString()
   JWT_REFRESH_TOKEN_EXPIRATION_TIME: string;
 
-
   @IsString()
   DATABASE_HOST: string;
   @IsNumber()
@@ -32,8 +31,6 @@ class EnvironmentVariables {
   DATABASE_PASSWORD: string;
   @IsString()
   DATABASE_NAME: string;
-  @IsString()
-  DATABASE_SCHEMA: string;
   @IsBoolean()
   DATABASE_SYNCHRONIZE: boolean;
 }

@@ -9,7 +9,7 @@ import { validate } from './environment-config.validation';
       envFilePath: '.env',
       // ignoreEnvFile: process.env.NODE_ENV === 'local' || process.env.NODE_ENV === 'test' ? false : true,
       isGlobal: true,
-      // validate,
+      validate,
     }),
   ],
   providers: [EnvironmentConfigService],
