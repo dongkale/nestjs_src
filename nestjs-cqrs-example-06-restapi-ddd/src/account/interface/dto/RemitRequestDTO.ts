@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsAlphanumeric, IsInt, Length, Min } from 'class-validator';
 
-import { EntityId } from 'libs/DatabaseModule';
+import { EntityId } from '@/libs/DatabaseModule';
 
 export class RemitRequestDTO {
   @IsAlphanumeric()

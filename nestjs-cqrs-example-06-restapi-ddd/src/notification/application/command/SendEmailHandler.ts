@@ -1,14 +1,14 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
-import { Transactional } from 'libs/Transactional';
-import { EmailAdaptor } from 'src/notification/application/adaptor/EmailAdaptor';
+import { Transactional } from '@/libs/Transactional';
+import { EmailAdaptor } from '@/notification/application/adaptor/EmailAdaptor';
 
-import { SendEmailCommand } from 'src/notification/application/command/SendEmailCommand';
-import { InjectionToken } from 'src/notification/application/InjectionToken';
+import { SendEmailCommand } from '@/notification/application/command/SendEmailCommand';
+import { InjectionToken } from '@/notification/application/InjectionToken';
 
-import { NotificationFactory } from 'src/notification/domain/NotificationFactory';
-import { NotificationRepository } from 'src/notification/domain/NotificationRepository';
+import { NotificationFactory } from '@/notification/domain/NotificationFactory';
+import { NotificationRepository } from '@/notification/domain/NotificationRepository';
 
 @CommandHandler(SendEmailCommand)
 export class SendEmailHandler

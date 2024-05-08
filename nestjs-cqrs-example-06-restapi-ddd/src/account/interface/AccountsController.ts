@@ -1,6 +1,5 @@
 import {
   Body,
-  CacheInterceptor,
   Controller,
   Delete,
   Get,
@@ -13,6 +12,7 @@ import {
   NotFoundException,
   Headers,
 } from '@nestjs/common';
+import { CacheInterceptor } from '@nestjs/cache-manager';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import {
   ApiBadRequestResponse,
@@ -24,34 +24,34 @@ import {
   ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
 
-import { Auth, AuthorizedHeader } from 'libs/Auth';
+import { Auth, AuthorizedHeader } from '@/libs/Auth';
 
-import { DepositRequestDto } from 'src/account/interface/dto/DepositRequestDto';
-import { FindAccountsRequestQueryString } from 'src/account/interface/dto/FindAccountsRequestQueryString';
-import { OpenAccountRequestDTO } from 'src/account/interface/dto/OpenAccountRequestDTO';
-import { UpdatePasswordRequestDTO } from 'src/account/interface/dto/UpdatePasswordRequestDTO';
-import { WithdrawRequestDTO } from 'src/account/interface/dto/WithdrawRequestDTO';
-import { RemitRequestDTO } from 'src/account/interface/dto/RemitRequestDTO';
-import { WithdrawRequestParam } from 'src/account/interface/dto/WithdrawRequestParam';
-import { DepositRequestParam } from 'src/account/interface/dto/DepositRequestParam';
-import { RemitRequestParam } from 'src/account/interface/dto/RemitRequestParam';
-import { UpdatePasswordRequestParam } from 'src/account/interface/dto/UpdatePasswordRequestParam';
-import { DeleteAccountRequestParam } from 'src/account/interface/dto/DeleteAccountRequestParam';
-import { FindAccountByIdRequestParam } from 'src/account/interface/dto/FindAccountByIdRequestParam';
-import { FindAccountByIdResponseDTO } from 'src/account/interface/dto/FindAccountByIdResponseDTO';
-import { FindAccountsResponseDto } from 'src/account/interface/dto/FindAccountsResponseDto';
-import { ResponseDescription } from 'src/account/interface/ResponseDescription';
+import { DepositRequestDto } from '@/account/interface/dto/DepositRequestDto';
+import { FindAccountsRequestQueryString } from '@/account/interface/dto/FindAccountsRequestQueryString';
+import { OpenAccountRequestDTO } from '@/account/interface/dto/OpenAccountRequestDTO';
+import { UpdatePasswordRequestDTO } from '@/account/interface/dto/UpdatePasswordRequestDTO';
+import { WithdrawRequestDTO } from '@/account/interface/dto/WithdrawRequestDTO';
+import { RemitRequestDTO } from '@/account/interface/dto/RemitRequestDTO';
+import { WithdrawRequestParam } from '@/account/interface/dto/WithdrawRequestParam';
+import { DepositRequestParam } from '@/account/interface/dto/DepositRequestParam';
+import { RemitRequestParam } from '@/account/interface/dto/RemitRequestParam';
+import { UpdatePasswordRequestParam } from '@/account/interface/dto/UpdatePasswordRequestParam';
+import { DeleteAccountRequestParam } from '@/account/interface/dto/DeleteAccountRequestParam';
+import { FindAccountByIdRequestParam } from '@/account/interface/dto/FindAccountByIdRequestParam';
+import { FindAccountByIdResponseDTO } from '@/account/interface/dto/FindAccountByIdResponseDTO';
+import { FindAccountsResponseDto } from '@/account/interface/dto/FindAccountsResponseDto';
+import { ResponseDescription } from '@/account/interface/ResponseDescription';
 
-import { CloseAccountCommand } from 'src/account/application/command/CloseAccountCommand';
-import { DepositCommand } from 'src/account/application/command/DepositCommand';
-import { OpenAccountCommand } from 'src/account/application/command/OpenAccountCommand';
-import { UpdatePasswordCommand } from 'src/account/application/command/UpdatePasswordCommand';
-import { WithdrawCommand } from 'src/account/application/command/WithdrawCommand';
-import { FindAccountByIdQuery } from 'src/account/application/query/FindAccountByIdQuery';
-import { FindAccountsQuery } from 'src/account/application/query/FindAccountsQuery';
-import { RemitCommand } from 'src/account/application/command/RemitCommand';
+import { CloseAccountCommand } from '@/account/application/command/CloseAccountCommand';
+import { DepositCommand } from '@/account/application/command/DepositCommand';
+import { OpenAccountCommand } from '@/account/application/command/OpenAccountCommand';
+import { UpdatePasswordCommand } from '@/account/application/command/UpdatePasswordCommand';
+import { WithdrawCommand } from '@/account/application/command/WithdrawCommand';
+import { FindAccountByIdQuery } from '@/account/application/query/FindAccountByIdQuery';
+import { FindAccountsQuery } from '@/account/application/query/FindAccountsQuery';
+import { RemitCommand } from '@/account/application/command/RemitCommand';
 
-import { ErrorMessage } from 'src/account/domain/ErrorMessage';
+import { ErrorMessage } from '@/account/domain/ErrorMessage';
 
 @ApiTags('Accounts')
 @Controller()

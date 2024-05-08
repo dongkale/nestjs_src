@@ -5,13 +5,13 @@ import {
   EntityIdTransformer,
   ENTITY_ID_TRANSFORMER,
   writeConnection,
-} from 'libs/DatabaseModule';
+} from '@/libs/DatabaseModule';
 
-import { AccountEntity } from 'src/account/infrastructure/entity/AccountEntity';
+import { AccountEntity } from '@/account/infrastructure/entity/AccountEntity';
 
-import { AccountRepository } from 'src/account/domain/AccountRepository';
-import { Account, AccountProperties } from 'src/account/domain/Account';
-import { AccountFactory } from 'src/account/domain/AccountFactory';
+import { AccountRepository } from '@/account/domain/AccountRepository';
+import { Account, AccountProperties } from '@/account/domain/Account';
+import { AccountFactory } from '@/account/domain/AccountFactory';
 
 export class AccountRepositoryImplement implements AccountRepository {
   @Inject() private readonly accountFactory: AccountFactory;

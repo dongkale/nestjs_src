@@ -2,11 +2,11 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-import { LoggingInterceptor } from './libs/LoggingInterceptor';
-import { HttpExceptionFilter } from './libs/HttpExceptionFilter';
+import { LoggingInterceptor } from '@/libs/LoggingInterceptor';
+import { HttpExceptionFilter } from '@/libs/HttpExceptionFilter';
 
-import { Config } from './Config';
-import { AppModule } from './AppModule';
+import { Config } from '@/Config';
+import { AppModule } from '@/AppModule';
 import helmet from 'helmet';
 import compression from 'compression';
 

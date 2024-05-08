@@ -5,9 +5,9 @@ import {
   IntegrationEventPublisher,
   INTEGRATION_EVENT_PUBLISHER,
   Topic,
-} from 'libs/MessageModule';
+} from '@/libs/MessageModule';
 
-import { DepositedEvent } from 'src/account/domain/event/DepositedEvent';
+import { DepositedEvent } from '@/account/domain/event/DepositedEvent';
 
 @EventsHandler(DepositedEvent)
 export class DepositedHandler implements IEventHandler<DepositedEvent> {

@@ -1,10 +1,6 @@
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import {
-  CacheModule,
-  MiddlewareConsumer,
-  Module,
-  NestModule,
-} from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { CacheModule } from '@nestjs/cache-manager';
 import { APP_GUARD } from '@nestjs/core';
 import { ScheduleModule } from '@nestjs/schedule';
 
@@ -12,10 +8,10 @@ import { DatabaseModule } from './libs/DatabaseModule';
 import { MessageModule } from './libs/MessageModule';
 import { RequestStorageMiddleware } from './libs/RequestStorageMiddleware';
 
-import { AppController } from 'src/AppController';
-import { AppService } from 'src/AppService';
-import { AccountsModule } from 'src/account/AccountsModule';
-import { NotificationModule } from 'src/notification/NotificationModule';
+import { AppController } from './AppController';
+import { AppService } from './AppService';
+import { AccountsModule } from './account/AccountsModule';
+import { NotificationModule } from './notification/NotificationModule';
 
 @Module({
   imports: [

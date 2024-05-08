@@ -3,7 +3,7 @@
     "module": "commonjs",
     "declaration": false,
     "noImplicitAny": false,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "removeComments": true,
     "noLib": false,
     "emitDecoratorMetadata": true,
@@ -18,8 +18,9 @@
     "strictNullChecks": false,    
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,    
   },
+  "extends": "./tsconfig.paths.json",
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

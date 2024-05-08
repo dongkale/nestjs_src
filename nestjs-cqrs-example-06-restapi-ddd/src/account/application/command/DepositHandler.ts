@@ -1,13 +1,13 @@
 import { Inject, NotFoundException } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
-import { Transactional } from 'libs/Transactional';
+import { Transactional } from '@/libs/Transactional';
 
-import { DepositCommand } from 'src/account/application/command/DepositCommand';
-import { InjectionToken } from 'src/account/application/InjectionToken';
+import { DepositCommand } from '@/account/application/command/DepositCommand';
+import { InjectionToken } from '@/account/application/InjectionToken';
 
-import { ErrorMessage } from 'src/account/domain/ErrorMessage';
-import { AccountRepository } from 'src/account/domain/AccountRepository';
+import { ErrorMessage } from '@/account/domain/ErrorMessage';
+import { AccountRepository } from '@/account/domain/AccountRepository';
 
 @CommandHandler(DepositCommand)
 export class DepositHandler implements ICommandHandler<DepositCommand, void> {

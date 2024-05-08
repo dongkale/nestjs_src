@@ -9,9 +9,9 @@ import {
   AccountWithdrawn,
   MessageHandler,
   Topic,
-} from '../../libs/MessageModule';
+} from '@/libs/MessageModule';
 
-import { SendEmailCommand } from '../../notification/application/command/SendEmailCommand';
+import { SendEmailCommand } from '@/notification/application/command/SendEmailCommand';
 
 @Controller()
 export class NotificationIntegrationController {

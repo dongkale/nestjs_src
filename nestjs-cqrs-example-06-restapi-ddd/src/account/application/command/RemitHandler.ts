@@ -5,14 +5,14 @@ import {
 } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
-import { Transactional } from 'libs/Transactional';
+import { Transactional } from '@/libs/Transactional';
 
-import { RemitCommand } from 'src/account/application/command/RemitCommand';
-import { InjectionToken } from 'src/account/application/InjectionToken';
+import { RemitCommand } from '@/account/application/command/RemitCommand';
+import { InjectionToken } from '@/account/application/InjectionToken';
 
-import { ErrorMessage } from 'src/account/domain/ErrorMessage';
-import { AccountRepository } from 'src/account/domain/AccountRepository';
-import { AccountDomainService } from 'src/account/domain/AccountDomainService';
+import { ErrorMessage } from '@/account/domain/ErrorMessage';
+import { AccountRepository } from '@/account/domain/AccountRepository';
+import { AccountDomainService } from '@/account/domain/AccountDomainService';
 
 @CommandHandler(RemitCommand)
 export class RemitHandler implements ICommandHandler<RemitCommand, void> {

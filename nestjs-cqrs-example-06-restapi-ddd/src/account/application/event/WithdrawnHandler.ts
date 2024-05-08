@@ -6,9 +6,9 @@ import {
   IntegrationEventPublisher,
   INTEGRATION_EVENT_PUBLISHER,
   Topic,
-} from 'libs/MessageModule';
+} from '@/libs/MessageModule';
 
-import { WithdrawnEvent } from 'src/account/domain/event/WithdrawnEvent';
+import { WithdrawnEvent } from '@/account/domain/event/WithdrawnEvent';
 
 @EventsHandler(WithdrawnEvent)
 export class WithdrawnHandler implements IEventHandler<WithdrawnEvent> {

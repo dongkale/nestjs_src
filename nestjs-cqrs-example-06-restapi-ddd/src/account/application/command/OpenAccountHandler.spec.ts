@@ -1,14 +1,14 @@
 import { ModuleMetadata, Provider } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 
-import { PasswordGenerator, PASSWORD_GENERATOR } from 'libs/PasswordModule';
+import { PasswordGenerator, PASSWORD_GENERATOR } from '@/libs/PasswordModule';
 
-import { OpenAccountCommand } from 'src/account/application/command/OpenAccountCommand';
-import { OpenAccountHandler } from 'src/account/application/command/OpenAccountHandler';
-import { InjectionToken } from 'src/account/application/InjectionToken';
-import { AccountFactory } from 'src/account/domain/AccountFactory';
+import { OpenAccountCommand } from '@/account/application/command/OpenAccountCommand';
+import { OpenAccountHandler } from '@/account/application/command/OpenAccountHandler';
+import { InjectionToken } from '@/account/application/InjectionToken';
+import { AccountFactory } from '@/account/domain/AccountFactory';
 
-import { AccountRepository } from 'src/account/domain/AccountRepository';
+import { AccountRepository } from '@/account/domain/AccountRepository';
 
 jest.mock('libs/Transactional', () => ({
   Transactional: () => () => undefined,

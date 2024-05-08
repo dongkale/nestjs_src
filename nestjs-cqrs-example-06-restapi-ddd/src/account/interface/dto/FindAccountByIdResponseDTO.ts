@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { EntityId } from 'libs/DatabaseModule';
+import { EntityId } from '@/libs/DatabaseModule';
 
-import { FindAccountByIdResult } from 'src/account/application/query/FindAccountByIdResult';
+import { FindAccountByIdResult } from '@/account/application/query/FindAccountByIdResult';
 
 export class FindAccountByIdResponseDTO extends FindAccountByIdResult {
   @ApiProperty({ example: new EntityId() })

@@ -5,15 +5,15 @@ import {
   EntityIdTransformer,
   ENTITY_ID_TRANSFORMER,
   writeConnection,
-} from 'libs/DatabaseModule';
+} from '@/libs/DatabaseModule';
 
-import { NotificationEntity } from 'src/notification/infrastructure/entities/NotificationEntity';
+import { NotificationEntity } from '@/notification/infrastructure/entities/NotificationEntity';
 
 import {
   Notification,
   NotificationProperties,
-} from 'src/notification/domain/Notification';
-import { NotificationRepository } from 'src/notification/domain/NotificationRepository';
+} from '@/notification/domain/Notification';
+import { NotificationRepository } from '@/notification/domain/NotificationRepository';
 
 export class NotificationRepositoryImplement implements NotificationRepository {
   @Inject(ENTITY_ID_TRANSFORMER)

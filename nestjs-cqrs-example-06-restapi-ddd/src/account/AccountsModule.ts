@@ -1,43 +1,43 @@
-import addYears from 'date-fns/addYears';
+import { addYears } from 'date-fns/addYears';
 import { LessThan } from 'typeorm';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { Inject, Logger, Module, Provider } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 
-import { PasswordModule } from 'libs/PasswordModule';
+import { PasswordModule } from '@/libs/PasswordModule';
 import {
   EntityIdTransformer,
   ENTITY_ID_TRANSFORMER,
   writeConnection,
-} from 'libs/DatabaseModule';
-import { TaskPublisher, TASK_PUBLISHER } from 'libs/MessageModule';
+} from '@/libs/DatabaseModule';
+import { TaskPublisher, TASK_PUBLISHER } from '@/libs/MessageModule';
 
-import { AccountQueryImplement } from 'src/account/infrastructure/query/AccountQueryImplement';
-import { AccountRepositoryImplement } from 'src/account/infrastructure/repository/AccountRepositoryImplement';
-import { AccountEntity } from 'src/account/infrastructure/entity/AccountEntity';
+import { AccountQueryImplement } from '@/account/infrastructure/query/AccountQueryImplement';
+import { AccountRepositoryImplement } from '@/account/infrastructure/repository/AccountRepositoryImplement';
+import { AccountEntity } from '@/account/infrastructure/entity/AccountEntity';
 
-import { AccountsController } from 'src/account/interface/AccountsController';
-import { AccountTaskController } from 'src/account/interface/AccountTaskController';
+import { AccountsController } from '@/account/interface/AccountsController';
+import { AccountTaskController } from '@/account/interface/AccountTaskController';
 
-import { CloseAccountHandler } from 'src/account/application/command/CloseAccountHandler';
-import { DepositHandler } from 'src/account/application/command/DepositHandler';
-import { OpenAccountHandler } from 'src/account/application/command/OpenAccountHandler';
-import { RemitHandler } from 'src/account/application/command/RemitHandler';
-import { UpdatePasswordHandler } from 'src/account/application/command/UpdatePasswordHandler';
-import { WithdrawHandler } from 'src/account/application/command/WithdrawHandler';
-import { FindAccountByIdHandler } from 'src/account/application/query/FindAccountByIdHandler';
-import { FindAccountsHandler } from 'src/account/application/query/FindAccountsHandler';
-import { InjectionToken } from 'src/account/application/InjectionToken';
-import { AccountOpenedHandler } from 'src/account/application/event/AccountOpenedHandler';
-import { LockAccountCommand } from 'src/account/application/command/LockAccountCommand';
-import { LockAccountHandler } from 'src/account/application/command/LockAccountHandler';
-import { PasswordUpdatedHandler } from 'src/account/application/event/PasswordUpdatedHandler';
-import { AccountClosedHandler } from 'src/account/application/event/AccountClosedHandler';
-import { DepositedHandler } from 'src/account/application/event/DepositedHandler';
-import { WithdrawnHandler } from 'src/account/application/event/WithdrawnHandler';
+import { CloseAccountHandler } from '@/account/application/command/CloseAccountHandler';
+import { DepositHandler } from '@/account/application/command/DepositHandler';
+import { OpenAccountHandler } from '@/account/application/command/OpenAccountHandler';
+import { RemitHandler } from '@/account/application/command/RemitHandler';
+import { UpdatePasswordHandler } from '@/account/application/command/UpdatePasswordHandler';
+import { WithdrawHandler } from '@/account/application/command/WithdrawHandler';
+import { FindAccountByIdHandler } from '@/account/application/query/FindAccountByIdHandler';
+import { FindAccountsHandler } from '@/account/application/query/FindAccountsHandler';
+import { InjectionToken } from '@/account/application/InjectionToken';
+import { AccountOpenedHandler } from '@/account/application/event/AccountOpenedHandler';
+import { LockAccountCommand } from '@/account/application/command/LockAccountCommand';
+import { LockAccountHandler } from '@/account/application/command/LockAccountHandler';
+import { PasswordUpdatedHandler } from '@/account/application/event/PasswordUpdatedHandler';
+import { AccountClosedHandler } from '@/account/application/event/AccountClosedHandler';
+import { DepositedHandler } from '@/account/application/event/DepositedHandler';
+import { WithdrawnHandler } from '@/account/application/event/WithdrawnHandler';
 
-import { AccountDomainService } from 'src/account/domain/AccountDomainService';
-import { AccountFactory } from 'src/account/domain/AccountFactory';
+import { AccountDomainService } from '@/account/domain/AccountDomainService';
+import { AccountFactory } from '@/account/domain/AccountFactory';
 
 const infrastructure: Provider[] = [
   {

@@ -1,18 +1,18 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 
-import { EmailAdaptorImplement } from '../notification/infrastructure/adaptor/EmailAdaptorImplement';
-import { NotificationRepositoryImplement } from '../notification/infrastructure/repository/NotificationRepositoryImplement';
-import { NotificationQueryImplement } from '../notification/infrastructure/query/NotificationQueryImplement';
+import { EmailAdaptorImplement } from '@/notification/infrastructure/adaptor/EmailAdaptorImplement';
+import { NotificationRepositoryImplement } from '@/notification/infrastructure/repository/NotificationRepositoryImplement';
+import { NotificationQueryImplement } from '@/notification/infrastructure/query/NotificationQueryImplement';
 
-import { NotificationIntegrationController } from '../notification/interface/NotificationIntegrationController';
-import { NotificationController } from '../notification/interface/NotificationController';
+import { NotificationIntegrationController } from '@/notification/interface/NotificationIntegrationController';
+import { NotificationController } from '@/notification/interface/NotificationController';
 
-import { SendEmailHandler } from '../notification/application/command/SendEmailHandler';
-import { InjectionToken } from '../notification/application/InjectionToken';
-import { FindNotificationHandler } from '../notification/application/query/FindNotificationHandler';
+import { SendEmailHandler } from '@/notification/application/command/SendEmailHandler';
+import { InjectionToken } from '@/notification/application/InjectionToken';
+import { FindNotificationHandler } from '@/notification/application/query/FindNotificationHandler';
 
-import { NotificationFactory } from '../notification/domain/NotificationFactory';
+import { NotificationFactory } from '@/notification/domain/NotificationFactory';
 
 const infrastructure = [
   {

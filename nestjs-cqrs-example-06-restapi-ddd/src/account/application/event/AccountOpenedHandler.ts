@@ -6,10 +6,10 @@ import {
   IntegrationEventPublisher,
   INTEGRATION_EVENT_PUBLISHER,
   Topic,
-} from 'libs/MessageModule';
-import { Transactional } from 'libs/Transactional';
+} from '@/libs/MessageModule';
+import { Transactional } from '@/libs/Transactional';
 
-import { AccountOpenedEvent } from 'src/account/domain/event/AccountOpenedEvent';
+import { AccountOpenedEvent } from '@/account/domain/event/AccountOpenedEvent';
 
 @EventsHandler(AccountOpenedEvent)
 export class AccountOpenedHandler implements IEventHandler<AccountOpenedEvent> {

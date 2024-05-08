@@ -1,14 +1,14 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
-import { PasswordGenerator, PASSWORD_GENERATOR } from 'libs/PasswordModule';
-import { Transactional } from 'libs/Transactional';
+import { PasswordGenerator, PASSWORD_GENERATOR } from '@/libs/PasswordModule';
+import { Transactional } from '@/libs/Transactional';
 
-import { OpenAccountCommand } from 'src/account/application/command/OpenAccountCommand';
-import { InjectionToken } from 'src/account/application/InjectionToken';
+import { OpenAccountCommand } from '@/account/application/command/OpenAccountCommand';
+import { InjectionToken } from '@/account/application/InjectionToken';
 
-import { AccountFactory } from 'src/account/domain/AccountFactory';
-import { AccountRepository } from 'src/account/domain/AccountRepository';
+import { AccountFactory } from '@/account/domain/AccountFactory';
+import { AccountRepository } from '@/account/domain/AccountRepository';
 
 @CommandHandler(OpenAccountCommand)
 export class OpenAccountHandler

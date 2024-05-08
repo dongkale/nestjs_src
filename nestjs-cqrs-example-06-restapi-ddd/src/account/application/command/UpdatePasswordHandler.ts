@@ -1,14 +1,14 @@
 import { Inject, NotFoundException } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
-import { PasswordGenerator, PASSWORD_GENERATOR } from 'libs/PasswordModule';
-import { Transactional } from 'libs/Transactional';
+import { PasswordGenerator, PASSWORD_GENERATOR } from '@/libs/PasswordModule';
+import { Transactional } from '@/libs/Transactional';
 
-import { UpdatePasswordCommand } from 'src/account/application/command/UpdatePasswordCommand';
-import { InjectionToken } from 'src/account/application/InjectionToken';
+import { UpdatePasswordCommand } from '@/account/application/command/UpdatePasswordCommand';
+import { InjectionToken } from '@/account/application/InjectionToken';
 
-import { ErrorMessage } from 'src/account/domain/ErrorMessage';
-import { AccountRepository } from 'src/account/domain/AccountRepository';
+import { ErrorMessage } from '@/account/domain/ErrorMessage';
+import { AccountRepository } from '@/account/domain/AccountRepository';
 
 @CommandHandler(UpdatePasswordCommand)
 export class UpdatePasswordHandler

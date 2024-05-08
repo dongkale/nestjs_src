@@ -6,10 +6,10 @@ import {
   IntegrationEventPublisher,
   INTEGRATION_EVENT_PUBLISHER,
   Topic,
-} from 'libs/MessageModule';
-import { Transactional } from 'libs/Transactional';
+} from '@/libs/MessageModule';
+import { Transactional } from '@/libs/Transactional';
 
-import { AccountClosedEvent } from 'src/account/domain/event/AccountClosedEvent';
+import { AccountClosedEvent } from '@/account/domain/event/AccountClosedEvent';
 
 @EventsHandler(AccountClosedEvent)
 export class AccountClosedHandler implements IEventHandler<AccountClosedEvent> {

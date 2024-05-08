@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { EntityId } from 'libs/DatabaseModule';
+import { EntityId } from '@/libs/DatabaseModule';
 
-import { FindAccountsResult } from 'src/account/application/query/FindAccountsResult';
+import { FindAccountsResult } from '@/account/application/query/FindAccountsResult';
 
 class Account {
   @ApiProperty({ example: new EntityId() })

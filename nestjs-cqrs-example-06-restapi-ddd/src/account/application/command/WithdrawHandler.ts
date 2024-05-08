@@ -1,13 +1,13 @@
 import { Inject, NotFoundException } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
-import { Transactional } from 'libs/Transactional';
+import { Transactional } from '@/libs/Transactional';
 
-import { WithdrawCommand } from 'src/account/application/command/WithdrawCommand';
-import { InjectionToken } from 'src/account/application/InjectionToken';
+import { WithdrawCommand } from '@/account/application/command/WithdrawCommand';
+import { InjectionToken } from '@/account/application/InjectionToken';
 
-import { ErrorMessage } from 'src/account/domain/ErrorMessage';
-import { AccountRepository } from 'src/account/domain/AccountRepository';
+import { ErrorMessage } from '@/account/domain/ErrorMessage';
+import { AccountRepository } from '@/account/domain/AccountRepository';
 
 @CommandHandler(WithdrawCommand)
 export class WithdrawHandler implements ICommandHandler<WithdrawCommand, void> {

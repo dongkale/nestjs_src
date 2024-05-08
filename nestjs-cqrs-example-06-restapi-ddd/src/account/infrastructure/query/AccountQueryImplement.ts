@@ -4,14 +4,14 @@ import {
   EntityIdTransformer,
   ENTITY_ID_TRANSFORMER,
   readConnection,
-} from 'libs/DatabaseModule';
+} from '@/libs/DatabaseModule';
 
-import { AccountEntity } from 'src/account/infrastructure/entity/AccountEntity';
+import { AccountEntity } from '@/account/infrastructure/entity/AccountEntity';
 
-import { AccountQuery } from 'src/account/application/query/AccountQuery';
-import { FindAccountByIdResult } from 'src/account/application/query/FindAccountByIdResult';
-import { FindAccountsResult } from 'src/account/application/query/FindAccountsResult';
-import { FindAccountsQuery } from 'src/account/application/query/FindAccountsQuery';
+import { AccountQuery } from '@/account/application/query/AccountQuery';
+import { FindAccountByIdResult } from '@/account/application/query/FindAccountByIdResult';
+import { FindAccountsResult } from '@/account/application/query/FindAccountsResult';
+import { FindAccountsQuery } from '@/account/application/query/FindAccountsQuery';
 
 @Injectable()
 export class AccountQueryImplement implements AccountQuery {

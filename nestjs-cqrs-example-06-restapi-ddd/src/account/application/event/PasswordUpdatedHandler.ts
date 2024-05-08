@@ -6,10 +6,10 @@ import {
   IntegrationEventPublisher,
   INTEGRATION_EVENT_PUBLISHER,
   Topic,
-} from 'libs/MessageModule';
-import { Transactional } from 'libs/Transactional';
+} from '@/libs/MessageModule';
+import { Transactional } from '@/libs/Transactional';
 
-import { PasswordUpdatedEvent } from 'src/account/domain/event/PasswordUpdatedEvent';
+import { PasswordUpdatedEvent } from '@/account/domain/event/PasswordUpdatedEvent';
 
 @EventsHandler(PasswordUpdatedEvent)
 export class PasswordUpdatedHandler
