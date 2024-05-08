@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'local') {
   dotenv.config({ path: '.env' });
 }
 
-const config: ConnectionOptions = {
+const config__: ConnectionOptions = {
   type: 'mysql',
   host: process.env.DATABASE_HOST,
   port: parseInt(process.env.DATABASE_PORT),
@@ -25,6 +25,6 @@ const config: ConnectionOptions = {
   // },
 };
 
-console.log(config);
+console.log(config__);
 
-export default config;
+export default config__;
