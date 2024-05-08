@@ -10,6 +10,8 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true
-  },
-  "exclude": ["node_modules", "dist"]
+  },  
+  "extends": "./tsconfig.paths.json",
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
