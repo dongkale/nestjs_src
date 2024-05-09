@@ -1,0 +1,114 @@
+{
+  "name": "nestjs-cqrs-clean-arch-example",
+  "version": "1.0.0",
+  "description": "NestJS CQRS Clean Architecture Example",
+  "author": "boy672820",
+  "license": "MIT",
+  "scripts": {
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
+    "start": "nest start",
+    "dev": "nest start --watch",
+    "debug": "nest start --debug --watch",
+    "prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boy672820/nestjs-cqrs-clean-arch-example"
+  },
+  "dependencies": {
+    "@mikro-orm/core": "^5.7.14",
+    "@mikro-orm/nestjs": "^5.2.0",
+    "@mikro-orm/postgresql": "^5.7.14",
+    "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^3.0.0",
+    "@nestjs/core": "^9.0.0",
+    "@nestjs/cqrs": "^10.1.0",
+    "@nestjs/event-emitter": "^2.0.4",
+    "@nestjs/jwt": "^10.2.0",
+    "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/swagger": "^7.1.8",
+    "bignumber.js": "^9.1.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "ethers": "^6.7.1",
+    "jest-mock-extended": "^3.0.5",
+    "otplib": "^12.0.1",
+    "qrcode": "^1.5.3",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.2.0",
+    "ulid": "^2.3.0"
+  },
+  "devDependencies": {
+    "@mikro-orm/cli": "^5.7.14",
+    "@mikro-orm/migrations": "5.7.14",
+    "@nestjs/cli": "^9.0.0",
+    "@nestjs/schematics": "^9.0.0",
+    "@nestjs/testing": "^9.0.0",
+    "@nomicfoundation/hardhat-ethers": "3",
+    "@types/express": "^4.17.13",
+    "@types/jest": "29.5.1",
+    "@types/node": "18.16.12",
+    "@types/qrcode": "^1.5.5",
+    "@types/supertest": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "hardhat": "^2.20.1",
+    "jest": "29.5.0",
+    "prettier": "^2.3.2",
+    "source-map-support": "^0.5.20",
+    "supertest": "^6.1.3",
+    "ts-jest": "29.1.0",
+    "ts-loader": "^9.2.3",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "4.2.0",
+    "typescript": "^5.0.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": ".",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/src/",
+      "<rootDir>/libs/"
+    ],
+    "moduleNameMapper": {
+      "^@common$": "<rootDir>/src/common",
+      "^@common/(.*)$": "<rootDir>/src/common/$1",
+      "^@config$": "<rootDir>/src/config",
+      "^@config/(.*)$": "<rootDir>/src/config/$1",
+      "^@core$": "<rootDir>/src/core",
+      "^@core/(.*)$": "<rootDir>/src/core/$1",
+      "^@libs/auth$": "<rootDir>/libs/auth/src",
+      "^@libs/auth/(.*)$": "<rootDir>/libs/auth/src/$1",
+      "^@libs/ethers(|/.*)$": "<rootDir>/libs/ethers/src/$1"
+    }
+  },
+  "mikro-orm": {
+    "useTsNode": true,
+    "configPaths": [
+      "./src/mikro-orm.config.ts"
+    ]
+  }
+}

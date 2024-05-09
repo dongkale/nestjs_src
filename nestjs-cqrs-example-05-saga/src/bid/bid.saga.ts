@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { flatMap, map } from 'rxjs/operators';
 
 import { BidEvent, BidEventSuccess } from './bid.events';
-import { MailCommand } from '../mail/mail.command';
+import { MailCommand } from '@/mail/mail.command';
 import { BidCommand } from './bid.command';
-import { PostponeAuctionCommand } from '../auction/auction.command';
+import { PostponeAuctionCommand } from '@/auction/auction.command';
 
 @Injectable()
 export class BidSaga {

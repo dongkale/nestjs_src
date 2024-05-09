@@ -2,7 +2,7 @@
 
 Demonstration of CQRS pattern and Event Driven Programming using Nest.js
 
-Article describing this repository: 
+Article describing this repository:
 Diagram of this software is:
 
 ## Installation
@@ -37,3 +37,7 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+# Document
+
+- https://blog.logrocket.com/how-to-use-event-driven-programming-in-node-js/
+- https://github.com/vladotesanovic/cqrs.git

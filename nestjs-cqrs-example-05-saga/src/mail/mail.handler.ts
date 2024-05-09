@@ -4,7 +4,6 @@ import { MailCommand } from './mail.command';
 
 @CommandHandler(MailCommand)
 export class MailHandler implements ICommandHandler<MailCommand> {
-
   async execute(command: MailCommand) {
     const { mailAddress, mailDTO } = command;
     // tslint:disable-next-line:no-console
@@ -14,7 +13,8 @@ export class MailHandler implements ICommandHandler<MailCommand> {
     return {
       sent: true,
       payload: {
-        mailAddress, mailDTO,
+        mailAddress,
+        mailDTO,
       },
     };
   }

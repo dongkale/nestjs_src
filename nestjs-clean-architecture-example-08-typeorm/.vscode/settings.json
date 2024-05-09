@@ -1,0 +1,15 @@
+{
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "files.associations": {
+    ".env*": "properties",
+    ".yarnclean": "ignore"
+  },
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": [
+      "./.github/workflows/build.yml",
+      "./.github/workflows/tests.yml"
+    ]
+  }
+}

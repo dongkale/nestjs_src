@@ -7,10 +7,10 @@ import { AuctionRepository } from './auction.repository';
 export class AuctionHandler implements ICommandHandler<PostponeAuctionCommand> {
   constructor(
     private readonly auctionRepository: AuctionRepository,
-    private readonly publisher: EventPublisher) {}
+    private readonly publisher: EventPublisher,
+  ) {}
 
   async execute(command: PostponeAuctionCommand) {
-
     const { auctionID } = command;
 
     // to associate model ( Bid ) and publisher, we use code bellow
@@ -24,5 +24,4 @@ export class AuctionHandler implements ICommandHandler<PostponeAuctionCommand> {
     auction.postponeAuction();
     auction.commit();
   }
-
 }

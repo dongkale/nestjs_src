@@ -1,0 +1,409 @@
+{
+	"info": {
+		"_postman_id": "8cb49479-804a-4256-b582-e7fe7c6f068d",
+		"name": "nest-cqrs-clean-arch-example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20071694"
+	},
+	"item": [
+		{
+			"name": "wallets",
+			"item": [
+				{
+					"name": "/wallets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    const res = pm.response.json();",
+									"    pm.collectionVariables.set(\"phrase\", res.data.phrase);",
+									"    pm.collectionVariables.set(\"password\", JSON.parse(pm.request.body.raw).password);",
+									"    pm.collectionVariables.set(\"account_address\", res.data.accountAddress);",
+									"    pm.collectionVariables.set(\"privkey\", res.data.privkey);",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{api_tag}}",
+							"host": [
+								"{{base_url}}{{api_tag}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/wallets/accounts/unsafe",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phrase\": \"{{phrase}}\",\n    \"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{api_tag}}/accounts/unsafe",
+							"host": [
+								"{{base_url}}{{api_tag}}"
+							],
+							"path": [
+								"accounts",
+								"unsafe"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.collectionVariables.set(\"api_tag\", \"/wallets\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "/user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"boy672820\",\n    \"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{api_tag}}",
+							"host": [
+								"{{base_url}}{{api_tag}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/2fa/generate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{api_tag}}/2fa/generate",
+							"host": [
+								"{{base_url}}{{api_tag}}"
+							],
+							"path": [
+								"2fa",
+								"generate"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.collectionVariables.set(\"api_tag\", \"/users\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "accounts",
+			"item": [
+				{
+					"name": "/accounts/{accountId}/lock",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{api_tag}}/01HBXRPJVV761ACFBAH96V6ZZA/lock/",
+							"host": [
+								"{{base_url}}{{api_tag}}"
+							],
+							"path": [
+								"01HBXRPJVV761ACFBAH96V6ZZA",
+								"lock",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/accounts/{accountId}/open",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{api_tag}}/01HBXRPJVV761ACFBAH96V6ZZA/open",
+							"host": [
+								"{{base_url}}{{api_tag}}"
+							],
+							"path": [
+								"01HBXRPJVV761ACFBAH96V6ZZA",
+								"open"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/accounts/{accountId}/transfer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMUhBSjEwM0tKRTBFWFBUMDhOSjM2S0ZZTSIsImlzcyI6Im5lc3QtY3Fycy1jbGVhbi1hcmNoLWV4YW1wbGUuaW8iLCJhY2NvdW50SWQiOiIwMUhCWFNGSloyS01ZUEFEMDdBRUhKMFk0QiIsImlhdCI6MTcwNDU1OTc1OSwiZXhwIjoxNzA0NTU5OTM5fQ.Y6zEuCIMJqg20cBOyq0Qv7PdbV4LcHXtj_qRdBwiNUg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"1000000000000000000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{api_tag}}/01HBXSFSSD88KVF78QM7STSN0E/transfer",
+							"host": [
+								"{{base_url}}{{api_tag}}"
+							],
+							"path": [
+								"01HBXSFSSD88KVF78QM7STSN0E",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/accounts/withdraw",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMUhBSjEwM0tKRTBFWFBUMDhOSjM2S0ZZTSIsImlzcyI6Im5lc3QtY3Fycy1jbGVhbi1hcmNoLWV4YW1wbGUuaW8iLCJhY2NvdW50SWQiOiIwMUhCWFNGSloyS01ZUEFEMDdBRUhKMFk0QiIsImlhdCI6MTcwNDU1OTc1OSwiZXhwIjoxNzA0NTU5OTM5fQ.Y6zEuCIMJqg20cBOyq0Qv7PdbV4LcHXtj_qRdBwiNUg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"100\",\n    \"destAddress\": \"01HBXSFSSD88KVF78QM7STSN0E\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{api_tag}}/withdraw",
+							"host": [
+								"{{base_url}}{{api_tag}}"
+							],
+							"path": [
+								"withdraw"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/accounts/{accountId}/otp-verify",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "1",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-2fa-token",
+								"value": "729033",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}{{api_tag}}/01HBXSFJZ2KMYPAD07AEHJ0Y4B/otp-verify",
+							"host": [
+								"{{base_url}}{{api_tag}}"
+							],
+							"path": [
+								"01HBXSFJZ2KMYPAD07AEHJ0Y4B",
+								"otp-verify"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.collectionVariables.set(\"api_tag\", \"/accounts\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "123",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "boy672820",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000/v1",
+			"type": "string"
+		},
+		{
+			"key": "api_tag",
+			"value": ""
+		},
+		{
+			"key": "phrase",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "account_address",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "privkey",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

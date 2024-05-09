@@ -1,5 +1,3 @@
 export class PostponeAuctionCommand {
-  constructor(
-    public readonly auctionID: string,
-  ) {}
+  constructor(public readonly auctionID: string) {}
 }

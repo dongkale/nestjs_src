@@ -1,7 +1,7 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 
 import { BidCommand } from './bid.command';
-import { AuctionRepository } from '../auction/auction.repository';
+import { AuctionRepository } from '@/auction/auction.repository';
 
 @CommandHandler(BidCommand)
 export class BidHandler implements ICommandHandler<BidCommand> {
