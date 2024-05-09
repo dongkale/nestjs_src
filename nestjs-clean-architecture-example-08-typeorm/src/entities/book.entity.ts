@@ -4,10 +4,10 @@ import {
   JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
-} from "typeorm";
-import { Author } from "./author.entity";
+} from 'typeorm';
+import { Author } from './author.entity';
 
-@Entity("books")
+@Entity('books')
 export class Book {
   @PrimaryGeneratedColumn()
   id: number;

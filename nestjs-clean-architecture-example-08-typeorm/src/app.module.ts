@@ -1,11 +1,11 @@
-import { TypeOrmConfig } from "@configs/typeorm.config";
-import { ApolloDriverConfig, ApolloDriver } from "@nestjs/apollo";
-import { Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
-import { GraphQLModule } from "@nestjs/graphql";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { AuthorHttpModule } from "@modules/author-http.module";
-import { BookHttpModule } from "@modules/book-http.module";
+import { TypeOrmConfig } from '@/configs/typeorm.config';
+import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthorHttpModule } from '@/modules/author-http.module';
+import { BookHttpModule } from '@/modules/book-http.module';
 
 @Module({
   imports: [
@@ -16,7 +16,7 @@ import { BookHttpModule } from "@modules/book-http.module";
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: true,
-      debug: false,
+      // debug: false,
       driver: ApolloDriver,
       sortSchema: true,
     }),

@@ -1,4 +1,4 @@
-import { Author } from "@entities/author.entity";
+import { Author } from '@/entities/author.entity';
 import {
   Body,
   Controller,
@@ -10,7 +10,7 @@ import {
   Patch,
   Post,
   Put,
-} from "@nestjs/common";
+} from '@nestjs/common';
 import {
   ApiCreatedResponse,
   ApiNoContentResponse,
@@ -18,15 +18,15 @@ import {
   ApiOperation,
   ApiResponse,
   ApiTags,
-} from "@nestjs/swagger";
-import { AuthorService } from "@services/author.service";
-import { AuthorDto, CreateAuthorDto, UpdateAuthorDto } from "@dtos/author.dto";
-import { BookService } from "@services/book.service";
-import { BookDto, CreateBookDto } from "@dtos/book.dto";
-import { Book } from "@entities/book.entity";
+} from '@nestjs/swagger';
+import { AuthorService } from '@/services/author.service';
+import { AuthorDto, CreateAuthorDto, UpdateAuthorDto } from '@/dtos/author.dto';
+import { BookService } from '@/services/book.service';
+import { BookDto, CreateBookDto } from '@/dtos/book.dto';
+import { Book } from '@/entities/book.entity';
 
-@ApiTags("Author")
-@Controller({ path: "authors", version: "1" })
+@ApiTags('Author')
+@Controller({ path: 'authors', version: '1' })
 export class AuthorController {
   constructor(
     private readonly authorService: AuthorService,
@@ -34,60 +34,60 @@ export class AuthorController {
   ) {}
 
   @Get()
-  @ApiOperation({ summary: "List all Authors" })
+  @ApiOperation({ summary: 'List all Authors' })
   @ApiOkResponse({
-    description: "Found list of Authors",
+    description: 'Found list of Authors',
     type: [AuthorDto],
   })
   getAuthors(): Promise<Author[]> {
     return this.authorService.findAll();
   }
 
-  @Get(":id")
+  @Get(':id')
   @ApiOperation({
-    summary: "Get an Author by Id",
+    summary: 'Get an Author by Id',
     parameters: [
       {
-        description: "Unique Id of the Author",
-        in: "path",
-        name: "id",
+        description: 'Unique Id of the Author',
+        in: 'path',
+        name: 'id',
         required: true,
       },
     ],
   })
   @ApiOkResponse({
-    description: "Found existing Author",
+    description: 'Found existing Author',
     type: AuthorDto,
   })
-  getAuthor(@Param("id") id: number): Promise<Author> {
+  getAuthor(@Param('id') id: number) {
     return this.authorService.findOne(id);
   }
 
-  @Get(":id/books")
+  @Get(':id/books')
   @ApiOperation({
-    summary: "Get all Books written by the Author with Id",
+    summary: 'Get all Books written by the Author with Id',
     parameters: [
       {
-        description: "Unique Id of the Author",
-        in: "path",
-        name: "id",
+        description: 'Unique Id of the Author',
+        in: 'path',
+        name: 'id',
         required: true,
       },
     ],
   })
   @ApiOkResponse({
-    description: "List of all Books written by the Author",
+    description: 'List of all Books written by the Author',
     type: [BookDto],
   })
-  async getBooks(@Param("id") id: number): Promise<Book[]> {
+  async getBooks(@Param('id') id: number): Promise<Book[]> {
     const author = await this.authorService.findOne(id);
     return author.books;
   }
 
   @Post()
-  @ApiOperation({ summary: "Create a new Author" })
+  @ApiOperation({ summary: 'Create a new Author' })
   @ApiCreatedResponse({
-    description: "Created a new Author",
+    description: 'Created a new Author',
     type: AuthorDto,
   })
   addAuthor(@Body() createAuthorDto: CreateAuthorDto): Promise<Author> {
@@ -97,14 +97,14 @@ export class AuthorController {
     return this.authorService.save(author);
   }
 
-  @Post(":id/books")
-  @ApiOperation({ summary: "Create a new Book by the Author" })
+  @Post(':id/books')
+  @ApiOperation({ summary: 'Create a new Book by the Author' })
   @ApiCreatedResponse({
-    description: "Created a new Book for the Author",
+    description: 'Created a new Book for the Author',
     type: BookDto,
   })
   addBook(
-    @Param("id") authorId: number,
+    @Param('id') authorId: number,
     @Body() createBookDto: CreateBookDto,
   ): Promise<Book> {
     const author = new Author();
@@ -117,9 +117,9 @@ export class AuthorController {
 
   @Put()
   @HttpCode(HttpStatus.CREATED)
-  @ApiOperation({ summary: "Create a new Author if not already exist" })
+  @ApiOperation({ summary: 'Create a new Author if not already exist' })
   @ApiCreatedResponse({
-    description: "Created or Updated an Author",
+    description: 'Created or Updated an Author',
     type: AuthorDto,
   })
   addOrUpdateAuthor(@Body() createAuthorDto: UpdateAuthorDto): Promise<Author> {
@@ -130,27 +130,27 @@ export class AuthorController {
     return this.authorService.save(author);
   }
 
-  @Patch(":id")
+  @Patch(':id')
   @HttpCode(HttpStatus.RESET_CONTENT)
   @ApiOperation({
-    summary: "Updates an existing Author",
+    summary: 'Updates an existing Author',
     parameters: [
       {
-        description: "Unique Id of the Author",
+        description: 'Unique Id of the Author',
         example: 1,
-        in: "path",
-        name: "id",
+        in: 'path',
+        name: 'id',
         required: true,
       },
     ],
   })
   @ApiResponse({
-    description: "Updated Author",
+    description: 'Updated Author',
     status: HttpStatus.RESET_CONTENT,
     type: AuthorDto,
   })
   updateAuthor(
-    @Param("id") id: number,
+    @Param('id') id: number,
     @Body() updateAuthorDto: UpdateAuthorDto,
   ): Promise<Author> {
     const author = new Author();
@@ -159,53 +159,53 @@ export class AuthorController {
     return this.authorService.update(id, author);
   }
 
-  @Delete(":id")
+  @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({
-    summary: "Delete an Author by Id",
+    summary: 'Delete an Author by Id',
     parameters: [
       {
-        description: "Unique Id of the Author",
-        in: "path",
-        name: "id",
+        description: 'Unique Id of the Author',
+        in: 'path',
+        name: 'id',
         required: true,
       },
     ],
   })
   @ApiNoContentResponse({
-    description: "Deleted existing Author",
+    description: 'Deleted existing Author',
     type: Boolean,
   })
-  deleteAuthor(@Param("id") id: number): Promise<void> {
+  deleteAuthor(@Param('id') id: number): Promise<void> {
     return this.authorService.delete(id);
   }
 
-  @Delete(":id/books/:bookId")
+  @Delete(':id/books/:bookId')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({
-    summary: "Remove a Book from an Author",
+    summary: 'Remove a Book from an Author',
     parameters: [
       {
-        description: "Unique Id of the Author",
-        in: "path",
-        name: "id",
+        description: 'Unique Id of the Author',
+        in: 'path',
+        name: 'id',
         required: true,
       },
       {
-        description: "Unique Id of the Book",
-        in: "path",
-        name: "id",
+        description: 'Unique Id of the Book',
+        in: 'path',
+        name: 'id',
         required: true,
       },
     ],
   })
   @ApiNoContentResponse({
-    description: "Removed Book from the Author",
+    description: 'Removed Book from the Author',
     type: Boolean,
   })
   async removeBook(
-    @Param("id") id: number,
-    @Param("bookId") bookId: number,
+    @Param('id') id: number,
+    @Param('bookId') bookId: number,
   ): Promise<void> {
     const author = await this.authorService.findOne(id);
     const books = (await author.books).filter((book) => book.id !== bookId);

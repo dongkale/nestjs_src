@@ -1,7 +1,7 @@
-import { Author } from "@entities/author.entity";
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { Author } from '@/entities/author.entity';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AuthorService {
@@ -18,7 +18,7 @@ export class AuthorService {
     return this.authorRepository.find();
   }
 
-  findOne(id: number): Promise<Author> {
+  findOne(id: number) {
     return this.authorRepository.findOneBy({ id });
   }
 
