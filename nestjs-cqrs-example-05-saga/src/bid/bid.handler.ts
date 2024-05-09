@@ -7,14 +7,16 @@ import { AuctionRepository } from '../auction/auction.repository';
 export class BidHandler implements ICommandHandler<BidCommand> {
   constructor(
     private readonly auctionRepository: AuctionRepository,
-    private readonly publisher: EventPublisher) {}
+    private readonly publisher: EventPublisher,
+  ) {}
 
   async execute(command: BidCommand) {
-
-    const { bidTransactionGUID , bidAmount, auctionID, bidUserGUID } = command;
+    const { bidTransactionGUID, bidAmount, auctionID, bidUserGUID } = command;
 
     // tslint:disable-next-line:no-console
-    console.log(`Make a bid on ${auctionID}, with userID: ${bidUserGUID} amount: ${bidAmount}`);
+    console.log(
+      `Make a bid on ${auctionID}, with userID: ${bidUserGUID} amount: ${bidAmount}`,
+    );
 
     // to associate model ( Bid ) and publisher, we use code bellow
     const auction = this.publisher.mergeObjectContext(
@@ -24,5 +26,4 @@ export class BidHandler implements ICommandHandler<BidCommand> {
     auction.bidOnAuction(bidTransactionGUID, bidUserGUID, bidAmount);
     auction.commit();
   }
-
 }

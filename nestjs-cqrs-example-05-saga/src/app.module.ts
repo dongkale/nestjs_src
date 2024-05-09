@@ -11,9 +11,7 @@ import { AuctionSaga } from './auction/auction.saga';
 import { GetAuctionHandler } from './auction/auction.query';
 
 @Module({
-  imports: [
-    CqrsModule,
-  ],
+  imports: [CqrsModule],
   controllers: [AppController],
   providers: [
     MailHandler,

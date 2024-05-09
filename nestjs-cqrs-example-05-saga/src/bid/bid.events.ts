@@ -13,7 +13,7 @@ export class BidEventSuccess {
     public readonly bidTransactionGUID: string,
     public readonly auctionID: string,
     public readonly bidAmount: number,
-    public readonly user: { email: string, id: string },
+    public readonly user: { email: string; id: string },
   ) {}
 }
 

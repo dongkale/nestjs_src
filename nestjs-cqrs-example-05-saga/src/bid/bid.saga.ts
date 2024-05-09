@@ -10,23 +10,26 @@ import { PostponeAuctionCommand } from '../auction/auction.command';
 
 @Injectable()
 export class BidSaga {
-
   @Saga()
   createBid = (events$: Observable<any>): Observable<ICommand> => {
     return events$.pipe(
       ofType(BidEvent),
       map((event: BidEvent) => {
-        return new BidCommand(event.bidTransactionGUID, event.bidUser, event.auctionID, event.bidAmount);
+        return new BidCommand(
+          event.bidTransactionGUID,
+          event.bidUser,
+          event.auctionID,
+          event.bidAmount,
+        );
       }),
     );
-  }
+  };
 
   @Saga()
   createBidSuccess = (events$: Observable<any>): Observable<ICommand> => {
     return events$.pipe(
       ofType(BidEventSuccess),
       flatMap((event: BidEventSuccess) => {
-
         // We are always passing transaction GUID
         // event.bidTransactionGUID
 
@@ -40,5 +43,5 @@ export class BidSaga {
         ];
       }),
     );
-  }
+  };
 }
