@@ -37,7 +37,7 @@ export class RepositoryCacheMemory<
       // TODO: handle the case of not finding the item to update
     }
     for (const key in data) {
-      this.items[index][key] = data[key];
+      this.items[index][key] = data[key]!;
     }
     return this.items[index];
   }

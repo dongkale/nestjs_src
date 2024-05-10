@@ -1,20 +1,20 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger'
 
 export class CreatePostDto {
-  id?: number;
+  id?: number
 
   @ApiProperty({
-    example: 'Post title',
+    example: 'Post title'
   })
-  title: string;
+  title?: string
 
   @ApiProperty({
-    example: 'Post content',
+    example: 'Post content'
   })
-  content: string;
+  content?: string
 
   @ApiProperty({
-    example: 1,
+    example: 1
   })
-  userId: number;
+  userId?: number
 }

@@ -1,22 +1,53 @@
 {
-  "compilerOptions": {    
-    "module": "CommonJS",
+  "compilerOptions": {
+    "module": "commonjs",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ESNext",
+    "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "moduleResolution": "Node",
-    "strict": true
-  },
-  "extends": "./tsconfig.paths.json",
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@module/*": [
+        "src/modules/*"
+      ],
+      "@module": [
+        "src/modules"
+      ],
+      "@common/*": [
+        "src/common/*"
+      ],
+      "@common": [
+        "src/common"
+      ],
+      "@config/*": [
+        "src/config/*"
+      ],
+      "@config": [
+        "src/config"
+      ],
+      "@libs/auth": [
+        "libs/auth/src"
+      ],
+      "@libs/auth/*": [
+        "libs/auth/src/*"
+      ],
+      "@libs/ethers": [
+        "libs/ethers/src"
+      ],
+      "@libs/ethers/*": [
+        "libs/ethers/src/*"
+      ]
+    }
+  }
 }

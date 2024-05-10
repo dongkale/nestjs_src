@@ -6,15 +6,15 @@ export class CreateUserDto {
   @ApiProperty({
     example: 'John Doe',
   })
-  name: string;
+  name?: string;
 
   @ApiProperty({
     example: 'johndoe@example.com',
   })
-  email: string;
+  email?: string;
 
   @ApiProperty({
     example: '123456',
   })
-  password: string;
+  password?: string;
 }

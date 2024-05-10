@@ -1,5 +1,5 @@
 {
-  "compilerOptions": {    
+  "compilerOptions": {
     "module": "CommonJS",
     "declaration": true,
     "removeComments": true,
@@ -14,7 +14,8 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "moduleResolution": "Node",
-    "strict": true
+    "strict": true,
+    "strictPropertyInitialization": false
   },
   "extends": "./tsconfig.paths.json",
   "include": ["src/**/*"],
