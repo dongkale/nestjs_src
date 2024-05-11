@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  backend:
+    # image: nestjs:1
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: production
+    volumes:
+      - ./:/usr/src/app
+    env_file:
+      - .env  
+    # command: yarn start:dev
+    depends_on:
+      - redis
+      - postgres
+    ports:
+      - 8899:8000
+  
+  redis:
+    image: redis:7.0-alpine
+    volumes:
+      - redis:/data
+    
+  postgres:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres-compose:/var/lib/postgresql/data
+    
+volumes:
+  redis:
+    driver: local 
+  postgres-compose:
