@@ -1,0 +1,27 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "mikestead.dotenv",
+    "aaron-bond.better-comments",
+    "fabiospampinato.vscode-todo-plus",
+    "DavidAnson.vscode-markdownlint",
+    "eamodio.gitlens",
+    "ms-vsliveshare.vsliveshare",
+    "Postman.postman-for-vscode",
+    "ms-azuretools.vscode-docker",
+    "ms-vscode-remote.remote-containers",
+    "christian-kohler.npm-intellisense",
+    "vscodevim.vim",
+    "GitHub.vscode-pull-request-github",
+    "hediet.vscode-drawio",
+    "Orta.vscode-jest",
+    "firsttris.vscode-jest-runner",
+    "SonarSource.sonarlint-vscode",
+    "GitHub.copilot",
+    "jasonnutter.search-node-modules",
+    "vscode-icons-team.vscode-icons",
+    "kisstkondoros.vscode-codemetrics"
+  ]
+}
