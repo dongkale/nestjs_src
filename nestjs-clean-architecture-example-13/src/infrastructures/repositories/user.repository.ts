@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserM } from 'src/domains/model/user';
-import { UserRepository } from 'src/domains/repositories/user.repository';
-import { CreateUserDto } from 'src/presentations/user/dto/create-user.dto';
+import { UserModel } from '@/domains/model/user';
+import { UserRepository } from '@/domains/repositories/user.repository';
+import { CreateUserDto } from '@/presentations/user/dto/create-user.dto';
 import { Repository } from 'typeorm';
-import { User } from '../entities/user.entity';
+import { User } from '@/infrastructures/entities/user.entity';
 
 @Injectable()
 export class UserRepositoryOrm implements UserRepository {
@@ -13,12 +13,12 @@ export class UserRepositoryOrm implements UserRepository {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async getAllUsers(): Promise<UserM[]> {
+  async getAllUsers(): Promise<UserModel[]> {
     const users = await this.userRepository.find();
     return users.map((user) => this.toUser(user));
   }
 
-  async createUser(createUserDto: CreateUserDto): Promise<UserM> {
+  async createUser(createUserDto: CreateUserDto): Promise<UserModel> {
     const user = new User();
     user.email = createUserDto.email;
     user.name = createUserDto.name;
@@ -26,8 +26,8 @@ export class UserRepositoryOrm implements UserRepository {
     return this.userRepository.save(user);
   }
 
-  private toUser(userEntity: User): UserM {
-    const user: UserM = new UserM();
+  private toUser(userEntity: User): UserModel {
+    const user: UserModel = new UserModel();
 
     user.id = userEntity.id;
     user.email = userEntity.email;

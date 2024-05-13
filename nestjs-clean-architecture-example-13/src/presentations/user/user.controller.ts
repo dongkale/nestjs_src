@@ -1,9 +1,9 @@
 import * as bcrypt from 'bcryptjs';
 import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
-import { GetAllUserUseCases } from 'src/applications/use-cases/getAllUsers.usecase';
-import { CreateUserUseCases } from 'src/applications/use-cases/createUser.usecase';
-import { UseCaseProxy } from 'src/infrastructures/usecase-proxy/usecase-proxy';
-import { UsecaseProxyModule } from 'src/infrastructures/usecase-proxy/usecase-proxy.module';
+import { GetAllUserUseCases } from '@/applications/use-cases/getAllUsers.usecase';
+import { CreateUserUseCases } from '@/applications/use-cases/createUser.usecase';
+import { UseCaseProxy } from '@/infrastructures/usecase-proxy/usecase-proxy';
+import { UsecaseProxyModule } from '@/infrastructures/usecase-proxy/usecase-proxy.module';
 import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')

@@ -1,9 +1,9 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { CreateUserUseCases } from 'src/applications/use-cases/createUser.usecase';
-import { GetAllUserUseCases } from 'src/applications/use-cases/getAllUsers.usecase';
-import { EnvironmentConfigModule } from '../config/environment-config/environment-config.module';
-import { RepositoriesModule } from '../repositories/repositories.module';
-import { UserRepositoryOrm } from '../repositories/user.repository';
+import { CreateUserUseCases } from '@/applications/use-cases/createUser.usecase';
+import { GetAllUserUseCases } from '@/applications/use-cases/getAllUsers.usecase';
+import { EnvironmentConfigModule } from '@/infrastructures/config/environment-config/environment-config.module';
+import { RepositoriesModule } from '@/infrastructures/repositories/repositories.module';
+import { UserRepositoryOrm } from '@/infrastructures/repositories/user.repository';
 import { UseCaseProxy } from './usecase-proxy';
 
 @Module({
