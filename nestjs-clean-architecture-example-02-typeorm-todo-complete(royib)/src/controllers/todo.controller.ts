@@ -4,7 +4,7 @@ import {
   UpdateTodoDto,
   CreateTodoResponseDto,
 } from '@/core/dtos';
-import { TodoUseCases } from '../use-cases/todo';
+import { TodoUseCases } from '@/use-cases/todo';
 import { TodoFactoryService } from '@/use-cases/todo/todo-factory.service';
 
 @Controller('api/todo')
