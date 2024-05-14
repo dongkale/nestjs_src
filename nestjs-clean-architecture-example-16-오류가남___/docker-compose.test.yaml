@@ -1,0 +1,35 @@
+version: '3.2'
+
+services:
+
+  postgresql_test:
+    build: docker/postgres/.
+    env_file:
+      - env/test.pg.env
+    ports:
+      - '5455:5432'
+    networks:
+      - iposter_network_test
+    volumes:
+      - pg_data_test:/var/lib/postgresql/data
+
+  minio_test:
+    image: minio/minio
+    entrypoint: sh
+    command: -c 'mkdir -p /export/images && minio server /export'
+    env_file:
+      - env/test.minio.env
+    ports:
+      - '9001:9000'
+    networks:
+      - iposter_network_test
+    volumes:
+      - minio_data_test:/var/lib/minio/data
+
+volumes:
+  pg_data_test:
+  minio_data_test:
+
+networks:
+  iposter_network_test:
+    driver: bridge

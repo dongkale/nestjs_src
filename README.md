@@ -42,3 +42,10 @@ nestjs-clean-architecture-example-03-typeorm-complete
 
 -- nestjs clean-architecture
 nestjs-clean-architecture-example-02-typeorm-complete
+
+
+
+
+-- nestjs clean-architecture : .env 화일의 JWT key  와 config 값이 분산된 코드
+
+nestjs-clean-architecture-example-14-typeorm-jwt-complete

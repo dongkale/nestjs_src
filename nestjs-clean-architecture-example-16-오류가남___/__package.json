@@ -1,0 +1,100 @@
+{
+  "name": "typescript-clean-architecture",
+  "version": "1.0.0",
+  "description": "It is my attempt to create Clean Architecture based application in Typescript",
+  "main": "index.js",
+  "scripts": {
+    "build": "./scripts/build.sh",
+    "copy:local-env": "cp ./env/local.app.env ./dist/.env",
+    "start": "node ./dist/Main.js",
+    "start:local": "npm run copy:local-env && cd ./dist && node -r dotenv/config Main.js",
+    "test": "jest --config jest.json",
+    "test:cov": "jest --config jest.json --coverage",
+    "lib:check": "ncu",
+    "lib:upgrade": "ncu -u && npm install",
+    "lint": "eslint '{src,test}/**/*.ts'",
+    "lint:fix": "eslint --fix '{src,test}/**/*.ts'",
+    "migration:create": "node --require ts-node/register ./node_modules/typeorm/cli.js migration:create -n",
+    "migration:revert": "node --require ts-node/register ./node_modules/typeorm/cli.js migration:revert"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pvarentsov/typescript-clean-architecture.git"
+  },
+  "keywords": [
+    "clean-architecture",
+    "typescript"
+  ],
+  "author": "Pavel Varentsov (varentsovpavel@gmail.com)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  },
+  "bugs": {
+    "url": "https://github.com/pvarentsov/typescript-clean-architecture/issues"
+  },
+  "homepage": "https://github.com/pvarentsov/typescript-clean-architecture#readme",
+  "devDependencies": {
+    "@nestjs/testing": "8.0.6",
+    "@types/bcryptjs": "2.4.2",
+    "@types/busboy": "1.5.0",
+    "@types/express": "4.17.17",
+    "@types/jest": "29.4.0",
+    "@types/minio": "7.0.15",
+    "@types/passport-jwt": "3.0.8",
+    "@types/passport-local": "1.0.35",
+    "@types/supertest": "2.0.12",
+    "@types/uuid": "9.0.1",
+    "@typescript-eslint/eslint-plugin": "5.53.0",
+    "@typescript-eslint/parser": "5.53.0",
+    "eslint": "8.34.0",
+    "jest": "29.4.3",
+    "jest-junit": "15.0.0",
+    "jest-sonar-reporter": "2.0.0",
+    "jsonwebtoken": "9.0.0",
+    "npm-check-updates": "16.7.9",
+    "supertest": "6.3.3",
+    "ts-jest": "29.0.5",
+    "ts-node": "10.9.1",
+    "typescript": "4.9.5"
+  },
+  "dependencies": {
+    "@nestjs/common": "8.4.7",
+    "@nestjs/core": "8.0.6",
+    "@nestjs/cqrs": "8.0.0",
+    "@nestjs/jwt": "8.0.0",
+    "@nestjs/passport": "8.2.2",
+    "@nestjs/platform-express": "8.0.6",
+    "@nestjs/swagger": "5.0.9",
+    "@nestjs/typeorm": "8.0.2",
+    "bcryptjs": "2.4.3",
+    "busboy": "1.6.0",
+    "class-transformer": "0.5.1",
+    "class-validator": "0.14.0",
+    "dotenv": "16.0.3",
+    "env-var": "7.3.0",
+    "minio": "7.0.32",
+    "module-alias": "2.2.2",
+    "passport": "0.6.0",
+    "passport-jwt": "4.0.1",
+    "passport-local": "1.0.0",
+    "pg": "8.9.0",
+    "reflect-metadata": "0.1.13",
+    "rxjs": "7.8.0",
+    "swagger-ui-express": "4.6.1",
+    "typeorm": "0.2.37",
+    "typeorm-transactional-cls-hooked": "0.1.21",
+    "uuid": "9.0.0"
+  },
+  "jest-junit": {
+    "outputDirectory": ".coverage"
+  },
+  "jestSonar": {
+    "sonar56x": true
+  },
+  "_moduleAliases": {
+    "@core": "core",
+    "@infrastructure": "infrastructure",
+    "@application": "application"
+  }
+}
