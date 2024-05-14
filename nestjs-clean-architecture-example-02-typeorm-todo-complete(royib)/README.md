@@ -117,6 +117,7 @@ Inspiration, code snippets, etc.
 
 ## Document
 
+- https://medium.com/better-programming/clean-node-js-architecture-with-nestjs-and-typescript-34b9398d790f
 - https://roystack.home.blog/2019/10/22/node-clean-architecture-deep-dive/
 - https://betterprogramming.pub/node-clean-architecture-deep-dive-ab68e523554b
 
