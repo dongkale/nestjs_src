@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { DataServicesModule } from '@/services/data-services/data-services.module';
-import { TodoFactoryService } from './todo-factory.service';
-import { TodoUseCases } from './todo.use-case';
+import { TodoFactoryService } from '@/use-cases/todo/todo-factory.service';
+import { TodoUseCases } from '@/use-cases/todo/todo.use-case';
 
 @Module({
   imports: [DataServicesModule],

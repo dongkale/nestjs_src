@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
 // import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Todo } from './model';
+import { Todo } from '@/frameworks/data-services/typeorm/model';
 import { IDataServices } from '@/core';
 import { TypeOrmDataServices } from '@/frameworks/data-services/typeorm/typeorm-data-services.service';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { DATA_BASE_CONFIGURATION } from '@/configuration';
-// import dotenv from 'dotenv';
 
 @Module({
   imports: [
