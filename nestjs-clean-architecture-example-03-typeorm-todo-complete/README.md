@@ -92,6 +92,10 @@ Nest is [MIT licensed](LICENSE).
 - https://medium.com/@jonathan.pretre91/clean-architecture-with-nestjs-e089cef65045
 - https://github.com/jonathanPretre/clean-architecture-nestjs.git
 
+- winstone log
+
+https://j-ho.dev/8/
+
 ## Manual
 
 ```bash
