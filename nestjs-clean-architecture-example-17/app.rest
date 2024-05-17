@@ -1,0 +1,59 @@
+###
+GET http://localhost:3000/api/health-check/live
+
+###
+GET http://localhost:3000/api/health-check/ready
+
+###
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "jszero",
+  "email": "john.smith.zero@xyz.com",
+  "password": "P@ssw0rd",
+  "fullname": "John Smith"
+}
+
+###
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "jdzero",
+  "email": "joe.doe.zero@xyz.com",
+  "password": "P@ssw0rd",
+  "fullname": "Joe Doe"
+}
+
+###
+POST http://localhost:3000/api/users
+Content-Type: application/json
+Accept-Language: pt-BR
+
+{
+  "name": "",
+  "email": "wrong.email.com",
+  "password": "",
+  "fullName": null
+}
+
+###
+POST http://localhost:3000/api/users
+Content-Type: application/json
+Accept-Language: en-US
+
+{
+  "name": "",
+  "email": "wrong.email.com",
+  "password": "",
+  "fullName": null
+}
+
+###
+GET http://localhost:3000/api/users/by-name?name=jszero
+
+
+###
+GET http://localhost:3000/api/users/by-name?name=unknown
+

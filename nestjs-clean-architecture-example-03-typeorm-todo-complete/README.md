@@ -111,4 +111,6 @@ https://j-ho.dev/8/
     "id":1,
     "isDone":true
 }
+
+4. [GET] localhost:3000/api_v1/todo/todo?id=1
 ```

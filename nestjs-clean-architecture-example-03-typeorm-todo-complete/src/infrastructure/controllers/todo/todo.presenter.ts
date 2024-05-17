@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { TodoM } from '@/domain/model/todo';
+import { TodoModel } from '@/domain/model/todo';
 
 export class TodoPresenter {
   @ApiProperty()
@@ -13,7 +13,7 @@ export class TodoPresenter {
   @ApiProperty()
   updatedAt: Date;
 
-  constructor(todo: TodoM) {
+  constructor(todo: TodoModel) {
     this.id = todo.id;
     this.content = todo.content;
     this.isDone = todo.isDone;

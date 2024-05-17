@@ -55,8 +55,9 @@ export class TodoController {
   @ApiResponseType(TodoPresenter, true)
   async updateTodo(@Body() updateTodoDto: UpdateTodoDto) {
     const { id, isDone } = updateTodoDto;
-    await this.updateTodoUsecaseProxy.getInstance().execute(id, isDone);
-    return 'success';
+    const todo = await this.updateTodoUsecaseProxy.getInstance().execute(id, isDone);
+    // return 'success';
+    return new TodoPresenter(todo);
   }
 
   @Delete('todo')
