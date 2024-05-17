@@ -44,10 +44,9 @@ export class UsecasesProxyModule {
           useFactory: (todoRepository: DatabaseTodoRepository) => new UseCaseProxy(new getTodosUseCases(todoRepository)),
         },
         {
-          inject: [LoggerService, DatabaseTodoRepository],
+          inject: [DatabaseTodoRepository],
           provide: UsecasesProxyModule.POST_TODO_USECASES_PROXY,
-          useFactory: (logger: LoggerService, todoRepository: DatabaseTodoRepository) =>
-            new UseCaseProxy(new addTodoUseCases(logger, todoRepository)),
+          useFactory: (todoRepository: DatabaseTodoRepository) => new UseCaseProxy(new addTodoUseCases(todoRepository)),
         },
         {
           inject: [LoggerService, DatabaseTodoRepository],
