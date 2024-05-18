@@ -12,19 +12,14 @@ export class DatabaseTodoRepository implements TodoRepository {
     private readonly todoEntityRepository: Repository<Todo>,
   ) {}
 
-  async updateContent(id: number, isDone: boolean): Promise<void> {
-    await this.todoEntityRepository.update(
-      {
-        id: id,
-      },
-      { isDone: isDone },
-    );
+  async updateById(id: number, isDone: boolean): Promise<void> {
+    await this.todoEntityRepository.update({ id: id }, { isDone: isDone });
   }
   async insert(todo: TodoModel): Promise<TodoModel> {
     const todoEntity = this.toTodoEntity(todo);
     const result = await this.todoEntityRepository.insert(todoEntity);
     return this.toTodo(result.generatedMaps[0] as Todo);
-    console.log(result.generatedMaps);
+    // console.log(result.generatedMaps);
   }
   async findAll(): Promise<TodoModel[]> {
     const todosEntity = await this.todoEntityRepository.find();

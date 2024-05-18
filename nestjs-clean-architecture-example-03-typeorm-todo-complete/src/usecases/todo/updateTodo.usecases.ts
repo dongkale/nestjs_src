@@ -11,8 +11,8 @@ export class updateTodoUseCases {
   ) {}
 
   async execute(id: number, isDone: boolean): Promise<TodoModel> {
-    await this.todoRepository.updateContent(id, isDone);
-    this.logger.log('updateTodoUseCases execute', `Todo ${id} have been updated`);
+    await this.todoRepository.updateById(id, isDone);
+    this.logger.log(`updateTodoUseCases execute: Todo ${id} have been updated`);
 
     return await this.todoRepository.findById(id);
   }

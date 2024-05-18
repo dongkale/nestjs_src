@@ -3,6 +3,8 @@ import { AppModule } from '@/app.module';
 import * as figlet from 'figlet';
 import * as dotenv from 'dotenv';
 
+import { winstonLogger as WinstonLogger } from '@/frameworks/log-service/winston-logger.service';
+
 async function bootstrap() {
   dotenv.config();
 
@@ -15,7 +17,11 @@ async function bootstrap() {
     })
   );
 
-  const app = await NestFactory.create(AppModule);
+  // const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    cors: true,
+    logger: WinstonLogger('NESTJS'),
+  });
 
   await app.listen(process.env.PORT ?? 3000);
 

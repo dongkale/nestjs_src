@@ -16,7 +16,7 @@ export class addTodoUseCases {
     todo.content = content;
     todo.isDone = false;
     const result = await this.todoRepository.insert(todo);
-    this.logger.log('addTodoUseCases execute: New todo have been inserted');
+    this.logger.log(`addTodoUseCases execute: New todo have been inserted`);
     return result;
   }
 }

@@ -11,6 +11,6 @@ export class deleteTodoUseCases {
 
   async execute(id: number): Promise<void> {
     await this.todoRepository.deleteById(id);
-    this.logger.log('deleteTodoUseCases execute', `Todo ${id} have been deleted`);
+    this.logger.log(`deleteTodoUseCases execute: Todo ${id} have been deleted`);
   }
 }

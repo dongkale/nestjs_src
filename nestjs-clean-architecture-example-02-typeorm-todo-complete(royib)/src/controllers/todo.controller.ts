@@ -1,4 +1,12 @@
-import { Controller, Get, Param, Post, Body, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Put,
+  Logger,
+} from '@nestjs/common';
 import {
   CreateTodoDto,
   UpdateTodoDto,
@@ -9,6 +17,8 @@ import { TodoFactoryService } from '@/use-cases/todo/todo-factory.service';
 
 @Controller('api/todo')
 export class TodoController {
+  private readonly logger = new Logger(TodoController.name);
+
   constructor(
     private todoUseCases: TodoUseCases,
     private todoFactoryService: TodoFactoryService
@@ -16,7 +26,11 @@ export class TodoController {
 
   @Get()
   async getAll() {
-    return this.todoUseCases.getAllTodo();
+    const todo = await this.todoUseCases.getAllTodo();
+
+    this.logger.log(JSON.stringify(todo, null, 2));
+
+    return todo;
   }
 
   @Get(':id')
