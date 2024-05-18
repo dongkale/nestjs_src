@@ -1,0 +1,10 @@
+{
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "cSpell.words": ["dompurify"],
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
