@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: api
+    build:
+      context: ./
+      dockerfile: ./docker/development.Dockerfile
+    environment:
+      EXAMPLE: example
+    command: ['npm', 'run', 'typeorm migration:run -- -d src/config/db/migrations']
+    depends_on:
+      - db
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/usr/src
+      - /usr/src/node_modules
+  db:
+    container_name: db
+    image: arm64v8/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - '3306:3306'
+    volumes:
+      - my-datavolume:/var/lib/mysql
+volumes:
+  my-datavolume:

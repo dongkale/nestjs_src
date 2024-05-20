@@ -1,0 +1,14 @@
+
+POST http://{{host}}/api/{{version}}/reports HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+  "make": "Ferrary",
+  "model": "WUIG78",
+  "year": 2022,
+  "mileage": 100,
+  "lng": 45,
+  "lat": 45,
+  "price": 324
+}

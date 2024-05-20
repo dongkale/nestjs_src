@@ -1,0 +1,20 @@
+{
+    // Configurar variables de entorno para rest-client
+    "rest-client.environmentVariables": {
+        "$shared": {
+            "version": "v1",
+            "contentType": "application/json"
+        },
+        "local": {
+            "host": "localhost:3000",
+           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ5YXNuaWVsQGdtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2OTIwMTk2NzEsImV4cCI6MTY5MjYyNDQ3MX0.Sfg8CUqwV_RNAXJ7mMjavvoszwNOaePbHQjkD6kyXzk",
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ5YXNuaWVsQGdtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2OTIwMTk2NzEsImV4cCI6MTY5NDYxMTY3MX0.YAYaZHg3Z20Eg_zYDl-nMOMrHMbD42J_-SPEIMkhyrU"
+        },
+        "production": {
+            "host": "example.com",
+            "token": "",
+            "refreshToken": "",
+        }
+    }
+}
+

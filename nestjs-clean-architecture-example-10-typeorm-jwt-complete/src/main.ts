@@ -8,7 +8,7 @@ import * as figlet from 'figlet';
 async function bootstrap() {
   console.log(
     figlet.textSync('NestJS Server', {
-      font: 'Cyberlarge', //Ghost , Standard , Graffiti , Dancing Font , Slant , Pagga
+      font: 'Cyberlarge',
       horizontalLayout: 'default',
       verticalLayout: 'default',
       width: 200,

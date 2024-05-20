@@ -3,11 +3,11 @@ import { AppModule } from '@/app.module';
 import * as figlet from 'figlet';
 import * as dotenv from 'dotenv';
 
-import { winstonLogger as WinstonLogger } from '@/frameworks/log-service/winston-logger.service';
+import { winstonLogger } from '@/frameworks/log-service/winston-logger.service';
+
+dotenv.config();
 
 async function bootstrap() {
-  dotenv.config();
-
   console.log(
     figlet.textSync('NestJS Server', {
       font: 'Cyberlarge',
@@ -17,11 +17,9 @@ async function bootstrap() {
     })
   );
 
-  // const app = await NestFactory.create(AppModule);
-  const app = await NestFactory.create(AppModule, {
-    cors: true,
-    logger: WinstonLogger('NESTJS'),
-  });
+  const app = await NestFactory.create(AppModule);
+
+  app.useLogger(winstonLogger(process.env.APP_NAME ?? 'defaultAppName'));
 
   await app.listen(process.env.PORT ?? 3000);
 

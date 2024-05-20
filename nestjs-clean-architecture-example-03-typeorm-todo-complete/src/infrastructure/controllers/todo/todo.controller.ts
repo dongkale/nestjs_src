@@ -16,7 +16,7 @@ import { addTodoUseCases } from '@/usecases/todo/addTodo.usecases';
 @ApiResponse({ status: 500, description: 'Internal error' })
 @ApiExtraModels(TodoPresenter)
 export class TodoController {
-  private readonly logger = new Logger(TodoController.name);
+  private readonly logger = new Logger(TodoController.name, { timestamp: true });
 
   constructor(
     @Inject(UsecasesProxyModule.GET_TODO_USECASES_PROXY)

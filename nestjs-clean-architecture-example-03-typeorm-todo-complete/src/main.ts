@@ -10,7 +10,8 @@ import { ResponseFormat, ResponseInterceptor } from '@/infrastructure/common/int
 import * as figlet from 'figlet';
 import * as dotenv from 'dotenv';
 
-import { winstonLogger as WinstonLogger } from '@/infrastructure/logger/winston-logger.service';
+//import { winstonLogger as WinstonLogger } from '@/infrastructure/logger/winston-logger.service';
+import { winstonLogger } from '@/infrastructure/logger/winston-logger.service';
 
 dotenv.config();
 
@@ -26,10 +27,14 @@ async function bootstrap() {
   );
 
   const env = process.env.NODE_ENV;
-  const app = await NestFactory.create(AppModule, {
-    cors: true,
-    logger: WinstonLogger('NESTJS'),
-  });
+  const app = await NestFactory.create(AppModule);
+  // {
+  //   cors: true,
+  //   logger: WinstonLoggerService('NESTJS'),
+  // });
+
+  app.useLogger(winstonLogger(process.env.APP_NAME));
+  // app.useLogger(app.get(WinstonLoggerService));
 
   app.use(cookieParser());
 
