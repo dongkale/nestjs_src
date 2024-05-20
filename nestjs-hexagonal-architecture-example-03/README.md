@@ -75,5 +75,5 @@ Nest is [MIT licensed](LICENSE).
 
 ## Document 
 
-git clone https://github.com/YaroslavTaranenko/nest-hexagonal.git nestjs-hexagonal-architecture-example-03
+- https://github.com/YaroslavTaranenko/nest-hexagonal.git
 - https://velog.io/@whythis/%EC%BD%94%EB%93%9C%EB%B6%84%EC%84%9D-Hexagonal-Architecture-in-Nestjs
