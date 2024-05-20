@@ -11,7 +11,7 @@ import { TicketService } from './domain/ports/ticket.service';
 
   providers: [
     TicketService,
-    TicketApiService,
+    // TicketApiService,
     {
       provide: TicketRepository,
       useClass: TicketInMemory, // can add condition on ENV, inject mock impl for unit testing
