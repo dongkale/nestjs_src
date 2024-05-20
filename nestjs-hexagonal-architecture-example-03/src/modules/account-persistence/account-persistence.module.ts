@@ -1,25 +1,29 @@
 import { Global, Module } from '@nestjs/common';
-import { AccountPersistenceAdatper } from './account-persistence.adatper';
+import { AccountPersistenceAdapter } from './account-persistence.adapter';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountOrmEntity } from './account.orm-entity';
 import { ActivityOrmEntity } from './activity.orm-entity';
 import { SendMoneyUseCaseSymbol } from '../../domains/ports/in/send-money.use-case';
 import { SendMoneyService } from '../../domains/services/send-money.service';
+import { LoadAccountPort } from '@/domains/ports/out/load-account.port';
+import { UpdateAccountStatePort } from '@/domains/ports/out/update-account-state.port';
 
 @Global()
 @Module({
   imports: [TypeOrmModule.forFeature([AccountOrmEntity, ActivityOrmEntity])],
   providers: [
-    AccountPersistenceAdatper,
+    AccountPersistenceAdapter,
     {
       provide: SendMoneyUseCaseSymbol,
-      useFactory: (accountPersistenceAdatper) => {
+      useFactory: (
+        accountPersistenceAdapter: UpdateAccountStatePort | LoadAccountPort,
+      ) => {
         return new SendMoneyService(
-          accountPersistenceAdatper,
-          accountPersistenceAdatper,
+          accountPersistenceAdapter as UpdateAccountStatePort,
+          accountPersistenceAdapter as LoadAccountPort,
         );
       },
-      inject: [AccountPersistenceAdatper],
+      inject: [AccountPersistenceAdapter],
     },
   ],
   exports: [SendMoneyUseCaseSymbol],

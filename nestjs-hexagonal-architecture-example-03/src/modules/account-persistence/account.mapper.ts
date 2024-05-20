@@ -10,9 +10,8 @@ export class AccountMapper {
     account: AccountOrmEntity,
     activities: ActivityOrmEntity[],
   ) {
-    const activityWindow: ActivityWindowEntity = this.mapToActivityWindow(
-      activities,
-    );
+    const activityWindow: ActivityWindowEntity =
+      this.mapToActivityWindow(activities);
     const balance = activityWindow.calculateBalance(account.userId);
     return new AccountEntity(account.userId, balance, activityWindow);
   }
@@ -20,7 +19,8 @@ export class AccountMapper {
   static mapToActivityWindow(
     activities: ActivityOrmEntity[],
   ): ActivityWindowEntity {
-    const activityWindowEntity: ActivityWindowEntity = new ActivityWindowEntity();
+    const activityWindowEntity: ActivityWindowEntity =
+      new ActivityWindowEntity();
     activities.forEach((activity: ActivityOrmEntity) => {
       const activityEntity: ActivityEntity = new ActivityEntity(
         activity.ownerAccountId,
@@ -42,7 +42,7 @@ export class AccountMapper {
     activityOrmEntity.targetAccountId = activity.targetAccountId;
     activityOrmEntity.timestamp = activity.timestamp.getTime();
     activityOrmEntity.amount = activity.money.amount.toNumber();
-    if(activity.id !== null){
+    if (activity.id !== null) {
       activityOrmEntity.id = activity.id;
     }
     return activityOrmEntity;

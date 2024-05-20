@@ -46,13 +46,13 @@ export class AccountEntity {
     this._activityWindow.addActivity(withdrawal);
     return true;
   }
-  public deposite(money: MoneyEntity, sourceAccountId: AccountId): boolean{
+  public deposite(money: MoneyEntity, sourceAccountId: AccountId): boolean {
     const deposite = new ActivityEntity(
       this._id,
       sourceAccountId,
       this._id,
       new Date(),
-      money
+      money,
     );
     this._activityWindow.addActivity(deposite);
     return true;

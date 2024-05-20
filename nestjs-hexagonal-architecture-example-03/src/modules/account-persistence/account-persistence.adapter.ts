@@ -13,8 +13,9 @@ import { AccountMapper } from './account.mapper';
 import { ActivityEntity } from '../../domains/entities/activity.entity';
 
 @Injectable()
-export class AccountPersistenceAdatper
-  implements LoadAccountPort, UpdateAccountStatePort {
+export class AccountPersistenceAdapter
+  implements LoadAccountPort, UpdateAccountStatePort
+{
   constructor(
     @InjectRepository(AccountOrmEntity)
     private readonly accountRepository: Repository<AccountOrmEntity>,
@@ -23,15 +24,17 @@ export class AccountPersistenceAdatper
   ) {}
 
   async loadAccount(accountId: AccountId): Promise<AccountEntity> {
-    const account: AccountOrmEntity = await this.accountRepository.findOne({
-      userId: accountId,
-    });
-    if (account) {
+    const account: AccountOrmEntity | null =
+      await this.accountRepository.findOne({
+        where: { userId: accountId },
+      });
+    if (!account) {
       throw new Error('Account not found');
     }
     const activities = await this.activityRepository.find({
-      ownerAccountId: accountId,
+      where: { ownerAccountId: accountId },
     });
+
     return AccountMapper.mapToDomain(account, activities);
   }
   async updateActivities(account: AccountEntity) {
@@ -41,7 +44,6 @@ export class AccountPersistenceAdatper
           AccountMapper.mapToActivityOrmEntity(activity),
         );
       }
-
     });
   }
 }
