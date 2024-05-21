@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Ticket } from 'src/ticket/domain/model/ticket.model';
-import { TicketRepository } from 'src/ticket/domain/ports/ticket.repository';
+import { Ticket } from '@/ticket/domain/model/ticket.model';
+import { TicketRepository } from '@/ticket/domain/ports/ticket.repository';
 
 @Injectable()
 export class TicketInMemory implements TicketRepository {

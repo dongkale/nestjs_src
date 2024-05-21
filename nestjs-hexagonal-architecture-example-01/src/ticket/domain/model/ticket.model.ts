@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto';
+
 export class Ticket {
   private id: string;
   description: string;
@@ -6,6 +7,7 @@ export class Ticket {
   createAt: Date;
   updateAt: Date;
   priority: number;
+
   constructor(description: string, priority: number) {
     this.id = randomUUID();
     this.description = description;
