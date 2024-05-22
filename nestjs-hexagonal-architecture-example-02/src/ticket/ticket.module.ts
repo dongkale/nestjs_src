@@ -1,11 +1,11 @@
-import { Logger, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { TicketController } from './adapters/driving/TicketController';
 import { TicketService } from './domain/inboudPorts/TicketService';
 import { ITicketRepository } from './domain/outboundPorts/ITicketRepository';
 import { TicketInMemory } from './adapters/driven/TicketInMemory';
 
 @Module({
-  imports: [Logger],
+  imports: [],
   controllers: [TicketController],
   providers: [
     TicketService,

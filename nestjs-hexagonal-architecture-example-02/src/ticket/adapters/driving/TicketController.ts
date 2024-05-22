@@ -1,12 +1,10 @@
-import { Body, Controller, Get, Logger, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { TicketService } from '../../domain/inboudPorts/TicketService';
 
 import { TicketCommand } from '../model/TicketCommand';
 
 @Controller('ticket')
 export class TicketController {
-  private readonly logger = new Logger(TicketController.name);
-
   constructor(private ticketService: TicketService) {}
 
   @Get()
@@ -20,8 +18,8 @@ export class TicketController {
       ticketCommand.description,
       ticketCommand.priority,
     );
-    this.logger.debug(ticketCommand);
-    this.logger.debug({ ticker });
+    // this.logger.debug(ticketCommand);
+    // this.logger.debug({ ticker });
     return { ...ticker };
   }
 }
