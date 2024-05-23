@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Ticket } from '../../domain/model/Ticket';
-import { ITicketRepository } from '../../domain/outboundPorts/ITicketRepository';
-import { TicketEntity } from './TicketEntity';
+import { Ticket } from '@/ticket/domain/model/Ticket';
+import { ITicketRepository } from '@/ticket/domain/outboundPorts/ITicketRepository';
+import { TicketEntity } from '@/ticket/adapters/driven/TicketEntity';
 
 /**
  * This is the implementation of output port, to store things in database.
@@ -22,6 +22,9 @@ export class TicketInDatabase implements ITicketRepository {
 
   async findAll(): Promise<Ticket[]> {
     const tickets = await this.repository.find();
+    if (!tickets) {
+      return [];
+    }
 
     return tickets.map((ticket) => {
       return new Ticket(
