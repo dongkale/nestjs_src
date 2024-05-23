@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model RouterData {
+  id String @id
+
+  type RouterTypeData
+
+  networkSwitch SwitchData?
+
+
+  @@map(name: "router")
+}
+
+
+model SwitchData {
+  id String @id
+
+  type SwitchTypeData 
+
+  router RouterData @relation(fields: [routerId], references: [id])
+  routerId String @map("router_id") @unique
+
+  
+  networks NetworkData[]
+
+
+  ipAddress String @unique @map("ip_address")
+  ip IPData @relation(fields: [ipAddress], references: [address])
+
+  @@map(name: "switch")
+}
+
+
+model NetworkData {
+  id Int @id @default(autoincrement())
+
+  switch SwitchData @relation(fields: [switchId], references: [id])
+  switchId String @map("switch_id")
+
+  ipAddress String @unique @map("ip_address")
+  ip IPData @relation(fields: [ipAddress], references: [address])
+
+  name String
+
+  cidr Int
+
+  @@map(name: "network")
+}
+
+model IPData {
+  address String @unique
+  protocol ProtocolData
+
+  network NetworkData? 
+  switch SwitchData?
+
+  @@map(name: "ip")
+}
+
+
+enum ProtocolData {
+  IPV4
+  IPV6
+  @@map(name: "protocol")
+}
+
+enum RouterTypeData {
+  EDGE
+  CORE
+
+  @@map(name: "router_type")
+}
+
+enum SwitchTypeData {
+  LAYER2
+  LAYER3
+
+  @@map(name: "switch_type")
+}
+
+
+

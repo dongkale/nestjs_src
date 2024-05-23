@@ -1,0 +1,17 @@
+language: node_js
+os:
+  - linux
+dist: xenial
+node_js:
+  - "lts/*"
+  - node
+install:
+  - npm install
+script:
+  - npm test
+  - sonar-scanner
+addons:
+  sonarcloud:
+    organization: nullent1ty-github
+    token:
+      secure: "BGCWux+ESfysSF8BjPDQSACAnBS2NMtAZI0QuoHG4wP4LZ74mxPfQMEWXPgiNpYbb/E3I9+zCGl89VtnYIuZrPv0qRQjRtfN6ByHKFUAHobJg5e45xWHLaVUCG2vXXobtFi5N1FysB5WJTZ6Lv3RzaPYog2KnLp/uvZvK9u6eebaldqr8fz0jIPzPtXewlcwRCUifZEsq126pZCVDb9RBZhd4dFSDq1fLwOv0e9QHHzSfVQ5DdqWkV1GLQoiCrfJDa/YcufTW0Gbef3QyeVA75DXjgppqeMMYDMSddOG3BssRfoYXbTl8BxXn/2WOAmEaKaS3ldGAf2yyLYHbpMKLe4QIFIU5ulXqj+OnwV9aoy3tb+iAILwg5yadRNavoV/t622F+hIhstmw17Re7w/kW7qTNFzXKKQsntdZPejjeKruEBm2hHtprrFy3dpH/alG+Ctbrr0ZrHO2ggGltRVpjW73RR8eLXdri23ddtFC40Z8FB6LruMS75k8CoJ5vpf+n8BDRrRtW+lbH3xUzZACrhMqE5ju2bNwFCntPIA4cx3PF3IvylWthI1JUoE1CJHEmXT6Cw3Qn8piDXG6U9uoOnHQkc31SD8kiSdmZPdpPdRvtqAQ9ChkndsBtwD2vyhHbLiIb3wYRm9fKJMidZjugzcBnqKfiKKjyE/Hj4M2b8="

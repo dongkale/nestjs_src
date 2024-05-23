@@ -1,0 +1,56 @@
+{
+  "name": "hexagonal-architecture-with-ts-04",
+  "version": "0.0.0",
+  "description": "만들면서 배우는 헥사고날 아키텍처 설계와 구현 with Typescript 4장 예제",
+  "engines": {
+    "node": ">= 18.12 <19"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.16",
+    "@types/jest": "~29.2",
+    "@types/node": "~18",
+    "@typescript-eslint/eslint-plugin": "~5.44",
+    "@typescript-eslint/parser": "~5.44",
+    "eslint": "~8.28",
+    "eslint-config-prettier": "~8.5",
+    "eslint-plugin-jest": "~27.1",
+    "jest": "~29.3",
+    "prettier": "~2.8",
+    "prisma": "^4.9.0",
+    "rimraf": "~3.0",
+    "ts-jest": "~29.0",
+    "tsconfig-paths": "^4.1.2",
+    "tsutils": "~3.21",
+    "typescript": "~4.9"
+  },
+  "scripts": {
+    "start": "NODE_ENV=production ts-node-esm --transpile-only -r tsconfig-paths/register src/main.ts",
+    "start:dev": "NODE_ENV=development ts-node-dev --transpile-only --respawn -r tsconfig-paths/register --trace-warnings --trace-uncaught -- ./src/main.ts",
+    "clean": "rimraf coverage build tmp",
+    "prebuild": "npm run lint",
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -w -p tsconfig.json",
+    "build:release": "npm run clean && tsc -p tsconfig.release.json",
+    "lint": "eslint . --ext .ts --ext .mts",
+    "test": "jest --coverage",
+    "prettier": "prettier --config .prettierrc --write .",
+    "test:watch": "jest --watch",
+    "prisma": "npx prisma",
+    "db:generate": "yarn prisma generate",
+    "db:push": "yarn prisma db push",
+    "db:studio": "yarn prisma studio"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@prisma/client": "4.9.0",
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "tslib": "~2.4"
+  },
+  "volta": {
+    "node": "18.12.1"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  }
+}
