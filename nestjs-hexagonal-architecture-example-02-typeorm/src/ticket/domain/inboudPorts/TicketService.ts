@@ -13,20 +13,45 @@ export class TicketService implements ITicketService {
     private readonly tickerRepository: ITicketRepository,
   ) {}
 
-  create(description: string, priority: number): Ticket {
-    const ticket = new Ticket(description, priority);
-    if (this.findActiveTickets().length >= 3) {
+  async create(
+    description: string,
+    priority: number,
+    status: string,
+  ): Promise<Ticket> {
+    const ticket = new Ticket(
+      0,
+      description,
+      status,
+      priority,
+      new Date(),
+      new Date(),
+    );
+    const find = await this.findActiveTickets();
+
+    if (find.length >= 3) {
       throw new Error('Ticket count is more than 3');
     }
     this.tickerRepository.create(ticket);
     return ticket;
   }
 
-  findAll(): Ticket[] {
-    return this.tickerRepository.findAll();
+  async findAll(): Promise<Ticket[]> {
+    const tickets = await this.tickerRepository.findAll();
+    return tickets.map(
+      (ticket) =>
+        new Ticket(
+          ticket.id,
+          ticket.description,
+          ticket.status,
+          ticket.priority,
+          ticket.createAt,
+          ticket.updateAt,
+        ),
+    );
   }
 
-  findActiveTickets(): Ticket[] {
-    return this.tickerRepository.findAll().filter((ticket) => !ticket.isClosed);
+  async findActiveTickets(): Promise<Ticket[]> {
+    const tickets = await this.tickerRepository.findAll();
+    return tickets.filter((ticket) => !ticket.isClosed);
   }
 }

@@ -11,17 +11,17 @@ export class Ticket {
   constructor(
     id: number,
     description: string,
-    priority: number,
     status: string,
+    priority: number,
     createAt: Date,
     updateAt: Date,
   ) {
     this.id = id;
     this.description = description;
     this.status = status;
+    this.priority = priority;
     this.createAt = createAt;
     this.updateAt = updateAt;
-    this.priority = priority;
   }
 
   // constructor() {
@@ -33,9 +33,9 @@ export class Ticket {
   //   this.priority = priority;
   // }
 
-  // isClosed(): boolean {
-  //   return this.status === TicketStatus.CLOSED;
-  // }
+  isClosed(): boolean {
+    return this.status === TicketStatus.CLOSED;
+  }
 }
 
 enum TicketStatus {

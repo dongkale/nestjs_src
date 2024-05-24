@@ -5,7 +5,11 @@ import { Ticket } from '../model/Ticket';
  */
 
 export interface ITicketService {
-  create(description: string, priority: number): Ticket;
-  findAll(): Ticket[];
-  findActiveTickets(): Ticket[];
+  create(
+    description: string,
+    priority: number,
+    status: string,
+  ): Promise<Ticket>;
+  findAll(): Promise<Ticket[]>;
+  findActiveTickets(): Promise<Ticket[]>;
 }

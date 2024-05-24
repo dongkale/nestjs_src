@@ -16,8 +16,21 @@ export class TicketInDatabase implements ITicketRepository {
   ) {}
 
   async create(ticket: Ticket): Promise<Ticket> {
-    // this.tickets.push(ticket);
-    return ticket;
+    // const createdTicket = this.repository.create(
+    //   ticket.description,
+    //   ticket.priority,
+    //   ticket.status,
+    // );
+    const createdTicket = this.repository.create(ticket);
+    const savedTicket = await this.repository.save(createdTicket);
+    return new Ticket(
+      savedTicket.id,
+      savedTicket.description,
+      savedTicket.status,
+      savedTicket.priority,
+      savedTicket.createdAt,
+      savedTicket.updatedAt,
+    );
   }
 
   async findAll(): Promise<Ticket[]> {
@@ -26,12 +39,12 @@ export class TicketInDatabase implements ITicketRepository {
       return [];
     }
 
-    return tickets.map((ticket) => {
+    return tickets.map((ticket: TicketEntity) => {
       return new Ticket(
         ticket.id,
         ticket.description,
-        ticket.priority,
         ticket.status,
+        ticket.priority,
         ticket.createdAt,
         ticket.updatedAt,
       );

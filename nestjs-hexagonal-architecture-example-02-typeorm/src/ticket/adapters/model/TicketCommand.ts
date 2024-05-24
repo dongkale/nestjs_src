@@ -8,4 +8,5 @@ export class TicketCommand {
   @IsNotEmpty()
   description: string;
   priority: number;
+  status: string;
 }
