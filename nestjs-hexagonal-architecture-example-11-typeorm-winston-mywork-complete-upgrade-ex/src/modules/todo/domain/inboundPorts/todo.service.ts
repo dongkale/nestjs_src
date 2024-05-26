@@ -6,7 +6,7 @@ import { Todo } from '@/modules/todo/domain/model/todo.model';
 @Injectable()
 export class TodoService implements ITodoService {
   constructor(
-    @Inject('ITodoRepository') private readonly todoRepository: ITodoRepository,
+    @Inject(ITodoRepository) private readonly todoRepository: ITodoRepository,
   ) {}
 
   async getAll(): Promise<Todo[]> {
