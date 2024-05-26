@@ -86,6 +86,8 @@ import { ResponseDto } from '../dto/response.dto';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
+  constructor(private readonly logger: Logger) {}
+
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
@@ -97,6 +99,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     const message =
       exception instanceof HttpException ? exception.getResponse() : exception;
+
+    this.logger.error(`[${request.method}] ${request.url}`, { exception });
 
     response
       .status(status)
