@@ -1,10 +1,7 @@
-// src/application/dto/create-todo.dto.ts
-import { IsNotEmpty, IsString } from 'class-validator';
+// src/application/dto/update-todo.dto.ts
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateTodoDto {
-  @IsString()
-  @IsNotEmpty()
+export class UpdateTodoDto {
   @ApiProperty({ description: 'The content of the todo' })
   content: string;
 
