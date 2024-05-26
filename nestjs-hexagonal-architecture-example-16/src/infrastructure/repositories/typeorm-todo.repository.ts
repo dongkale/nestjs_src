@@ -2,8 +2,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ITodoRepository } from '../../domain/ports/itodo.repository';
-import { Todo } from '../../domain/entities/todo.entity';
+import { ITodoRepository } from '@/domain/ports/itodo.repository';
+import { Todo } from '@/domain/models/todo.model';
+// import { TodoEntity } from '@/domain/entities/todo.entity';
 
 @Injectable()
 export class TypeOrmTodoRepository implements ITodoRepository {
@@ -13,11 +14,32 @@ export class TypeOrmTodoRepository implements ITodoRepository {
   ) {}
 
   async findAll(): Promise<Todo[]> {
-    return this.repository.find();
+    const entities = await this.repository.find();
+
+    return entities.map(
+      (entity) =>
+        new Todo(
+          entity.id,
+          entity.content,
+          entity.isDone,
+          entity.createdAt,
+          entity.updatedAt,
+        ),
+    );
   }
 
   async findById(id: number): Promise<Todo> {
-    return this.repository.findOne(id);
+    const entity = await this.repository.findOne({ where: { id } });
+    if (!entity) {
+      throw new Error('Todo not found');
+    }
+    return new Todo(
+      entity.id,
+      entity.content,
+      entity.isDone,
+      entity.createdAt,
+      entity.updatedAt,
+    );
   }
 
   async create(todo: Todo): Promise<Todo> {

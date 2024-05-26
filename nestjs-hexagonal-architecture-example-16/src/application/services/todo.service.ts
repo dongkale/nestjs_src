@@ -1,8 +1,8 @@
 // src/application/services/todo.service.ts
 import { Injectable } from '@nestjs/common';
-import { ITodoService } from '../interfaces/itodo.service';
-import { ITodoRepository } from '../../domain/ports/itodo.repository';
-import { Todo } from '../../domain/entities/todo.entity';
+import { ITodoService } from '@/application/interfaces/itodo.service';
+import { ITodoRepository } from '@/domain/ports/itodo.repository';
+import { Todo } from '@/domain/entities/todo.entity';
 
 @Injectable()
 export class TodoService implements ITodoService {

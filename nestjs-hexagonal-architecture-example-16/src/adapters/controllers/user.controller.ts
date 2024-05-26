@@ -1,7 +1,7 @@
 // src/adapters/controllers/user.controller.ts
 import { Controller, Get, Param, Post, Body } from '@nestjs/common';
-import { IUserService } from '../../application/interfaces/iuser.service';
-import { User } from '../../domain/entities/user.entity';
+import { IUserService } from '@/application/interfaces/iuser.service';
+import { User } from '@/domain/entities/user.entity';
 
 @Controller('users')
 export class UserController {

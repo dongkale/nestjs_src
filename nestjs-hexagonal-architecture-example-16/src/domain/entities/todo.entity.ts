@@ -7,10 +7,10 @@ import {
   UpdateDateColumn,
   ManyToOne,
 } from 'typeorm';
-import { User } from './user.entity';
+import { User } from '@/domain/entities/user.entity';
 
 @Entity('todos')
-export class Todo {
+export class TodoEntity {
   @PrimaryGeneratedColumn()
   id: number;
 

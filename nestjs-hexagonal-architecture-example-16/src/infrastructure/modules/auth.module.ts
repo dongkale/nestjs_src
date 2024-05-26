@@ -1,9 +1,9 @@
 // src/infrastructure/modules/auth.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from '../../domain/entities/user.entity';
-import { AuthService } from '../../application/services/auth.service';
-import { TypeOrmAuthRepository } from '../repositories/typeorm-auth.repository';
+import { User } from '@/domain/entities/user.entity';
+import { AuthService } from '@/application/services/auth.service';
+import { TypeOrmAuthRepository } from '@/infrastructure/repositories/typeorm-auth.repository';
 import { AuthController } from '@/adapters/controllers/auth.controller';
 import { IAuthRepository } from '@/domain/ports/iauth.repository';
 import { IAuthService } from '@/application/interfaces/iauth.service';

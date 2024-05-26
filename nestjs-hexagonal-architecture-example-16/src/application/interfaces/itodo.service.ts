@@ -1,5 +1,5 @@
 // src/application/interfaces/itodo.service.ts
-import { Todo } from '../../domain/entities/todo.entity';
+import { Todo } from '@/domain/entities/todo.entity';
 
 export interface ITodoService {
   getAllTodos(): Promise<Todo[]>;
@@ -8,3 +8,5 @@ export interface ITodoService {
   updateTodo(id: number, todo: Todo): Promise<Todo>;
   deleteTodo(id: number): Promise<void>;
 }
+
+export const ITodoService = Symbol('ITodoService');

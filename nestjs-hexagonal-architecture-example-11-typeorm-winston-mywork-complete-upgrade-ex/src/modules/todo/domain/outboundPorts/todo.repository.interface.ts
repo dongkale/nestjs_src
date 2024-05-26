@@ -7,3 +7,5 @@ export interface ITodoRepository {
   update(id: number, todo: Partial<Todo>): Promise<Todo>;
   remove(id: number): Promise<void>;
 }
+
+export const ITodoRepository = Symbol('ITodoRepository');
