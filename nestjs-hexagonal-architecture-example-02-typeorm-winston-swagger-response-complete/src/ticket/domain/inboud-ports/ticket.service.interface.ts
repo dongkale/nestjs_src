@@ -1,4 +1,4 @@
-import { Ticket } from '@/ticket/domain/model/Ticket';
+import { Ticket } from '@/ticket/domain/model/ticket';
 
 /**
  * Our domain input port

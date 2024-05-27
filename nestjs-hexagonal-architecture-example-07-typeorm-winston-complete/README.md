@@ -276,7 +276,7 @@ import {
   FindMembersOutboundPort,
   FindMembersOutboundPortInputDto,
   FindMembersOutboundPortOutputDto,
-} from '../outbound-port/find-members.outbound-port';
+} from '../outbound-port/find-members.outbound-port.interface';
 
 import { MemoryDatabase } from '../../lib/memory-database';
 

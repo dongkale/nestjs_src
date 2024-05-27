@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GetMembersController } from '@/member/controller/get-member.controller';
-import { IFindMembersInboundPort } from '@/member/inbound-port/find-members.inbound-port';
+import { IFindMembersInboundPort } from '@/member/inbound-port/find-members.inbound-port.interface';
 import { FindMembersRepository } from '@/member/outbound-adapter/find-members.repository';
-import { IFindMembersOutboundPort } from '@/member/outbound-port/find-members.outbound-port';
+import { IFindMembersOutboundPort } from '@/member/outbound-port/find-members.outbound-port.interface';
 import { FindMembersService } from '@/member/service/find-members.service';
 import { MemberEntity } from '@/member/models/member.entity';
 

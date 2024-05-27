@@ -13,8 +13,8 @@
 ![](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ks8hc96go37q6qtciiqu.png)
 
 - Port
-  - [Inbound Port/Driving Port](src/ticket/domain/inboudPorts/)
-  - [Outbound Port/Driven Port](src/ticket/domain/outboundPorts/)
+  - [Inbound Port/Driving Port](src/ticket/domain/inboud-ports/)
+  - [Outbound Port/Driven Port](src/ticket/domain/outbound-ports/)
 - Adapter
   - [Primary/Driving/Inbound Adapter](src/ticket/adapters/driving/)
   - [Secondary/Driven/Outbound Adapter](src/ticket/adapters/driven/)

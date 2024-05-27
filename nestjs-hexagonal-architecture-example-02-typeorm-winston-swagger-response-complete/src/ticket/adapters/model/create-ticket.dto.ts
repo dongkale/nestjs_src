@@ -1,11 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-/**
- * TicketCommand
- * Used for CUD ticket
- */
-export class TicketCommand {
+export class CreateTicketDto {
   @ApiProperty({ description: '설명' })
   @IsNotEmpty()
   description: string;

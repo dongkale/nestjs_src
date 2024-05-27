@@ -8,10 +8,10 @@ import {
   Res,
   HttpStatus,
 } from '@nestjs/common';
-import { ITicketService } from '@/ticket/domain/inboudPorts/ITicketService';
-import { TicketService } from '@/ticket/domain/inboudPorts/TicketService';
-import { TicketCommand } from '@/ticket/adapters/model/TicketCommand';
-import { Ticket } from '@/ticket/domain/model/Ticket';
+import { ITicketService } from '@/ticket/domain/inboud-ports/ticket.service.interface';
+import { TicketService } from '@/ticket/domain/inboud-ports/ticket.service';
+import { CreateTicketDto } from '@/ticket/adapters/model/create-ticket.dto';
+import { Ticket } from '@/ticket/domain/model/ticket';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ResponseDto } from '@/commons/response/response.dto';
 import { Response } from 'express';
@@ -45,11 +45,12 @@ export class TicketController {
     const tickets = await this.ticketService.findAll();
 
     this.logger.log(JSON.stringify(tickets, null, 2));
-    // return tickets;
 
     return res
       .status(HttpStatus.OK)
       .json(new ResponseDto('success', 'successfully', tickets));
+
+    // return tickets
   }
 
   // @Post()
@@ -74,12 +75,12 @@ export class TicketController {
     type: Ticket,
   })
   @Post()
-  async create(@Body() ticketCommand: TicketCommand, @Res() res: Response) {
+  async create(@Body() createTicketDto: CreateTicketDto, @Res() res: Response) {
     const ticket = new Ticket(
       0,
-      ticketCommand.description,
-      ticketCommand.status,
-      ticketCommand.priority,
+      createTicketDto.description,
+      createTicketDto.status,
+      createTicketDto.priority,
       new Date(),
       new Date(),
     );
@@ -90,9 +91,9 @@ export class TicketController {
 
     this.logger.log(JSON.stringify(createdTicket, null, 2));
 
-    // return { ...createdTicket };
     return res
       .status(HttpStatus.OK)
       .json(new ResponseDto('success', 'successfully', createdTicket));
+    // return { ...createdTicket };
   }
 }

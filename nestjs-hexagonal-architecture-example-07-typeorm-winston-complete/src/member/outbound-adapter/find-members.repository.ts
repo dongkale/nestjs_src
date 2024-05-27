@@ -5,7 +5,7 @@ import {
   IFindMembersOutboundPort,
   FindMembersOutboundPortInputDto,
   FindMembersOutboundPortOutputDto,
-} from '@/member/outbound-port/find-members.outbound-port';
+} from '@/member/outbound-port/find-members.outbound-port.interface';
 
 // import { Member } from '@/member/models/member.model';
 import { MemberEntity } from '@/member/models/member.entity';

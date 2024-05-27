@@ -1,9 +1,9 @@
 import { Logger } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Ticket } from '@/ticket/domain/model/Ticket';
-import { ITicketRepository } from '@/ticket/domain/outboundPorts/ITicketRepository';
-import { TicketEntity } from '@/ticket/adapters/driven/TicketEntity';
+import { Ticket } from '@/ticket/domain/model/ticket';
+import { ITicketRepository } from '@/ticket/domain/outbound-ports/ticket.repository.interface';
+import { TicketEntity } from '@/ticket/adapters/driven/ticket.entity';
 
 export class TicketInDatabase implements ITicketRepository {
   private readonly logger = new Logger(TicketInDatabase.name);

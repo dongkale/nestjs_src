@@ -2,9 +2,9 @@ import {
   IFindMembersInboundPort,
   FindMembersInboundPortInputDto,
   FindMembersInboundPortOutputDto,
-} from '@/member/inbound-port/find-members.inbound-port';
+} from '@/member/inbound-port/find-members.inbound-port.interface';
 import { Inject, Logger } from '@nestjs/common';
-import { IFindMembersOutboundPort } from '@/member/outbound-port/find-members.outbound-port';
+import { IFindMembersOutboundPort } from '@/member/outbound-port/find-members.outbound-port.interface';
 
 // InboundPort의 구현체가 바로 서비스!
 // 서비스는 들어오는 Port들을 implements하면서 구현 된다.

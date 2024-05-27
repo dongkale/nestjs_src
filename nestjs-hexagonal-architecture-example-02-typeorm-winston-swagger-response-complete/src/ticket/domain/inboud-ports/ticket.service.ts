@@ -1,7 +1,7 @@
 import { Inject, Logger } from '@nestjs/common';
-import { Ticket } from '@/ticket/domain/model/Ticket';
-import { ITicketRepository } from '@/ticket/domain/outboundPorts/ITicketRepository';
-import { ITicketService } from '@/ticket/domain/inboudPorts/ITicketService';
+import { Ticket } from '@/ticket/domain/model/ticket';
+import { ITicketRepository } from '@/ticket/domain/outbound-ports/ticket.repository.interface';
+import { ITicketService } from '@/ticket/domain/inboud-ports/ticket.service.interface';
 
 export class TicketService implements ITicketService {
   private readonly logger = new Logger(TicketService.name);

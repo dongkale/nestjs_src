@@ -4,7 +4,7 @@ import { Controller, Get, Inject, Logger } from '@nestjs/common';
 // 파일 하나에 기능하나로 유지하는 것이 좋기 때문에
 // controller도 get-member.controller.ts 이렇게 둠.
 
-import { IFindMembersInboundPort } from '@/member/inbound-port/find-members.inbound-port';
+import { IFindMembersInboundPort } from '@/member/inbound-port/find-members.inbound-port.interface';
 
 @Controller()
 export class GetMembersController {
