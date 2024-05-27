@@ -20,6 +20,9 @@ export class TicketInDatabase implements ITicketRepository {
     // );
     const createdTicket = this.repository.create(ticket);
     const savedTicket = await this.repository.save(createdTicket);
+
+    this.logger.log(JSON.stringify(savedTicket, null, 2));
+
     return new Ticket(
       savedTicket.id,
       savedTicket.description,
@@ -35,6 +38,8 @@ export class TicketInDatabase implements ITicketRepository {
     if (!tickets) {
       return [];
     }
+
+    this.logger.log(JSON.stringify(tickets, null, 2));
 
     return tickets.map((ticket: TicketEntity) => {
       return new Ticket(
