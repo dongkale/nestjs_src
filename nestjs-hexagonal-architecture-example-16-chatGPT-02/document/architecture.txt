@@ -1,0 +1,40 @@
+src/
+├── application/
+│   ├── dto/
+│   │   ├── create-user.dto.ts
+│   │   ├── update-user.dto.ts
+│   │   ├── create-todo.dto.ts
+│   │   ├── update-todo.dto.ts
+│   │   ├── response.dto.ts
+│   └── services/
+│       ├── user.service.ts
+│       └── todo.service.ts
+├── commons/
+│   ├── decorators/
+│   ├── filters/
+│   ├── guards/
+│   └── interceptors/
+├── core/
+│   ├── domain/
+│   │   ├── user.entity.ts
+│   │   ├── todo.entity.ts
+│   ├── interfaces/
+│   │   ├── user-repository.interface.ts
+│   │   ├── user-service.interface.ts
+│   │   ├── todo-repository.interface.ts
+│   │   └── todo-service.interface.ts
+│   └── repositories/
+│       ├── user.repository.ts
+│       └── todo.repository.ts
+├── infrastructure/
+│   ├── config/
+│   │   ├── typeorm.config.ts
+│   │   ├── winston.config.ts
+│   ├── controllers/
+│   │   ├── user.controller.ts
+│   │   ├── todo.controller.ts
+│   ├── modules/
+│   │   ├── app.module.ts
+│   │   ├── user.module.ts
+│   │   └── todo.module.ts
+└── main.ts

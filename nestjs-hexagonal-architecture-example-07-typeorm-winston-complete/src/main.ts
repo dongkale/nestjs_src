@@ -4,7 +4,7 @@ import { AppModule } from './app.module';
 import * as figlet from 'figlet';
 import * as dotenv from 'dotenv';
 
-import { winstonLogger } from '@/libs/logger/winston.logger';
+import { winstonLogger } from '@/configs/winston.config';
 
 dotenv.config();
 
@@ -13,7 +13,7 @@ async function bootstrap() {
   const appPort = process.env.PORT ?? 3000;
 
   console.log(
-    figlet.textSync('NestJS Server', {
+    figlet.textSync(appName + ' Server', {
       font: 'Cyberlarge',
       horizontalLayout: 'default',
       verticalLayout: 'default',

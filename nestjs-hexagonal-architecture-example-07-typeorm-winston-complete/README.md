@@ -305,3 +305,7 @@ export class FindMembersRepository implements FindMembersOutboundPort {
 - https://dev.to/dyarleniber/hexagonal-architecture-and-clean-architecture-with-examples-48oi
 
 git clone https://github.com/Yesung-Han/nestjs-hexagonal-architecture.git nestjs-hexagonal-architecture-example-08
+
+## manual
+
+1. [GET] localhost:3001/members

@@ -7,7 +7,7 @@ export type FindMembersInboundPortOutputDto = Array<{
   phone: string;
 }>;
 
-export const FIND_MEMBERS_INBOUND_PORT = 'FIND_MEMBERS_INBOUND_PORT' as const;
+// export const FIND_MEMBERS_INBOUND_PORT = 'FIND_MEMBERS_INBOUND_PORT' as const;
 
 // Inbound 처리는 서비스로직에서 할거다.
 // 즉 InboundPort의 구현체는 서비스가 되고, 이것은 서비스 로직에서 사용할 인터페이스인 것이다.
@@ -17,3 +17,4 @@ export interface IFindMembersInboundPort {
     params: FindMembersInboundPortInputDto,
   ): Promise<FindMembersInboundPortOutputDto>;
 }
+export const IFindMembersInboundPort = Symbol('IFindMembersInboundPort');

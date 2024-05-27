@@ -4,7 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { TodoModule } from '@/modules/todo/todo.module';
-import { getTypeOrmConfig } from '@/common/configs/database.config';
+import { getTypeOrmConfig } from '@/configs/database.config';
 
 @Module({
   imports: [
