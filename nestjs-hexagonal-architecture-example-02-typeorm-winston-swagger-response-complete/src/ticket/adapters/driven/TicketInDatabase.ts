@@ -32,9 +32,9 @@ export class TicketInDatabase implements ITicketRepository {
 
   async findAll(): Promise<Ticket[]> {
     const tickets = await this.repository.find();
-    // if (!tickets) {
-    //   return [];
-    // }
+    if (!tickets) {
+      return [];
+    }
 
     return tickets.map((ticket: TicketEntity) => {
       return new Ticket(

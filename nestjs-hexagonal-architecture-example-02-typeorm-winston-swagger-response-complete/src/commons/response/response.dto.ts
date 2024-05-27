@@ -23,3 +23,8 @@ export class ResponseDto<T> {
     this.data = data;
   }
 }
+
+export enum ResponseStatus {
+  SUCCESS = 0,
+  FAIL = 1,
+}
