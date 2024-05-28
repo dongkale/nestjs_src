@@ -6,7 +6,7 @@ import {
   Logger,
 } from '@nestjs/common';
 // import { Request, Response } from 'express';
-import { ResponseDto } from '@/commons/response/response.dto';
+import { ResponseDto, ResponseStatus } from '@/commons/response/response.dto';
 
 // @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -25,6 +25,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     this.logger.error(`[Exception] message: ${message}`, stack);
 
-    response.status(status).json(new ResponseDto('error', message, ''));
+    response
+      .status(status)
+      .json(new ResponseDto(ResponseStatus.FAIL, message, ''));
   }
 }

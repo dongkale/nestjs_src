@@ -309,3 +309,10 @@ git clone https://github.com/Yesung-Han/nestjs-hexagonal-architecture.git nestjs
 ## manual
 
 1. [GET] localhost:3001/members
+
+2. [POST] localhost:3001/members
+   {
+   "name": "name_01"
+   "email": "email_01"
+   "phone": "phone_01"
+   }

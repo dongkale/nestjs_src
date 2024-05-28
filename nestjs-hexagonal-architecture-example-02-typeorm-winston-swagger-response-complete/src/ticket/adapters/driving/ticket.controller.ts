@@ -13,7 +13,11 @@ import { TicketService } from '@/ticket/domain/inboud-ports/ticket.service';
 import { CreateTicketDto } from '@/ticket/adapters/model/create-ticket.dto';
 import { Ticket } from '@/ticket/domain/model/ticket';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { ResponseDto } from '@/commons/response/response.dto';
+import {
+  ResponseDto,
+  ResponseStatus,
+  ResponseMessage,
+} from '@/commons/response/response.dto';
 import { Response } from 'express';
 
 @ApiTags('ticket API')
@@ -48,7 +52,9 @@ export class TicketController {
 
     return res
       .status(HttpStatus.OK)
-      .json(new ResponseDto('success', 'successfully', tickets));
+      .json(
+        new ResponseDto(ResponseStatus.OK, ResponseMessage.SUCCESS, tickets),
+      );
 
     // return tickets
   }
@@ -93,7 +99,13 @@ export class TicketController {
 
     return res
       .status(HttpStatus.OK)
-      .json(new ResponseDto('success', 'successfully', createdTicket));
+      .json(
+        new ResponseDto(
+          ResponseStatus.OK,
+          ResponseMessage.SUCCESS,
+          createdTicket,
+        ),
+      );
     // return { ...createdTicket };
   }
 }
