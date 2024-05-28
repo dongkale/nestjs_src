@@ -9,8 +9,8 @@ import {
 
 import { MemberEntity } from '@/member/models/member.entity';
 
-export class CreateMembersRepository implements ICreateMemberOutboundPort {
-  private readonly logger = new Logger(CreateMembersRepository.name);
+export class CreateMemberRepository implements ICreateMemberOutboundPort {
+  private readonly logger = new Logger(CreateMemberRepository.name);
 
   constructor(
     @InjectRepository(MemberEntity)

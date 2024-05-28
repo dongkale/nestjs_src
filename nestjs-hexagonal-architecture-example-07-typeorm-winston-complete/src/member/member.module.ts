@@ -6,11 +6,16 @@ import { FindMembersRepository } from '@/member/outbound-adapter/find-members.re
 import { IFindMembersOutboundPort } from '@/member/outbound-port/find-members.outbound-port.interface';
 import { FindMembersService } from '@/member/service/find-members.service';
 import { MemberEntity } from '@/member/models/member.entity';
+import { GreateMemberController } from './controller/create-member.controller';
+import { ICreateMemberInboundPort } from './inbound-port/create-member.inbound-port.interface';
+import { CreateMemberService } from './service/create-member.service';
+import { ICreateMemberOutboundPort } from './outbound-port/create-member.outbound-port.interface';
+import { CreateMemberRepository } from './outbound-adapter/create-member.repository';
 
 // member 리스트를 조회하는 API를 작성해보자
 @Module({
   imports: [TypeOrmModule.forFeature([MemberEntity])],
-  controllers: [GetMembersController],
+  controllers: [GetMembersController, GreateMemberController],
   providers: [
     {
       // 토큰으로 provider 구분 => @Inject(FIND_MEMBERS_INBOUND_PORT)이런 식으로 가져올 수 있다.
@@ -26,6 +31,14 @@ import { MemberEntity } from '@/member/models/member.entity';
     {
       provide: IFindMembersOutboundPort,
       useClass: FindMembersRepository,
+    },
+    {
+      provide: ICreateMemberInboundPort,
+      useClass: CreateMemberService,
+    },
+    {
+      provide: ICreateMemberOutboundPort,
+      useClass: CreateMemberRepository,
     },
   ],
 })
