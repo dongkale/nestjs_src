@@ -26,7 +26,7 @@ export class BoardMapper {
   }
 
   static mapToBoardOrmEntity(board: BoardEntity) {
-    const boardOrmEntity: BoardOrmEntity = new BoardOrmEntity();
+    const boardOrmEntity = new BoardOrmEntity();
     boardOrmEntity.title = board.title;
     boardOrmEntity.content = board.content;
     if (board.id !== null) {

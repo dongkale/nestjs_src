@@ -9,20 +9,10 @@ import {
   VersionColumn,
 } from 'typeorm';
 
-@Entity('board')
+@Entity('boards')
 export class BoardOrmEntity {
   @PrimaryGeneratedColumn({ type: 'int', unsigned: true })
   id: number;
-
-  @CreateDateColumn({ type: 'timestamp' })
-  createdAt: Date;
-
-  @DeleteDateColumn({ type: 'timestamp', nullable: true })
-  @Exclude()
-  deletedAt: Date;
-
-  @UpdateDateColumn({ type: 'timestamp', nullable: true })
-  updatedAt: Date;
 
   @VersionColumn()
   version: number;
@@ -32,4 +22,14 @@ export class BoardOrmEntity {
 
   @Column()
   content: string;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: 'timestamp', nullable: true })
+  updatedAt: Date;
+
+  @DeleteDateColumn({ type: 'timestamp', nullable: true })
+  @Exclude()
+  deletedAt: Date;
 }

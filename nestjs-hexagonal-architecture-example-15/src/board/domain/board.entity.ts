@@ -2,7 +2,7 @@ export type BoardId = number;
 
 export class BoardEntity {
   constructor(
-    private readonly _title: string,
+    private _title: string,
     private readonly _content: string,
     private readonly _id: BoardId,
     private readonly _updatedAt?: Date,
@@ -29,7 +29,11 @@ export class BoardEntity {
     return this._updatedAt;
   }
 
-  static createBoard(title: string, content: string, id: number): BoardEntity {
+  static createBoard(title: string, content: string): BoardEntity {
+    return new BoardEntity(title, content, 0);
+  }
+
+  static updateBoard(title: string, content: string, id: BoardId): BoardEntity {
     return new BoardEntity(title, content, id);
   }
 }

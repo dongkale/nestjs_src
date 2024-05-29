@@ -45,11 +45,15 @@ export class BoardService implements GetBoardsUseCase, HandleBoardUseCase {
 
     const newBoardEntity = UpdateBoardReq.of(id, dto).toEntity();
 
-    for (const key in newBoardEntity) {
-      newBoardEntity[key] = newBoardEntity[key] ?? oldBoardEntity[key];
-    }
+    // for (const key in newBoardEntity) {
+    //   newBoardEntity[key] = newBoardEntity[key] ?? oldBoardEntity[key];
+    // }
 
-    await this._handleBoardPort.upsertBoard(newBoardEntity);
+    // await this._handleBoardPort.upsertBoard(newBoardEntity);
+
+    const mergeBoardEntity = { oldBoardEntity, ...newBoardEntity };
+
+    await this._handleBoardPort.upsertBoard(mergeBoardEntity);
 
     const savedBoard = await this._getBoardPort.getBoard(id);
 

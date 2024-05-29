@@ -182,6 +182,24 @@ Request header의 Authorization에 담긴 accessToken의 값에 따라 인증, �
 >
 > 인증된 유저라면 모두 접근 가능한 리소스의 경우 accessToken이 'user'로 보내져야 한다.
 
-## document 
+## Document
 
 - https://github.com/myeongseoklee/hexagonal-practice.git
+
+## Postman
+
+1. [GET] localhost:3000/board?pageSize=1&pageNum=0
+
+2. [GET] localhost:3000/board/1
+
+3. [POST] localhost:3000/board
+   {
+   "title":"title_02",
+   "content":"content_02"
+   }
+
+4. [PATCH] localhost:3000/board/2
+   {
+   "title":"title_02++",
+   "content":"content_02++"
+   }

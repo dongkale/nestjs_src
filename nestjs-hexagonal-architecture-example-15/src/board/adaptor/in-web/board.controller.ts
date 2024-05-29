@@ -59,8 +59,8 @@ export class BoardController {
     return ResponseEntity.OK_WITH(await this._getBoardsUseCase.getBoard(id));
   }
 
-  @UseGuards(AuthGuard, RolesGuard)
-  @Roles(Role.User, Role.Me)
+  // @UseGuards(AuthGuard, RolesGuard)
+  // @Roles(Role.User, Role.Me)
   @HttpCode(HttpStatus.CREATED)
   @Post()
   async createBoard(@Body() dto: CreateBoardReq) {
@@ -69,8 +69,8 @@ export class BoardController {
     );
   }
 
-  @UseGuards(AuthGuard, RolesGuard)
-  @Roles(Role.Me)
+  // @UseGuards(AuthGuard, RolesGuard)
+  // @Roles(Role.Me)
   @HttpCode(HttpStatus.CREATED)
   @Patch(':id')
   async updateBoard(
@@ -82,8 +82,8 @@ export class BoardController {
     );
   }
 
-  @UseGuards(AuthGuard, RolesGuard)
-  @Roles(Role.Me)
+  // @UseGuards(AuthGuard, RolesGuard)
+  // @Roles(Role.Me)
   @HttpCode(HttpStatus.OK)
   @Delete(':id')
   async deleteBoard(@Param('id', ParseIntPipe) id: BoardId) {

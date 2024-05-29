@@ -23,6 +23,6 @@ export class UpdateBoardReq extends UpdateBoardBodyReq {
   }
 
   toEntity(): Partial<BoardEntity> {
-    return BoardEntity.createBoard(this.title, this.content, this.id);
+    return BoardEntity.updateBoard(this.title, this.content, this.id);
   }
 }

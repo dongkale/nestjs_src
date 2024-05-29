@@ -5,8 +5,8 @@ export class BoardRes {
   @Exclude() private readonly _id: BoardId;
   @Exclude() private readonly _title: string;
   @Exclude() private readonly _content: string;
-  @Exclude() private readonly _createdAt: Date;
-  @Exclude() private readonly _updatedAt: Date;
+  @Exclude() private readonly _createdAt?: Date;
+  @Exclude() private readonly _updatedAt?: Date;
 
   constructor(board: BoardEntity) {
     this._id = board.id;
@@ -33,11 +33,11 @@ export class BoardRes {
 
   @Expose()
   get createdAt() {
-    return this._createdAt.toLocaleString();
+    return this._createdAt?.toLocaleString();
   }
 
   @Expose()
   get updatedAt() {
-    return this._updatedAt.toLocaleString();
+    return this._updatedAt?.toLocaleString();
   }
 }

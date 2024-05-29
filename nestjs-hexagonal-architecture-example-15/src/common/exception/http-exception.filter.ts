@@ -20,13 +20,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const message = exception.message;
     const responseBody = exception.getResponse() as any;
 
-    const exceptionCheckOptions = {
-      message,
-      status,
-      responseBody,
-    };
+    // const exceptionCheckOptions = {
+    //   status,
+    //   message,
+    //   responseBody,
+    // };
 
-    const responseEntity = this.exceptionChecker(exceptionCheckOptions);
+    // const responseEntity = this.exceptionChecker(exceptionCheckOptions);
+    const responseEntity = this.exceptionChecker(status, message, responseBody);
 
     response.status(status).json(instanceToPlain(responseEntity));
   }
@@ -37,7 +38,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     return new CustomValidationError(responseBody);
   }
 
-  exceptionChecker({ status, message, responseBody }) {
+  // exceptionChecker({ status, message, responseBody }) {
+  exceptionChecker(status: number, message: string, responseBody: any) {
     let responseEntity: ResponseEntity<string | object>;
 
     switch (status) {
