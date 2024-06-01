@@ -54,11 +54,14 @@ export class TicketController {
 
     this.logger.log(JSON.stringify(tickets, null, 2));
 
-    return res
-      .status(HttpStatus.OK)
-      .json(
-        new ResponseDto(ResponseStatus.OK, ResponseMessage.SUCCESS, tickets),
-      );
+    return res.status(HttpStatus.OK).json(
+      // new ResponseDto(ResponseStatus.OK, ResponseMessage.SUCCESS, tickets),
+      ResponseDto.make<Ticket[]>(
+        ResponseStatus.OK,
+        ResponseMessage.SUCCESS,
+        tickets,
+      ),
+    );
 
     // return tickets
   }
@@ -108,13 +111,20 @@ export class TicketController {
   })
   @Post()
   async create(@Body() createTicketDto: CreateTicketDto, @Res() res: Response) {
-    const ticket = new Ticket(
+    // const ticket = new Ticket(
+    //   0,
+    //   createTicketDto.description,
+    //   createTicketDto.status,
+    //   createTicketDto.priority,
+    //   new Date(),
+    //   new Date(),
+    // );
+
+    const ticket = Ticket.make(
       0,
       createTicketDto.description,
       createTicketDto.status,
       createTicketDto.priority,
-      new Date(),
-      new Date(),
     );
 
     const createdTicket = await this.ticketService.create(ticket);

@@ -36,6 +36,17 @@ export class Ticket {
     this.updateAt = updateAt;
   }
 
+  static make(
+    id: number,
+    description: string,
+    status: string,
+    priority: number,
+    createAt?: Date,
+    updateAt?: Date,
+  ): Ticket {
+    return new Ticket(id, description, status, priority, createAt, updateAt);
+  }
+
   isClosed(): boolean {
     return this.status === TicketStatus.CLOSED;
   }

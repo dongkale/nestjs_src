@@ -22,6 +22,10 @@ export class ResponseDto<T> {
     this.message = message;
     this.data = data;
   }
+
+  static make<T>(status: number, message: string, data: T): ResponseDto<T> {
+    return new ResponseDto(status, message, data);
+  }
 }
 
 export enum ResponseStatus {
