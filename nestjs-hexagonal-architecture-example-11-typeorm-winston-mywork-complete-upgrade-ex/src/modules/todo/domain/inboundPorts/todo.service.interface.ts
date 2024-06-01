@@ -7,3 +7,5 @@ export interface ITodoService {
   update(id: number, content: string, isDone: boolean): Promise<Todo>;
   remove(id: number): Promise<void>;
 }
+
+export const ITodoService = Symbol('ITodoService');

@@ -6,9 +6,11 @@ import {
   Delete,
   Param,
   Body,
+  Inject,
   Logger,
 } from '@nestjs/common';
 import { TodoService } from '@/modules/todo/domain/inboundPorts/todo.service';
+import { ITodoService } from '@/modules/todo/domain/inboundPorts/todo.service.interface';
 import { CreateTodoDto } from '@/modules/todo/adapter/model/create-todo.dto';
 import { UpdateTodoDto } from '@/modules/todo/adapter/model/update-todo.dto';
 
@@ -16,7 +18,10 @@ import { UpdateTodoDto } from '@/modules/todo/adapter/model/update-todo.dto';
 export class TodoController {
   private readonly logger = new Logger(TodoController.name);
 
-  constructor(private readonly todoService: TodoService) {}
+  // constructor(private readonly todoService: TodoService) {}
+  constructor(
+    @Inject(ITodoService) private readonly todoService: ITodoService,
+  ) {}
 
   @Get()
   async getAll() {
