@@ -10,8 +10,8 @@ import {
   Logger,
 } from '@nestjs/common';
 import { ITodoService } from '@/modules/todo/inbound-port/todo.service.interface';
-import { CreateTodoDto } from '@/modules/todo/models/create-todo.dto';
-import { UpdateTodoDto } from '@/modules/todo/models/update-todo.dto';
+import { CreateTodoDto } from '@/modules/todo/dtos/create-todo.dto';
+import { UpdateTodoDto } from '@/modules/todo/dtos/update-todo.dto';
 
 @Controller('todos')
 export class TodoController {

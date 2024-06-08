@@ -3,7 +3,7 @@ import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
 import * as figlet from 'figlet';
 
-import { winstonLogger } from '@/config/winston.config';
+import { winstonLogger } from '@/configs/winston.config';
 
 async function bootstrap() {
   const appName = process.env.APP_NAME ?? 'defaultAppName';
