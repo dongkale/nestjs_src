@@ -6,17 +6,22 @@ import {
   Delete,
   Param,
   Body,
+  Inject,
   Logger,
 } from '@nestjs/common';
-import { TodoService } from '@/application/services/todo.service';
+// import { TodoService } from '@/application/services/todo.service';
 import { CreateTodoDto } from '@/interface/dto/create-todo.dto';
 import { UpdateTodoDto } from '@/interface/dto/update-todo.dto';
+import { ITodoService } from '@/core/interfaces/todo.service.interface';
 
 @Controller('todos')
 export class TodoController {
   private readonly logger = new Logger(TodoController.name);
 
-  constructor(private readonly todoService: TodoService) {}
+  // constructor(private readonly todoService: TodoService) {}
+  constructor(
+    @Inject(ITodoService) private readonly todoService: ITodoService,
+  ) {}
 
   @Get()
   async getAll() {

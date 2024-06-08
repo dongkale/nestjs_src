@@ -1,12 +1,10 @@
-import { Injectable, Inject, Logger } from '@nestjs/common';
-import { ITodoRepository } from '@/core/interfaces/todo.repository.interface';
-import { ITodoService } from '@/core/interfaces/todo.service.interface';
-import { Todo } from '@/core/models/todo.model';
+import { Injectable, Inject } from '@nestjs/common';
+import { ITodoRepository } from '@/modules/todo/outbound-port/todo.repository.interface';
+import { ITodoService } from '@/modules/todo/inbound-port/todo.service.interface';
+import { Todo } from '@/modules/todo/models/todo.model';
 
 @Injectable()
 export class TodoService implements ITodoService {
-  private readonly logger = new Logger(TodoService.name);
-
   constructor(
     @Inject(ITodoRepository) private readonly todoRepository: ITodoRepository,
   ) {}
@@ -20,8 +18,7 @@ export class TodoService implements ITodoService {
   }
 
   async create(content: string): Promise<Todo> {
-    // const todo = new Todo(0, content, false, new Date(), new Date());
-    const todo = Todo.make(0, content, false, new Date(), new Date());
+    const todo = new Todo(0, content, false, new Date(), new Date());
     return this.todoRepository.create(todo);
   }
 
@@ -33,7 +30,7 @@ export class TodoService implements ITodoService {
     });
   }
 
-  async remove(id: number): Promise<Todo> {
+  async remove(id: number): Promise<void> {
     return await this.todoRepository.remove(id);
   }
 }
