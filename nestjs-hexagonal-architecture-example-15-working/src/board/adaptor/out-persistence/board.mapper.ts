@@ -1,6 +1,6 @@
-import { BoardWindowEntity } from '../../domain/board-window.entity';
-import { BoardEntity } from '../../domain/board.entity';
-import { BoardOrmEntity } from './board.orm-entity';
+import { BoardWindowEntity } from '@/board/domain/board-window.entity';
+import { BoardEntity } from '@/board/domain/board.entity';
+import { BoardOrmEntity } from '@/board/adaptor/out-persistence/board.orm-entity';
 
 export class BoardMapper {
   static mapToBoards(boards: BoardOrmEntity[]) {
