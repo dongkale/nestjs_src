@@ -50,7 +50,14 @@ export class TodoService implements TodoUseCase {
     const newBoardEntity = UpdateTodoRequest.of(id, dto).toEntity();
 
     // const mergeBoardEntity = { ...oldBoardEntity, ...newBoardEntity };
-    const mergeBoardEntity = Object.assign({}, oldBoardEntity, newBoardEntity);
+    // const mergeBoardEntity = Object.assign({}, oldBoardEntity, newBoardEntity);
+
+    const mergeBoardEntity = Object.assign(
+      Object.create(Object.getPrototypeOf(newBoardEntity)),
+      newBoardEntity,
+      oldBoardEntity,
+    );
+    // return merged;
 
     await this._todoPort.updateTodo(mergeBoardEntity);
 
