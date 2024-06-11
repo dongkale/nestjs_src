@@ -1,4 +1,4 @@
-import { BoardOrmEntity } from './../../board/adaptor/out-persistence/board.orm-entity';
+import { BoardOrmEntity } from '@/board/adaptor/out-persistence/board.orm-entity';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import * as env from 'dotenv';
