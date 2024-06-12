@@ -7,7 +7,7 @@ import { CreateTodoPort } from '@/domains/ports/out/create-todo.port';
 import { GetTodosPort } from '@/domains/ports/out/get-todos.port';
 import { GetTodoPort } from '@/domains/ports/out/get-todo.port';
 import { UpdateTodoPort } from '@/domains/ports/out/update-todo.port';
-import { UpdateTodoRequest } from '../ports/in/dto/request/update-todo-request.dto';
+import { UpdateTodoRequest } from '@/domains/ports/in/dto/request/update-todo-request.dto';
 
 export class TodoService implements TodoUseCase {
   constructor(
