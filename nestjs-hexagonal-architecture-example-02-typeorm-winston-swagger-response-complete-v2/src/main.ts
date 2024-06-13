@@ -2,7 +2,7 @@ import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import * as dotenv from 'dotenv';
 import { AppModule } from '@/app.module';
-import * as figlet from 'figlet';
+import figlet from 'figlet';
 import { winstonLogger } from '@/configs/winston.config';
 import { setupSwagger } from '@/configs//swagger.config';
 import { HttpExceptionFilter } from './commons/filters/http-exception.filter';
