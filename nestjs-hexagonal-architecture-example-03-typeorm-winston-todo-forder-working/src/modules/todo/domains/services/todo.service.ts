@@ -1,15 +1,15 @@
-import { TodoId } from '@/domains/entities/todo.entity';
-import { TodoUseCase } from '@/domains/ports/in/todo.use-case';
-import { GetTodosResponse } from '@/domains/ports/in/dto/response/get-todos-response.dto';
-import { GetTodoResponse } from '@/domains/ports/in/dto/response/get-todo-response.dto';
-import { CreateTodoRequest } from '@/domains/ports/in/dto/request/create-todo-request.dto';
-import { CreateTodoPort } from '@/domains/ports/out/create-todo.port';
-import { GetTodosPort } from '@/domains/ports/out/get-todos.port';
-import { GetTodoPort } from '@/domains/ports/out/get-todo.port';
-import { UpdateTodoPort } from '@/domains/ports/out/update-todo.port';
-import { UpdateTodoRequest } from '@/domains/ports/in/dto/request/update-todo-request.dto';
+import { TodoId } from '@/todo/domains/entities/todo.entity';
+import { TodoUseCase } from '@/todo/domains/ports/in/todo.use-case';
+import { GetTodosResponse } from '@/todo/domains/ports/in/dto/response/get-todos-response.dto';
+import { GetTodoResponse } from '@/todo/domains/ports/in/dto/response/get-todo-response.dto';
+import { CreateTodoRequest } from '@/todo/domains/ports/in/dto/request/create-todo-request.dto';
+import { CreateTodoPort } from '@/todo/domains/ports/out/create-todo.port';
+import { GetTodosPort } from '@/todo/domains/ports/out/get-todos.port';
+import { GetTodoPort } from '@/todo/domains/ports/out/get-todo.port';
+import { UpdateTodoPort } from '@/todo/domains/ports/out/update-todo.port';
+import { UpdateTodoRequest } from '@/todo/domains/ports/in/dto/request/update-todo-request.dto';
 import { NotFoundException } from '@nestjs/common';
-import { DeleteTodoPort } from '@/domains/ports/out/delete-todo.port';
+import { DeleteTodoPort } from '@/todo/domains/ports/out/delete-todo.port';
 
 export class TodoService implements TodoUseCase {
   constructor(

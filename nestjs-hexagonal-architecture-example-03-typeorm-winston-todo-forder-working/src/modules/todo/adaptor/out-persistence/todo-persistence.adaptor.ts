@@ -1,16 +1,22 @@
-import { TodoEntity, TodoId } from '@/domains/entities/todo.entity';
+import { TodoEntity, TodoId } from '@/todo/domains/entities/todo.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { TodoOrmEntity } from '@/modules/todo-persistence/todo.orm-entity';
+import { TodoOrmEntity } from '@/todo/adaptor/out-persistence/todo.orm-entity';
 import { Repository } from 'typeorm';
-import { TodoMapper } from '@/modules/todo-persistence/todo.mapper';
-import { CreateTodoPort } from '@/domains/ports/out/create-todo.port';
-import { GetTodosPort } from '@/domains/ports/out/get-todos.port';
-import { GetTodoPort } from '@/domains/ports/out/get-todo.port';
-import { UpdateTodoPort } from '@/domains/ports/out/update-todo.port';
+import { TodoMapper } from '@/todo/adaptor/out-persistence/todo.mapper';
+import { CreateTodoPort } from '@/todo/domains/ports/out/create-todo.port';
+import { GetTodosPort } from '@/todo/domains/ports/out/get-todos.port';
+import { GetTodoPort } from '@/todo/domains/ports/out/get-todo.port';
+import { UpdateTodoPort } from '@/todo/domains/ports/out/update-todo.port';
+import { DeleteTodoPort } from '@/todo/domains/ports/out/delete-todo.port';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 export class TodoPersistenceAdaptor
-  implements GetTodosPort, GetTodoPort, CreateTodoPort, UpdateTodoPort
+  implements
+    GetTodosPort,
+    GetTodoPort,
+    CreateTodoPort,
+    UpdateTodoPort,
+    DeleteTodoPort
 {
   constructor(
     @InjectRepository(TodoOrmEntity)

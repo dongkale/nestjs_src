@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TodoPersistenceModule } from '@/modules/todo-persistence/todo-persistence.module';
-import { TodoWebModule } from '@/modules/todo-web/todo-web.module';
-import { getTypeOrmConfig } from '@/config/database.config';
+import { TodoPersistenceModule } from '@/todo/adaptor/out-persistence/todo-persistence.module';
+import { TodoWebModule } from '@/todo/adaptor/in-web/todo-web.module';
+import { getTypeOrmConfig } from '@/configs/database.config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { RequestLoggerInterceptor } from '@/commons/interceptor/request-logger.interceptor';
 

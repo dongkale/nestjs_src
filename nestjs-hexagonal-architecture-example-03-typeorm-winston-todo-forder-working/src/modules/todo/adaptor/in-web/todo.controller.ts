@@ -13,12 +13,13 @@ import {
 import {
   TodoUseCase,
   TodoUseCaseSymbol,
-} from '@/domains/ports/in/todo.use-case';
+} from '@/todo/domains/ports/in/todo.use-case';
 import { ResponseEntity } from '@/commons/response/response.entity';
-import { CreateTodoRequest } from '@/domains/ports/in/dto/request/create-todo-request.dto';
-import { TodoId } from '@/domains/entities/todo.entity';
-import { UpdateTodoValidationPipe } from '@/domains/ports/in/pipe/update-todo-validation.pipe';
-import { UpdateTodoBodyRequest } from '@/domains/ports/in/dto/request/update-todo-body-request.dto';
+import { CreateTodoRequest } from '@/todo/domains/ports/in/dto/request/create-todo-request.dto';
+import { TodoId } from '@/todo/domains/entities/todo.entity';
+import { UpdateTodoValidationPipe } from '@/todo/domains/ports/in/pipe/update-todo-validation.pipe';
+import { UpdateTodoBodyRequest } from '@/todo/domains/ports/in/dto/request/update-todo-body-request.dto';
+
 @Controller('todo')
 export class TodoController {
   private readonly logger = new Logger(TodoController.name);

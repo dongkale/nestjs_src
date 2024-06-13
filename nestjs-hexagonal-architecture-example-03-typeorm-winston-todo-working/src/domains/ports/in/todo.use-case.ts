@@ -17,4 +17,6 @@ export interface TodoUseCase {
     todoId: TodoId,
     dto: UpdateTodoBodyRequest,
   ): Promise<GetTodoResponse>;
+
+  deleteTodo(todoId: TodoId): Promise<GetTodoResponse>;
 }
