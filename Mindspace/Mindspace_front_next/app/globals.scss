@@ -1,0 +1,16 @@
+html {
+  height: 100vh;
+  width: 100%;
+}
+body {
+  margin: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+// toast ui editor css
+.toastui-editor-mode-switch {
+  display: none !important;
+}

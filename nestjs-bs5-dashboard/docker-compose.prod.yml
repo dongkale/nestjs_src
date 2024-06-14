@@ -1,0 +1,29 @@
+version: '3'
+services:
+  api-service:
+    container_name: api-service
+    build:
+      context: .
+      dockerfile: prod.Dockerfile
+    command: 'yarn start:prod'
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '3001:3001'
+    volumes:
+      - ./:/app
+      - '/app/node_modules'
+    links:
+      - api-service-mongo
+    depends_on:
+      - api-service-mongo
+
+  api-service-mongo:
+    image: 'mongo:4.0'
+    container_name: api-service-mongo
+    ports:
+      - '5300:27017'
+    volumes:
+      - './.data/mongo:/data/db'
+      - './.data/mongoconfigdb:/data/configdb'
