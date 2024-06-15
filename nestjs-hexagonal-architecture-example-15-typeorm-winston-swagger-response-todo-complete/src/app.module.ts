@@ -7,6 +7,7 @@ import { TodoModule } from '@/todo/todo.module';
 import { LoggerMiddleware } from '@/commons/logger/logger.middleware';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { RequestLoggerInterceptor } from '@/commons/interceptor/request-logger.interceptor';
+import { TypeormModule } from './configs/database-config';
 
 @Module({
   imports: [
@@ -17,11 +18,12 @@ import { RequestLoggerInterceptor } from '@/commons/interceptor/request-logger.i
     //   inject: [ConfigService],
     //   useFactory: typeOrmConfig,
     // }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: typeOrmConfig,
-    }),
+    // TypeOrmModule.forRootAsync({
+    //   imports: [ConfigModule],
+    //   inject: [ConfigService],
+    //   useFactory: typeOrmConfig,
+    // }),
+    TypeormModule.forRoot(),
     TodoModule,
   ],
   providers: [
