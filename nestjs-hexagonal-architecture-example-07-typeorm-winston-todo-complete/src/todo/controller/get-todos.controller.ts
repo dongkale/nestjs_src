@@ -9,7 +9,7 @@ export class GetTodosController {
     private readonly findTodosInboundPort: IFindTodosInboundPort,
   ) {}
 
-  @Get('/tosos')
+  @Get('/todos')
   async handle() {
     // 컨트롤러는 의존성이 주입된 객체를 직접 가지고 컨트롤 하는것이 아니라,
     // 의존된 인터페이스를 가지고 조작한다.
