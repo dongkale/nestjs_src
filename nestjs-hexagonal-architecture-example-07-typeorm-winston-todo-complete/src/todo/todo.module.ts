@@ -17,6 +17,10 @@ import { CreateTodoController } from '@/todo/controller/create-todo.controller';
 import { UpdateTodoController } from '@/todo/controller/update-todo.controller';
 import { DeleteTodoController } from '@/todo/controller/delete-todo.controller';
 import { TodoEntity } from '@/todo/entity/todo.entity';
+import { IFindTodosInboundPort } from '@/todo/inbound-port/find-todos.inbound-port.interface';
+import { FindTodosService } from '@/todo/service/find-todos.service';
+import { IFindTodosOutboundPort } from '@/todo/outbound-port/find-todos.outbound-port.interface';
+import { FindTodosRepository } from '@/todo/outbound-adapter/find-todos.repository';
 
 // member 리스트를 조회하는 API를 작성해보자
 @Module({
@@ -29,14 +33,14 @@ import { TodoEntity } from '@/todo/entity/todo.entity';
     UpdateTodoController,
   ],
   providers: [
-    // {
-    //   provide: IFindMembersInboundPort,
-    //   useClass: FindMembersService,
-    // },
-    // {
-    //   provide: IFindMembersOutboundPort,
-    //   useClass: FindMembersRepository,
-    // },
+    {
+      provide: IFindTodosInboundPort,
+      useClass: FindTodosService,
+    },
+    {
+      provide: IFindTodosOutboundPort,
+      useClass: FindTodosRepository,
+    },
     // {
     //   provide: ICreateMemberInboundPort,
     //   useClass: CreateMemberService,
