@@ -16,15 +16,19 @@ import { GetTodosController } from '@/todo/controller/get-todos.controller';
 import { CreateTodoController } from '@/todo/controller/create-todo.controller';
 import { UpdateTodoController } from '@/todo/controller/update-todo.controller';
 import { DeleteTodoController } from '@/todo/controller/delete-todo.controller';
-import { TodoEntity } from '@/todo/entity/todo.entity';
+import { TodoOrmEntity } from '@/todo/outbound-adapter/todo.typeorm-entity';
 import { IFindTodosInboundPort } from '@/todo/inbound-port/find-todos.inbound-port.interface';
 import { FindTodosService } from '@/todo/service/find-todos.service';
 import { IFindTodosOutboundPort } from '@/todo/outbound-port/find-todos.outbound-port.interface';
 import { FindTodosRepository } from '@/todo/outbound-adapter/find-todos.repository';
+import { IFindTodoInboundPort } from '@/todo/inbound-port/find-todo.inbound-port.interface';
+import { FindTodoService } from '@/todo/service/find-todo.service';
+import { IFindTodoOutboundPort } from '@/todo/outbound-port/find-todo.outbound-port.interface';
+import { FindTodoRepository } from '@/todo/outbound-adapter/find-todo.repository';
 
 // member 리스트를 조회하는 API를 작성해보자
 @Module({
-  imports: [TypeOrmModule.forFeature([TodoEntity])],
+  imports: [TypeOrmModule.forFeature([TodoOrmEntity])],
   controllers: [
     GetTodoController,
     GetTodosController,
@@ -41,6 +45,14 @@ import { FindTodosRepository } from '@/todo/outbound-adapter/find-todos.reposito
       provide: IFindTodosOutboundPort,
       useClass: FindTodosRepository,
     },
+    {
+      provide: IFindTodoInboundPort,
+      useClass: FindTodoService,
+    },
+    {
+      provide: IFindTodoOutboundPort,
+      useClass: FindTodoRepository,
+    },
     // {
     //   provide: ICreateMemberInboundPort,
     //   useClass: CreateMemberService,
@@ -51,4 +63,4 @@ import { FindTodosRepository } from '@/todo/outbound-adapter/find-todos.reposito
     // },
   ],
 })
-export class MemberModule {}
+export class TodoModule {}

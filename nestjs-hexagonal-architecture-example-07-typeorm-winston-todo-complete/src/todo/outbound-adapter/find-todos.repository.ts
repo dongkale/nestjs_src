@@ -8,14 +8,14 @@ import {
 } from '@/todo/outbound-port/find-todos.outbound-port.interface';
 
 // import { Member } from '@/member/models/member.model';
-import { TodoEntity } from '@/todo/entity/todo.entity';
+import { TodoOrmEntity } from '@/todo/outbound-adapter/todo.typeorm-entity';
 
 export class FindTodosRepository implements IFindTodosOutboundPort {
   private readonly logger = new Logger(FindTodosRepository.name);
 
   constructor(
-    @InjectRepository(TodoEntity)
-    private readonly repository: Repository<TodoEntity>,
+    @InjectRepository(TodoOrmEntity)
+    private readonly repository: Repository<TodoOrmEntity>,
   ) {}
   async execute(
     params: FindTodosOutboundPortInputDto,
