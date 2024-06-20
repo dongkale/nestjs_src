@@ -1,5 +1,4 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity } from 'typeorm';
 
 export type TodoId = number;
 
