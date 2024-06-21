@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/todo/*": ["./src/modules/todo/*"]
     }
   }
 }
