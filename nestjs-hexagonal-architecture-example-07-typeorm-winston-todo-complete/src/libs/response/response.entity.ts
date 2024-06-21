@@ -3,8 +3,7 @@ import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude, Expose } from 'class-transformer';
 // import { GetTodosResponse } from '@/todo/application/port/in/dto/response/get-todos-response.dto';
-
-import { UpdateTodoOutboundPortOutputDto } from '@/todo/outbound-port/update-todo.outbound-port.interface';
+// import { UpdateTodoOutboundPortOutputDto } from '@/todo/outbound-port/update-todo.outbound-port.interface';
 
 export class ResponseEntity<T> {
   @ApiProperty({
@@ -23,7 +22,7 @@ export class ResponseEntity<T> {
 
   @ApiProperty({
     description: '반환 데이터',
-    type: [UpdateTodoOutboundPortOutputDto],
+    type: [Object],
     name: 'data',
   })
   @Exclude()

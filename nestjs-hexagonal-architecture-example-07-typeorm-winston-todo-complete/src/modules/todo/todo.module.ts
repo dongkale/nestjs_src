@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CreateTodoController } from '@/todo/controller/create-todo.controller';
+import { DeleteTodoController } from '@/todo/controller/delete-todo.controller';
 import { GetTodoController } from '@/todo/controller/get-todo.controller';
 import { GetTodosController } from '@/todo/controller/get-todos.controller';
-import { CreateTodoController } from '@/todo/controller/create-todo.controller';
 import { UpdateTodoController } from '@/todo/controller/update-todo.controller';
-import { DeleteTodoController } from '@/todo/controller/delete-todo.controller';
 import { TodoOrmEntity } from '@/todo/outbound-adapter/typeorm-entity/todo.typeorm-entity';
 import { IFindTodosInboundPort } from '@/todo/inbound-port/find-todos.inbound-port.interface';
 import { FindTodosService } from '@/todo/service/find-todos.service';
@@ -30,10 +30,10 @@ import { DeleteTodoRepository } from '@/todo/outbound-adapter/delete-todo.reposi
 @Module({
   imports: [TypeOrmModule.forFeature([TodoOrmEntity])],
   controllers: [
-    GetTodoController,
-    GetTodosController,
     CreateTodoController,
     DeleteTodoController,
+    GetTodoController,
+    GetTodosController,
     UpdateTodoController,
   ],
   providers: [
