@@ -27,7 +27,6 @@ import { DeleteTodoService } from '@/todo/service/delete-todo.service';
 import { IDeleteTodoOutboundPort } from '@/todo/outbound-port/delete-todo.outbound-port.interface';
 import { DeleteTodoRepository } from '@/todo/outbound-adapter/delete-todo.repository';
 
-// member 리스트를 조회하는 API를 작성해보자
 @Module({
   imports: [TypeOrmModule.forFeature([TodoOrmEntity])],
   controllers: [
