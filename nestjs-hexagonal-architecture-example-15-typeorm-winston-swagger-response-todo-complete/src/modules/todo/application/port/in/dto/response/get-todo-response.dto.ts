@@ -7,6 +7,7 @@ export class GetTodoResponse {
     description: 'id',
     type: Number,
     name: 'id',
+    default: 0,
   })
   @Exclude()
   private readonly _id: TodoId;
@@ -15,6 +16,7 @@ export class GetTodoResponse {
     description: '제목',
     type: String,
     name: 'title',
+    default: 'title',
   })
   @Exclude()
   private readonly _title: string;
@@ -23,6 +25,7 @@ export class GetTodoResponse {
     description: '내용',
     type: String,
     name: 'content',
+    default: 'content',
   })
   @Exclude()
   private readonly _content: string;

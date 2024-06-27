@@ -1,8 +1,9 @@
 import { Exclude, Expose } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
-import { GetTodoResponse } from './get-todo-response.dto';
+import { GetTodoResponse } from '@/todo/application/port/in/dto/response/get-todo-response.dto';
+// import { GetTodosResponse } from '@/todo/application/port/in/dto/response/get-todos-response.dto';
 
-export class GetTodosResponse {
+export class CommonTodoResponse {
   @ApiProperty({
     description: '반환 데이터',
     type: [GetTodoResponse],
@@ -15,11 +16,12 @@ export class GetTodosResponse {
     this._todos = todos;
   }
 
-  @Expose() get todos() {
+  @Expose()
+  get todos() {
     return this._todos;
   }
 
   static make(todos: GetTodoResponse[]) {
-    return new GetTodosResponse(todos);
+    return new CommonTodoResponse(todos);
   }
 }

@@ -8,7 +8,6 @@ export type FindTodosInboundPortInputDto = void;
 //   title: string;
 //   content: string;
 // }>;
-
 export class FindTodosInboundPortOutputDto {
   id: TodoId;
   title: string;

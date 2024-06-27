@@ -13,12 +13,14 @@ import * as dotenv from 'dotenv';
 import { winstonLogger } from '@/configs/winston.config';
 import { CustomValidationError } from '@/libs/exception/custom-validation-error';
 import { HttpExceptionFilter } from '@/libs/exception/http-exception.filter';
+import { setupSwagger } from '@/configs/swagger.config';
 
 dotenv.config();
 
 async function bootstrap() {
   const appName = process.env.APP_NAME ?? 'defaultAppName';
   const appPort = process.env.PORT ?? 3000;
+  const prefix = process.env.URL_PREFIX ?? '';
 
   console.log(
     figlet.textSync(appName + ' Server', {
@@ -33,6 +35,8 @@ async function bootstrap() {
   const logger = new Logger('bootstrap');
 
   const app = await NestFactory.create(AppModule);
+
+  setupSwagger(app, prefix);
 
   app.useLogger(winstonLogger(appName));
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));

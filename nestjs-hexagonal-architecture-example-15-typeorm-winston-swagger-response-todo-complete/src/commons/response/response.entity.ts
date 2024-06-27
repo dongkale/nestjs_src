@@ -1,55 +1,71 @@
-import { TodoEntity } from '@/modules/todo/domain/todo.entity';
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude, Expose } from 'class-transformer';
-import { GetTodosResponse } from '@/todo/application/port/in/dto/response/get-todos-response.dto';
+import { CommonTodoResponse } from '@/todo/application/port/in/dto/response/common-todo-response.dto';
+// import { Http } from 'winston/lib/winston/transports';
+
+export declare enum ResponseStatus {
+  SUCCESS = 0,
+  FAIL = 1,
+}
 
 export class ResponseEntity<T> {
   @ApiProperty({
     description: '반환 데이터',
-    type: [GetTodosResponse],
+    type: [CommonTodoResponse],
     name: 'data',
   })
   @Exclude()
   private readonly _data: T;
 
   @ApiProperty({
-    description: '메세지',
+    description: '응답 상태 메세지(성공: Success, 실패: 실패 메세지)',
     name: 'message',
+    default: 'Success',
   })
   @Exclude()
   private readonly _message: string;
 
   @ApiProperty({
-    description: '응답 상태값(0: success, 1: fail)',
+    // description: '응답 상태값(0: Success, 1: Fail)',
+    description: `응답 상태값[HttpStatus](성공: ${HttpStatus.OK}, 실패: 실패 코드)`,
     name: 'code',
+    default: HttpStatus.OK,
   })
   @Exclude()
   private readonly _code: number;
 
-  private constructor(status: HttpStatus, data: T, message: string) {
-    this._data = data;
-    this._message = message;
+  private constructor(status: HttpStatus, message: string, data: T) {
     this._code = status;
+    this._message = message;
+    this._data = data;
   }
 
-  static OK(): ResponseEntity<string> {
-    return new ResponseEntity<string>(HttpStatus.OK, '', 'Success');
+  static Ok<T>(data: T = new Object() as T): ResponseEntity<T> {
+    return new ResponseEntity<T>(HttpStatus.OK, 'Success', data);
   }
 
-  static OK_WITH<T>(data: T): ResponseEntity<T> {
-    return new ResponseEntity<T>(HttpStatus.OK, data, 'Success');
-  }
+  // static Created<T>(data: T = new Object() as T): ResponseEntity<T> {
+  //   return new ResponseEntity<T>(HttpStatus.CREATED, 'Success', data);
+  // }
 
-  static CREATED_WITH<T>(data: T): ResponseEntity<T> {
-    return new ResponseEntity<T>(HttpStatus.CREATED, data, 'Success');
-  }
+  // static OK(): ResponseEntity<string> {
+  //   return new ResponseEntity<string>(HttpStatus.OK, 'Success', '');
+  // }
+
+  // static OK_WITH<T>(data: T): ResponseEntity<T> {
+  //   return new ResponseEntity<T>(HttpStatus.OK, 'Success', data);
+  // }
+
+  // static CREATED_WITH<T>(data: T): ResponseEntity<T> {
+  //   return new ResponseEntity<T>(HttpStatus.CREATED, 'Success', data);
+  // }
 
   static ERROR(): ResponseEntity<string> {
     return new ResponseEntity<string>(
       HttpStatus.INTERNAL_SERVER_ERROR,
+      'Internal Server Error',
       '',
-      '서버 에러가 발생했습니다.',
     );
   }
 
@@ -57,7 +73,7 @@ export class ResponseEntity<T> {
     message: string,
     code: HttpStatus = HttpStatus.BAD_REQUEST,
   ): ResponseEntity<string> {
-    return new ResponseEntity<string>(code, '', message);
+    return new ResponseEntity<string>(code, message, '');
   }
 
   static ERROR_WITH_DATA<T>(
@@ -65,7 +81,7 @@ export class ResponseEntity<T> {
     code: HttpStatus = HttpStatus.BAD_REQUEST,
     data: T,
   ): ResponseEntity<T> {
-    return new ResponseEntity<T>(code, data, message);
+    return new ResponseEntity<T>(code, message, data);
   }
 
   @Expose()

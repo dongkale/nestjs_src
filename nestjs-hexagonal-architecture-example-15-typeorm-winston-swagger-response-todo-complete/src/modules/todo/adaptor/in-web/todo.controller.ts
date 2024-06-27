@@ -22,8 +22,9 @@ import {
   TodoUseCase,
   TodoUseCaseSymbol,
 } from '@/todo/application/port/in/todo.use-case';
+import { CommonTodoResponse } from '@/todo/application/port/in/dto/response/common-todo-response.dto';
 
-@ApiTags('ticket API')
+@ApiTags('todo API')
 @Controller('todo')
 export class TodoController {
   private readonly logger = new Logger(TodoController.name);
@@ -46,9 +47,9 @@ export class TodoController {
   async getTodos() {
     const todos = await this.todoUseCase.getTodos();
 
-    this.logger.log(JSON.stringify(todos, null, 2));
+    // this.logger.log(JSON.stringify(todos, null, 2));
 
-    return ResponseEntity.OK_WITH(todos);
+    return ResponseEntity.Ok<CommonTodoResponse>(todos);
   }
 
   @ApiOperation({
@@ -65,14 +66,14 @@ export class TodoController {
   async getTodo(@Param('id', ParseIntPipe) id: number) {
     const todo = await this.todoUseCase.getTodo(id);
 
-    this.logger.log(JSON.stringify(todo, null, 2));
+    // this.logger.log(JSON.stringify(todo, null, 2));
 
-    return ResponseEntity.OK_WITH(todo);
+    return ResponseEntity.Ok<CommonTodoResponse>(todo);
   }
 
   @ApiOperation({ summary: 'Create Todo', description: 'Todo를 생성한다.' })
   @ApiResponse({
-    status: 200,
+    status: HttpStatus.OK,
     description: '생성된 Todo 정보',
     type: ResponseEntity,
   })
@@ -81,9 +82,9 @@ export class TodoController {
   async createTodo(@Body() dto: CreateTodoRequest) {
     const createTodo = await this.todoUseCase.createTodo(dto);
 
-    this.logger.log(JSON.stringify(createTodo, null, 2));
+    // this.logger.log(JSON.stringify(createTodo, null, 2));
 
-    return ResponseEntity.CREATED_WITH(createTodo);
+    return ResponseEntity.Ok<CommonTodoResponse>(createTodo);
   }
 
   @ApiOperation({ summary: 'Update Todo', description: 'Todo를 수정한다.' })
@@ -92,7 +93,7 @@ export class TodoController {
     description: '수정된 Todo 정보',
     type: ResponseEntity,
   })
-  @HttpCode(HttpStatus.CREATED)
+  @HttpCode(HttpStatus.OK)
   @Patch(':id')
   async updateTodo(
     @Param('id', ParseIntPipe) todoId: TodoId,
@@ -100,9 +101,9 @@ export class TodoController {
   ) {
     const updateTodo = await this.todoUseCase.updateTodo(todoId, dto);
 
-    this.logger.log(JSON.stringify(updateTodo, null, 2));
+    // this.logger.log(JSON.stringify(updateTodo, null, 2));
 
-    return ResponseEntity.OK_WITH(updateTodo);
+    return ResponseEntity.Ok<CommonTodoResponse>(updateTodo);
   }
 
   @ApiOperation({ summary: 'Delete Todo', description: 'Todo를 삭제한다.' })
@@ -116,8 +117,8 @@ export class TodoController {
   async deleteTodo(@Param('id', ParseIntPipe) todoId: TodoId) {
     const deleteTodo = await this.todoUseCase.deleteTodo(todoId);
 
-    this.logger.log(JSON.stringify(deleteTodo, null, 2));
+    // this.logger.log(JSON.stringify(deleteTodo, null, 2));
 
-    return ResponseEntity.OK_WITH(deleteTodo);
+    return ResponseEntity.Ok<CommonTodoResponse>(deleteTodo);
   }
 }
