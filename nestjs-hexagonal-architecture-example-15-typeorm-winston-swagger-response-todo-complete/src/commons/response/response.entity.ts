@@ -4,7 +4,7 @@ import { Exclude, Expose } from 'class-transformer';
 import { CommonTodoResponse } from '@/todo/application/port/in/dto/response/common-todo-response.dto';
 // import { Http } from 'winston/lib/winston/transports';
 
-export declare enum ResponseStatus {
+export declare enum ResponseResult {
   SUCCESS = 0,
   FAIL = 1,
 }
@@ -43,6 +43,14 @@ export class ResponseEntity<T> {
 
   static Ok<T>(data: T = new Object() as T): ResponseEntity<T> {
     return new ResponseEntity<T>(HttpStatus.OK, 'Success', data);
+  }
+
+  static Error<T>(
+    message: string,
+    code: HttpStatus = HttpStatus.BAD_REQUEST,
+    data: T,
+  ): ResponseEntity<T> {
+    return new ResponseEntity<T>(code, message, data);
   }
 
   // static Created<T>(data: T = new Object() as T): ResponseEntity<T> {
