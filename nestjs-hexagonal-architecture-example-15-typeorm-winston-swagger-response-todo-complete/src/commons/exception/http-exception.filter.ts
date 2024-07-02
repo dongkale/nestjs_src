@@ -46,9 +46,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       case 400:
         const isValidationError = responseBody instanceof ValidationError;
 
-        responseEntity = ResponseEntity.ERROR_WITH_DATA<
-          CustomValidationError[]
-        >(
+        responseEntity = ResponseEntity.Error<CustomValidationError[]>(
           message,
           HttpStatus.BAD_REQUEST,
           isValidationError
@@ -58,25 +56,23 @@ export class HttpExceptionFilter implements ExceptionFilter {
         break;
 
       case 401:
-        responseEntity = ResponseEntity.ERROR_WITH(
-          message,
-          HttpStatus.UNAUTHORIZED,
-        );
+        responseEntity = ResponseEntity.Error(message, HttpStatus.UNAUTHORIZED);
         break;
 
       case 404:
-        responseEntity = ResponseEntity.ERROR_WITH(
-          message,
-          HttpStatus.NOT_FOUND,
-        );
+        responseEntity = ResponseEntity.Error(message, HttpStatus.NOT_FOUND);
         break;
 
       case 500:
-        responseEntity = ResponseEntity.ERROR();
+        responseEntity = ResponseEntity.Error(
+          'Internal Server Error',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
         break;
 
       default:
-        responseEntity = ResponseEntity.ERROR_WITH(message, status);
+        responseEntity = ResponseEntity.Error(message, status);
+        // responseEntity = ResponseEntity.ERROR_WITH(message, status);
         break;
     }
 

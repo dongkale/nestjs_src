@@ -1,4 +1,4 @@
-import { NotFoundException } from '@nestjs/common';
+import { NotFoundException, Logger } from '@nestjs/common';
 import { TodoUseCase } from '@/todo/application/port/in/todo.use-case';
 import { GetTodoPort } from '@/todo/application/port/out/get-todo.port';
 import { GetTodosPort } from '@/todo/application/port/out/get-todos.port';
@@ -12,6 +12,8 @@ import { CreateTodoRequest } from '@/todo/application/port/in/dto/request/create
 import { UpdateTodoRequest } from '@/todo/application/port/in/dto/request/update-todo-request.dto';
 
 export class TodoService implements TodoUseCase {
+  private readonly logger = new Logger(TodoService.name);
+
   constructor(
     private readonly getTodoPort: GetTodoPort,
     private readonly getTodosPort: GetTodosPort,

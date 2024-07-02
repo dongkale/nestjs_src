@@ -1,6 +1,6 @@
+import { BadRequestException, NotFoundException, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { TodoOrmEntity } from '@/todo/adaptor/out-persistence/todo.typeorm-entity';
 import { TodoEntity, TodoId } from '@/todo/domain/todo.entity';
 import { TodoMapper } from '@/todo/adaptor/out-persistence/todo.mapper';
@@ -18,6 +18,8 @@ export class TodoPersistenceAdaptor
     UpdateTodoPort,
     DeleteTodoPort
 {
+  private readonly logger = new Logger(TodoPersistenceAdaptor.name);
+
   constructor(
     @InjectRepository(TodoOrmEntity)
     private readonly todoRepository: Repository<TodoOrmEntity>,
@@ -25,6 +27,8 @@ export class TodoPersistenceAdaptor
 
   async getTodos(): Promise<TodoEntity[]> {
     const todos = await this.todoRepository.find();
+
+    this.logger.log(JSON.stringify(todos, null, 2));
 
     return TodoMapper.mapToTodos(todos);
   }
@@ -36,6 +40,8 @@ export class TodoPersistenceAdaptor
       throw new NotFoundException('Not Found Todo');
     }
 
+    this.logger.log(JSON.stringify(todo, null, 2));
+
     return TodoMapper.mapToTodo(todo);
   }
 
@@ -43,6 +49,8 @@ export class TodoPersistenceAdaptor
     const todoOrmEntity = TodoMapper.mapToTodoOrmEntity(todo);
 
     const savedTodo = await this.todoRepository.save(todoOrmEntity);
+
+    this.logger.log(JSON.stringify(savedTodo, null, 2));
 
     return TodoMapper.mapToTodo(savedTodo);
   }
@@ -62,6 +70,8 @@ export class TodoPersistenceAdaptor
       throw new NotFoundException('Not Found Todo');
     }
 
+    this.logger.log(JSON.stringify(updateTodoOrmEntity, null, 2));
+
     return TodoMapper.mapToTodo(updateTodoOrmEntity);
   }
 
@@ -78,9 +88,11 @@ export class TodoPersistenceAdaptor
       throw new BadRequestException('Bad Request');
     }
 
-    // if (result.affected < 1) {
-    //   throw new BadRequestException('잘못된 요청입니다.');
-    // }
+    if (result.affected === 0) {
+      throw new BadRequestException('Bad Request');
+    }
+
+    this.logger.log(JSON.stringify(result, null, 2));
 
     return TodoMapper.mapToTodo(deleteTodoOrmEntity);
   }

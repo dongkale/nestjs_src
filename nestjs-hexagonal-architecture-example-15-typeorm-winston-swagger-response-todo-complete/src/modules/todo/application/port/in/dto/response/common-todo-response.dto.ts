@@ -1,7 +1,6 @@
 import { Exclude, Expose } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { GetTodoResponse } from '@/todo/application/port/in/dto/response/get-todo-response.dto';
-// import { GetTodosResponse } from '@/todo/application/port/in/dto/response/get-todos-response.dto';
 
 export class CommonTodoResponse {
   @ApiProperty({
@@ -16,12 +15,12 @@ export class CommonTodoResponse {
     this._todos = todos;
   }
 
+  static make(todos: GetTodoResponse[]) {
+    return new CommonTodoResponse(todos);
+  }
+
   @Expose()
   get todos() {
     return this._todos;
-  }
-
-  static make(todos: GetTodoResponse[]) {
-    return new CommonTodoResponse(todos);
   }
 }

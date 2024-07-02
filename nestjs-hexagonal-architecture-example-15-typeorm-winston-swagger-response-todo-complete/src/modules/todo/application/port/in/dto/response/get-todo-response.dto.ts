@@ -54,6 +54,10 @@ export class GetTodoResponse {
     this._updatedAt = todoEntity.updatedAt;
   }
 
+  static make(todoEntity: TodoEntity) {
+    return new GetTodoResponse(todoEntity);
+  }
+
   @Expose()
   get id() {
     return this._id;
@@ -77,9 +81,5 @@ export class GetTodoResponse {
   @Expose()
   get updatedAt() {
     return this._updatedAt?.toLocaleString();
-  }
-
-  static make(todoEntity: TodoEntity) {
-    return new GetTodoResponse(todoEntity);
   }
 }

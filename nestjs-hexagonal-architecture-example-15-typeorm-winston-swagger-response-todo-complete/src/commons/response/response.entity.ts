@@ -10,6 +10,8 @@ export declare enum ResponseResult {
 }
 
 export class ResponseEntity<T> {
+  static readonly Success = 'Success';
+
   @ApiProperty({
     description: '반환 데이터',
     type: [CommonTodoResponse],
@@ -19,15 +21,14 @@ export class ResponseEntity<T> {
   private readonly _data: T;
 
   @ApiProperty({
-    description: '응답 상태 메세지(성공: Success, 실패: 실패 메세지)',
+    description: `응답 상태 메세지(성공: ${ResponseEntity.Success}, 실패: 실패 메세지)`,
     name: 'message',
-    default: 'Success',
+    default: ResponseEntity.Success,
   })
   @Exclude()
   private readonly _message: string;
 
   @ApiProperty({
-    // description: '응답 상태값(0: Success, 1: Fail)',
     description: `응답 상태값[HttpStatus](성공: ${HttpStatus.OK}, 실패: 실패 코드)`,
     name: 'code',
     default: HttpStatus.OK,
@@ -42,13 +43,13 @@ export class ResponseEntity<T> {
   }
 
   static Ok<T>(data: T = new Object() as T): ResponseEntity<T> {
-    return new ResponseEntity<T>(HttpStatus.OK, 'Success', data);
+    return new ResponseEntity<T>(HttpStatus.OK, ResponseEntity.Success, data);
   }
 
   static Error<T>(
     message: string,
     code: HttpStatus = HttpStatus.BAD_REQUEST,
-    data: T,
+    data: T = new Object() as T,
   ): ResponseEntity<T> {
     return new ResponseEntity<T>(code, message, data);
   }
@@ -66,30 +67,35 @@ export class ResponseEntity<T> {
   // }
 
   // static CREATED_WITH<T>(data: T): ResponseEntity<T> {
-  //   return new ResponseEntity<T>(HttpStatus.CREATED, 'Success', data);
+  //   return new ResponseEntity<T>(HttpStatus.CREATED, 'Su0ccess', data);
   // }
 
-  static ERROR(): ResponseEntity<string> {
-    return new ResponseEntity<string>(
-      HttpStatus.INTERNAL_SERVER_ERROR,
-      'Internal Server Error',
-      '',
-    );
-  }
+  // static ERROR(): ResponseEntity<string> {
+  //   return new ResponseEntity<string>(
+  //     HttpStatus.INTERNAL_SERVER_ERROR,
+  //     'Internal Server Error',
+  //     '',
+  //   );
+  // }
 
-  static ERROR_WITH(
-    message: string,
-    code: HttpStatus = HttpStatus.BAD_REQUEST,
-  ): ResponseEntity<string> {
-    return new ResponseEntity<string>(code, message, '');
-  }
+  // static ERROR_WITH(
+  //   message: string,
+  //   code: HttpStatus = HttpStatus.BAD_REQUEST,
+  // ): ResponseEntity<string> {
+  //   return new ResponseEntity<string>(code, message, '');
+  // }
 
-  static ERROR_WITH_DATA<T>(
-    message: string,
-    code: HttpStatus = HttpStatus.BAD_REQUEST,
-    data: T,
-  ): ResponseEntity<T> {
-    return new ResponseEntity<T>(code, message, data);
+  // static ERROR_WITH_DATA<T>(
+  //   message: string,
+  //   code: HttpStatus = HttpStatus.BAD_REQUEST,
+  //   data: T,
+  // ): ResponseEntity<T> {
+  //   return new ResponseEntity<T>(code, message, data);
+  // }
+
+  @Expose()
+  get code(): number {
+    return this._code;
   }
 
   @Expose()
@@ -100,10 +106,5 @@ export class ResponseEntity<T> {
   @Expose()
   get data(): T {
     return this._data;
-  }
-
-  @Expose()
-  get code(): number {
-    return this._code;
   }
 }

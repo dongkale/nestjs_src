@@ -38,11 +38,10 @@ export class TodoController {
     description: '모든 Todo를 가져온다.',
   })
   @ApiResponse({
-    status: 200,
+    status: HttpStatus.OK,
     description: '모든 Todo 정보',
     type: ResponseEntity,
   })
-  @HttpCode(HttpStatus.OK)
   @Get()
   async getTodos() {
     const todos = await this.todoUseCase.getTodos();
@@ -57,11 +56,10 @@ export class TodoController {
     description: '지정 Todo를 가져온다.',
   })
   @ApiResponse({
-    status: 200,
+    status: HttpStatus.OK,
     description: '지정 Todo 정보',
     type: ResponseEntity,
   })
-  @HttpCode(HttpStatus.OK)
   @Get(':id')
   async getTodo(@Param('id', ParseIntPipe) id: number) {
     const todo = await this.todoUseCase.getTodo(id);
@@ -77,7 +75,6 @@ export class TodoController {
     description: '생성된 Todo 정보',
     type: ResponseEntity,
   })
-  @HttpCode(HttpStatus.CREATED)
   @Post()
   async createTodo(@Body() dto: CreateTodoRequest) {
     const createTodo = await this.todoUseCase.createTodo(dto);
@@ -89,11 +86,10 @@ export class TodoController {
 
   @ApiOperation({ summary: 'Update Todo', description: 'Todo를 수정한다.' })
   @ApiResponse({
-    status: 200,
+    status: HttpStatus.OK,
     description: '수정된 Todo 정보',
     type: ResponseEntity,
   })
-  @HttpCode(HttpStatus.OK)
   @Patch(':id')
   async updateTodo(
     @Param('id', ParseIntPipe) todoId: TodoId,
@@ -108,11 +104,10 @@ export class TodoController {
 
   @ApiOperation({ summary: 'Delete Todo', description: 'Todo를 삭제한다.' })
   @ApiResponse({
-    status: 200,
+    status: HttpStatus.OK,
     description: '삭제된 Todo 정보',
     type: ResponseEntity,
   })
-  @HttpCode(HttpStatus.OK)
   @Delete(':id')
   async deleteTodo(@Param('id', ParseIntPipe) todoId: TodoId) {
     const deleteTodo = await this.todoUseCase.deleteTodo(todoId);
