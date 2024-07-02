@@ -1,4 +1,4 @@
-import { TodoEntity, TodoId } from '@/todo/domain/todo.entity';
+import { TodoEntity } from '@/todo/domain/todo.entity';
 
 export interface GetTodosPort {
   getTodos(): Promise<TodoEntity[]>;
