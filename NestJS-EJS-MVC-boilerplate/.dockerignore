@@ -1,0 +1,36 @@
+# Versioning and metadata
+.git
+.gitignore
+.dockerignore
+
+# Build dependencies
+dist
+node_modules
+coverage
+
+# Files not required for production
+.editorconfig
+Dockerfile
+README.md
+nodemon.json
+
+# Upload files
+public/uploads/*
+
+# Sensitive files
+.env
+.env.docker
+firebase.spec.json
+
+# Others
+.docker
+.github
+.circleci
+.vscode
+.husky
+docs
+logs
+run.sh
+create-image.sh
+public/uploads/main.js
+public/uploads/sw.js

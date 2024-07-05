@@ -1,0 +1,13 @@
+{
+	"home": "Home",
+	"login": "Login",
+	"profile": "Get profile",
+	"triggerPushNotification": "Trigger Push Notification",
+	"username": "Username",
+	"password": "Password",
+	"logout": "Log out",
+	"about_x": "About %s",
+	"welcome_x": "Welcome %s!",
+	"pleaseTryAgain": "Please try again!",
+	"": "#renderError"
+}

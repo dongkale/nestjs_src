@@ -1,0 +1,13 @@
+{
+	"home": "Trang chủ",
+	"login": "Đăng nhập",
+	"profile": "Trang cá nhân",
+	"triggerPushNotification": "Đăng ký nhận thông báo",
+	"username": "Username",
+	"password": "Mật khẩu",
+	"logout": "Đăng xuất",
+	"welcome_x": "Xin chào %s!",
+	"about_x": "Thông tin về %s",
+	"pleaseTryAgain": "Xin vui lòng thử lại!",
+	"": "#renderError"
+}

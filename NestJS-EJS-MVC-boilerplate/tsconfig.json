@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "incremental": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@*": ["src/*"],
+      "@auth/*": ["src/modules/auth/*"],
+      "@app/*": ["src/modules/app/*"],
+      "@user/*": ["src/modules/user/*"],
+      "@file-uploader/*": ["src/modules/file-uploader/*"],
+      "@sitemap/*": ["src/modules/sitemap/*"],
+      "@notification/*": ["src/modules/notification/*"],
+      "@redis/*": ["src/modules/redis/*"],
+      "@locales/*": ["src/modules/locales/*"],
+    }
+  },
+  "include": ["src"],
+  "exclude": ["src/node_modules", "dist", "*.js"],
+  "types": ["node"]
+}
