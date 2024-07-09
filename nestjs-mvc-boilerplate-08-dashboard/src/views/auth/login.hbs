@@ -1,0 +1,12 @@
+{{#extends 'layouts/main'}}
+{{#content 'title'}}Login{{/content}}
+
+{{#content 'body'}}
+<h1>Login</h1>
+<form action="/auth/login" method="post">
+  <label>Email: <input type="email" name="email"></label><br>
+  <label>Password: <input type="password" name="password"></label><br>
+  <button type="submit">Login</button>
+</form>
+<a href="/auth/register">Register</a>
+{{/content}}

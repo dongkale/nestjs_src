@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "assets": [
+      {
+        "include": "views",
+        "outDir": "dist",
+        "watchAssets": true
+      }
+    ],
+    "watchAssets": true,
+    "deleteOutDir": true
+  }
+}

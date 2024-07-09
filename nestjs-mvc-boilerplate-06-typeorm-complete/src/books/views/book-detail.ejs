@@ -1,0 +1,135 @@
+<%- include('partials/header.ejs') %>
+<div class="container-fluid">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Item</th>
+        <th scope="col">Details</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Title</td>
+        <td colspan="2"><%= book.title %></td>
+      </tr>
+      <tr>
+        <td>Author</td>
+        <td colspan="2"><%= book.author %></td>
+      </tr>
+      <tr>
+        <td>Quantity</td>
+        <td colspan="2"><%= book.quantity %></td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td colspan="2"><%= book.description %></td>
+      </tr>
+      <tr>
+        <td colspan="2"></td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#update"
+          >
+            Update
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            onclick="deleteBook('<%= book.id %>')"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div
+    class="modal fade"
+    id="update"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="update">Update Book</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div
+            class="alert alert-success alert-dismissible fade show"
+            role="alert"
+            hidden
+          >
+            <strong>Succcess!</strong> Record Updated!.
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+          <form action="" id="form">
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                value="<%= book.title %>"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="author" class="form-label">Author</label>
+              <input
+                type="text"
+                class="form-control"
+                id="author"
+                name="author"
+                value="<%= book.author %>"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="quantity" class="form-label">Quantity</label>
+              <input
+                type="text"
+                class="form-control"
+                id="quantity"
+                name="quantity"
+                value="<%= book.quantity %>"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea
+                class="form-control"
+                id="description"
+                name="description"
+                rows="3"
+              >
+<%= book.description %></textarea
+              >
+            </div>
+            <input type="hidden" class="" name="id" value="<%= book.id %>" />
+            <button type="submit" class="btn btn-primary">Add</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer.ejs') %>

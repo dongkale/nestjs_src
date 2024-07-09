@@ -1,0 +1,93 @@
+<%- include('partials/header.ejs') %>
+
+<div class="container-fluid mt-3">
+  <h4>Book Store</h4>
+  <ol class="list-group list-group-numbered">
+    <% books.forEach(data=>{ %>
+
+    <li
+      class="list-group-item d-flex justify-content-between align-items-start"
+    >
+      <div class="ms-2 me-auto">
+        <div class="fw-bold">
+          <a href="book/<%= data.id %>"><%= data.title %></a>
+        </div>
+      </div>
+      <span class="badge bg-primary rounded-pill"><%= data.quantity %></span>
+    </li>
+    <% }) %>
+  </ol>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add Book</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form action="" id="createForm" method="post" action="/movie">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="title"
+              placeholder="Javascript Cookbook"
+              name="title"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="author" class="form-label">Author</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="author"
+              name="author"
+              placeholder="Nelson Doe"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input
+              required
+              type="number"
+              class="form-control"
+              id="quantity"
+              name="quantity"
+              placeholder="40"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              class="form-control"
+              id="description"
+              name="description"
+              required
+              rows="3"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer.ejs') %>
