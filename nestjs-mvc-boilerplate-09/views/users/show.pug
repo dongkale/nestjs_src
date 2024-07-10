@@ -1,0 +1,7 @@
+extends ../layouts/base.pug
+
+block content
+  h1 Welcome Back #{user.email}
+  form#logout(action="/logout", method="POST")
+    input(type="hidden", name="_csrf" value=csrfToken)
+    button.btn.btn-primary(type='submit') Logout

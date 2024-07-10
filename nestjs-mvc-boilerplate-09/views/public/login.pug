@@ -1,0 +1,15 @@
+extends ../layouts/base.pug
+
+block content
+  h1 Login
+
+  form(action='/login' method='POST')
+    input(type="hidden", name="_csrf" value=csrfToken)
+    .form-group
+      label() Email address
+      input.form-control(name="email" type='email' aria-describedby='emailHelp')
+      small#emailHelp.form-text.text-muted We&apos;ll never share your email with anyone else.
+    .form-group
+      label() Password
+      input.form-control(name="password" type='password')
+    button.btn.btn-primary(type='submit') Submit
