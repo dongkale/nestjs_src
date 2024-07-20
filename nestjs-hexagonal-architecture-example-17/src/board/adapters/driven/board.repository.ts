@@ -1,7 +1,7 @@
-import { User } from '../../../auth/user.entity';
+import { User } from '@/auth/user.entity';
 import { DeleteResult, Repository } from 'typeorm';
-import { BoardStatus } from '../../domain/board-status.enum';
-import { Board } from '../model/board.entity';
+import { BoardStatus } from '@/board/domain/board-status.enum';
+import { Board } from '@/board/adapters/model/board.entity';
 
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';

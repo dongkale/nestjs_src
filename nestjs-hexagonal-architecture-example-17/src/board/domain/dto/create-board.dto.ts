@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-//pipe 사용한 validate 
+//pipe 사용한 validate
 
 export class CreateBoardDto {
   @IsNotEmpty()

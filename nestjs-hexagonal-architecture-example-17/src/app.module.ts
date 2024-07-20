@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from './auth/auth.module';
-import { BoardsModule } from './board/board.module';
-import { typeORMconfig } from './configs/typeorm.config';
+import { AuthModule } from '@/auth/auth.module';
+import { BoardsModule } from '@/board/board.module';
+import { typeORMconfig } from '@/configs/typeorm.config';
 
 // 어차피 App.module에 import해야 하는데 왜
 // BoardModule, AuthModule은 각자의 디렉토리에 위치해 있을까?

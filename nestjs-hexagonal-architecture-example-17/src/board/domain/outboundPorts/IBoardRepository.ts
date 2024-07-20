@@ -1,9 +1,9 @@
-import { User } from '../../../auth/user.entity';
-import { BoardStatus } from '../board-status.enum';
-import { Board } from '../../adapters/model/board.entity';
+import { User } from '@/auth/user.entity';
+import { BoardStatus } from '@/board/domain/board-status.enum';
+import { Board } from '@/board/adapters/model/board.entity';
 
 import { DeleteResult } from 'typeorm';
-import { CreateBoardDto } from '../dto/create-board.dto';
+import { CreateBoardDto } from '@/board/domain/dto/create-board.dto';
 
 export interface IBoardRepository {
   findBoardById(id: number): Promise<Board>;
@@ -14,5 +14,3 @@ export interface IBoardRepository {
 }
 
 export const IBoardRepository = Symbol('IBoardRepository');
-
-

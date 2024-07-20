@@ -1,7 +1,7 @@
-import { User } from '../../../auth/user.entity';
-import { BoardStatus } from '../board-status.enum';
-import { Board } from '../../adapters/model/board.entity';
-import { CreateBoardDto } from '../dto/create-board.dto';
+import { User } from '@/auth/user.entity';
+import { BoardStatus } from '@/board/domain/board-status.enum';
+import { Board } from '@/board/adapters/model/board.entity';
+import { CreateBoardDto } from '@/board/domain/dto/create-board.dto';
 
 export interface IBoardService {
   getBoardById(id: number): Promise<Board>;
@@ -12,6 +12,3 @@ export interface IBoardService {
 }
 
 export const IBoardService = Symbol('IBoardService');
-
-
-
