@@ -10,7 +10,7 @@ export function setupSwagger(app: INestApplication, basePrefix: string): void {
   const options = new DocumentBuilder()
     .setTitle('NestJS API Docs')
     .setDescription('NestJS API description')
-    .addApiKey({ type: 'apiKey', name: 'X-API-KEY', in: 'header' }, 'X-API-KEY')
+    .addApiKey({ type: 'apiKey', name: 'X-API-KEY', in: 'header' }, 'X-API-KEY')  // 각 controller 에 @ApiSecurity('x-api-key') 추가 필요(대소문자 구별)
     .setVersion('1.0.0')
     .setContact('Lee Dong Kwan', '', 'dklee@lennon.co.kr')
     .setLicense('Apache 2.0', 'ttp://www.apache.org/licenses/LICENSE-2.0.html')
