@@ -22,10 +22,11 @@ export class VideoController {
     @Param('id') id: string,
     @Headers() headers: Record<string, string>,
     @Res() res: Response,
-  ) {    
+  ) {
     const videoPath = `assets/${id}.mp4`;
     const { size } = statSync(videoPath);
     const videoRange = headers.range;
+
     if (videoRange) {
       const parts = videoRange.replace(/bytes=/, '').split('-');
       const start = parseInt(parts[0], 10);
@@ -42,17 +43,23 @@ export class VideoController {
       };
       res.writeHead(HttpStatus.PARTIAL_CONTENT, head); //206
       readStreamfile.pipe(res);
+
+      console.log(
+        `id: ${id}, videoRange: ${videoRange}, start: ${start}, end: ${end}, chunkSize: ${chunkSize}, size: ${size}`,
+      );
     } else {
       const head = {
         'Content-Length': size,
       };
       res.writeHead(HttpStatus.OK, head); //200
       createReadStream(videoPath).pipe(res);
+
+      console.log(`id: ${id}, videoRange: none`);
     }
 
-    console.log(`id: ${id}, videoRange: ${videoRange}`);
+    // console.log(`id: ${id}, videoRange: ${videoRange}`);
   }
-  
+
   @Get()
   findAll() {
     return this.videoService.findAll();
