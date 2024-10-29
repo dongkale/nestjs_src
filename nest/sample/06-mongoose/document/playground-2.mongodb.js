@@ -55,7 +55,8 @@ db.cats.find({ name: { $regex: '.*me.*' } }); // line  '%me%'
 db.cats.find({ name: { $regex: '.*09' } }); // like '%09'
 db.cats.find({ name: { $regex: 'name.*' } }); // like 'name%'
 
-// # https://stackoverflow.com/questions/3305561/how-to-query-mongodb-with-like
+// https://stackoverflow.com/questions/3305561/how-to-query-mongodb-with-like
+// https://tychejin.tistory.com/371
 db.users.find({ name: /a/ }); // Like '%a%'
 db.users.find({ name: /^pa/ }); // Like 'pa%'
 db.users.find({ name: /ro$/ }); // Like '%ro'
