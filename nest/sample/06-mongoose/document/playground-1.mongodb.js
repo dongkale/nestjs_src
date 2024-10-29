@@ -9,6 +9,8 @@
 // For more documentation on playgrounds please refer to
 // https://www.mongodb.com/docs/mongodb-vscode/playgrounds/
 
+const { log } = require('console');
+
 // // Select the database to use.
 // use('mongodbVSCodePlaygroundDB');
 
@@ -44,4 +46,51 @@
 
 use('test');
 
+// 전체 검색
 db.cats.find({});
+
+db.createCollection('cats');
+db.cats.insertMany([
+  { name: 'Fluffy', age: 3, breed: 'Persian' },
+  { name: 'Whiskers', age: 1, breed: 'Siamese' },
+  { name: 'Spitz', age: 2, breed: 'Sphynx' },
+]);
+
+db.cats.insertMany([
+  { name: 'Milo', age: 3, breed: 'Persian', hobbies: ['sleeping', 'eating'] },
+  {
+    name: 'Tiger',
+    age: 1,
+    breed: 'Siamese',
+    hobbies: ['playing', 'eating'],
+  },
+  { name: 'Oscar', age: 2, breed: 'Sphynx', hobbies: ['sleeping', 'playing'] },
+]);
+
+db.cats.find({ hobbies: { $in: ['sleeping'] } });
+
+db.cats.insertMany([
+  {
+    name: 'Fluffy',
+    age: 3,
+    breed: 'Persian',
+    log: { weight: 4.5, height: 9.5 },
+  },
+]);
+
+// id 로 검색
+db.cats.find({ _id: ObjectId('67205477b0f015ab7f3abdfd') });
+
+// dog 테이블 생성
+db.createCollection('dogs');
+db.dogs.insertMany([
+  { name: 'Buddy', age: 3, breed: 'Golden Retriever' },
+  { name: 'Daisy', age: 5, breed: 'Beagle' },
+  { name: 'Cooper', age: 2, breed: 'Siberian Husky' },
+]);
+
+// 테이블 목록
+db.getCollectionNames();
+
+db.cats.find({});
+db.cats.find({ name: 'name09' });
